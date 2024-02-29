@@ -39,5 +39,13 @@ const login = async (data) => {
     }
 }
 
-export { login }
+const Logout =  () => {
+
+            localStorage.removeItem("nombre")
+            localStorage.removeItem("token")
+            localStorage.removeItem("id")
+            localStorage.removeItem("email")
+           return true;
+}
+export { login, Logout }
  
