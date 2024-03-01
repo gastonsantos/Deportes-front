@@ -19,7 +19,7 @@ async function enviarLoginAlBackend(){
     };
     const response = await login(data);
     if (response) {
-        router.push('/pages/inicio');
+        router.push('/pages/deportes');
       } else {
         console.error('No se Pudieron Enviar los datos al backend pasaron cositas');
       }
