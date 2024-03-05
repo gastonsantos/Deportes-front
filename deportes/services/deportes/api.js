@@ -1,11 +1,15 @@
 import axios from 'axios'; // Asegúrate de importar axios correctamente
 import { API } from "@/config/constants";
+import Cookies from 'js-cookie';
 
 async function obtenerDeportes() {
-    return axios.get(API+`/usuarios/AllDeportes`,{
+  const token = Cookies.get('token');
+    return axios.get(API + '/usuarios/AllDeportes',
+    {
       headers: {
         'Content-Type': 'application/json',
-        'Access-Control-Allow-Origin': '*'
+        'Authorization': `Bearer ${token}`
+        //'Access-Control-Allow-Origin': '*'
       }
   })
     .then((data) => {

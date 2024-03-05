@@ -1,8 +1,7 @@
-
 "use client";
 import React, { useEffect, useState } from 'react';
 import {SingleDeporte} from "./singleDeporte";
-import {obtenerDeportes} from "@/services/deportes/api";
+import {obtenerDeportes} from "@/services/deportes/api2";
 import {Deportes} from "@/model/Deportes"
 
 const Dep = () => {
@@ -13,7 +12,8 @@ useEffect(() => {
       try {
         const response = await obtenerDeportes();
         if (response) {
-          const data = response.data
+          console.log("obtenerDeportes", response);
+          const data = response
           setDeportes(data); // Almacena los deportes en el estado local
         }
       } catch (error) {
@@ -21,7 +21,7 @@ useEffect(() => {
       }
     };
 
-    fetchData(); // Llamada a la función asincrónica
+    fetchData();
   }, []);
 
 

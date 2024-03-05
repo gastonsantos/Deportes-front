@@ -5,8 +5,9 @@ import { Fragment } from 'react'
 import { Disclosure, Menu, Transition } from '@headlessui/react'
 import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/react/24/outline'
 import Link from "next/link";
-import { Logout } from '@/services/login/api';
+import { Logout } from '@/services/login/login2';
 import { useRouter } from 'next/navigation';
+import Cookies from 'js-cookie';
 
 const navigation = [
   { name: 'Dashboard', href: '#', current: true },
@@ -23,8 +24,15 @@ const NavBar = () => {
   const router = useRouter();
   const [userName, setUserName] = useState("");
 
+
   useEffect(() => {
-    const storedUserName = localStorage.getItem("nombre");
+    
+  let storedUserName = Cookies.get("nombre");
+
+    // Si no hay valor en la cookie, intenta obtenerlo del localStorage
+    if (!storedUserName) {
+      storedUserName = localStorage.getItem("nombre");
+    }
     if (storedUserName) {
       setUserName(storedUserName);
     }

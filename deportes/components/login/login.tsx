@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { login } from '@/services/login/api';
+import { login } from '@/services/login/login2';
 
 const LoginForm = () => {
 
