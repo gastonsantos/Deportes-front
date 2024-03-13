@@ -1,6 +1,6 @@
 "use client"
 import React, { useEffect, useState } from 'react';
-import {obtenerDeportes, obtenerUsuarioPorId} from "@/services/deportes/api2";
+import {obtenerUsuarioPorId} from "@/services/usuario/api";
 const SettingsComponent = () => {
   const [formData, setFormData] = useState({
     nombre: ' ',

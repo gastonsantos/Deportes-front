@@ -8,6 +8,7 @@ import Link from "next/link";
 import { Logout } from '@/services/login/login2';
 import { useRouter } from 'next/navigation';
 import Cookies from 'js-cookie';
+import signalRService from "@/services/chat/api";
 
 const navigation = [
   { name: 'Dashboard', href: '#', current: true },
@@ -23,6 +24,22 @@ function classNames(...classes) {
 const NavBar = () => {
   const router = useRouter();
   const [userName, setUserName] = useState("");
+  const [mensajeNotificacion, setMensajeNotificacion] = useState([]);
+
+  useEffect(() => {
+    signalRService.startConnection()
+      .then(() => {
+      
+        iniciarEscuchaAlertas();
+      })
+      .catch(error => console.error('Error al conectar a SignalR y al unirse al grupo:', error));
+
+    signalRService.respuestaDeNotificacionSignalR((mensaje)=>{
+      console.log("respuestaDeSignalR", mensaje)
+      setMensajeNotificacion((prevMensajes)=>[...prevMensajes,mensaje]);
+    });
+   
+  }, []);
 
 
   useEffect(() => {
@@ -37,6 +54,16 @@ const NavBar = () => {
       setUserName(storedUserName);
     }
   }, []);
+
+  const iniciarEscuchaAlertas = async () => {
+    const idUsuario = Cookies.get("id"); // Replace with the actual user ID
+    try {
+      await signalRService.iniciarEscuchaAlertas(idUsuario);
+     //console.log("Escuchando alertas para el usuario desde el componente", idUsuario);
+    } catch (error) {
+      console.error("Error al iniciar la escucha de alertas:", error);
+    }
+  };
 
   function logout(){
     const response =  Logout();
@@ -95,16 +122,51 @@ const NavBar = () => {
 
               {userName ? (
                 <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
-                <button
-                  type="button"
-                  className="relative rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
-                >
-                  <span className="absolute -inset-1.5" />
+                {/* Profile dropdown */}
+                <Menu as="div" className="relative ml-3">
+                  <div>
+                    <Menu.Button className="relative rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
+                    <span className="absolute -inset-1.5" />
                   <span className="sr-only">View notifications</span>
                   <BellIcon className="h-6 w-6" aria-hidden="true" />
-                </button>
+                  {mensajeNotificacion.length > 0 && (
+                  <span className="absolute top-0 right-0 -mt-1 -mr-1 bg-red-500 text-white rounded-full p-1 text-xs">
+                  {mensajeNotificacion.length}
+                  </span>
+                  )}  
+                    </Menu.Button>
+                  </div>
+                  <Transition
+                    as={Fragment}
+                    enter="transition ease-out duration-100"
+                    enterFrom="transform opacity-0 scale-95"
+                    enterTo="transform opacity-100 scale-100"
+                    leave="transition ease-in duration-75"
+                    leaveFrom="transform opacity-100 scale-100"
+                    leaveTo="transform opacity-0 scale-95"
+                  >
+                    <Menu.Items className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+                    {mensajeNotificacion.map((notification)=>(
+                      <Menu.Item>
+                      {({ active }) => (
+                        
+                        <a
+                          href="#"
+                          className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700')}
+                        >
+                        {notification}
+                        </a>
+                      )}
+                    </Menu.Item>
 
-                {/* Profile dropdown */}
+                    ))}
+                    
+                    
+                     
+                    </Menu.Items>
+                  </Transition>
+                </Menu>
+
                 <Menu as="div" className="relative ml-3">
                   <div>
                     <Menu.Button className="relative flex rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
