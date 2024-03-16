@@ -35,12 +35,79 @@ async function obtenerUsuarioPorId(){
           'Access-Control-Allow-Origin': '*'
         },
       });
-      return response.data;
+
+      if (response.status === 200) {
+       
+        alert('Usuario registrado correctamente');
+        return true; 
+      } else {
+      
+        return false; 
+      }
     } catch (error) {
-      console.error('Error registrando usuario:', error);
-      throw error;
+      return false;
+      //alert('Ocurrió un error al registrar el usuario entro al Catch');
+      //throw new Error('Error');
     }
   };
-   
+  
+   const confirmarEmail = async (data)=> {
+    console.log("Que entra en confirmar email", data);
+    const decodedToken = decodeURIComponent(data);
+    console.log("Que hay en decodedToken", decodedToken);
+    
+    try {
+      const response = await axios.post(API + '/usuarios/confirmar/',data,  {
+        headers: {
+          'Content-Type': 'application/json',
+          'Access-Control-Allow-Origin': '*'
+        },
+      });
+      console.log("que hay en response", response.data)
+      if (response.data == true) {
+       
 
-  export { obtenerUsuarioPorId, registrarUsuario};
+        return response; 
+      } else {
+      
+        return response; 
+      }
+    } catch (error) {
+      return response;
+      //alert('Ocurrió un error al registrar el usuario entro al Catch');
+      //throw new Error('Error');
+    }
+  };
+
+  const cambioContransenia = async (data)=> {
+    
+    try {
+      const response = await axios.post(API + '/usuarios/enviaMailCambioContrasenia/',data,  {
+        headers: {
+          'Content-Type': 'application/json',
+          'Access-Control-Allow-Origin': '*'
+        },
+      });
+        return response.data;    
+    } catch (error) {
+      return response;
+      
+    }
+  };
+
+  const realizarCambioContraseña = async (data)=>{
+    try {
+      const response = await axios.post(API + '/usuarios/cambioContrasenia/',data,  {
+        headers: {
+          'Content-Type': 'application/json',
+          'Access-Control-Allow-Origin': '*'
+        },
+      });
+        return response.data;    
+    } catch (error) {
+      return response;
+      
+    }
+  }
+
+  export { obtenerUsuarioPorId, registrarUsuario, confirmarEmail, cambioContransenia, realizarCambioContraseña};

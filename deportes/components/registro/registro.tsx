@@ -3,6 +3,8 @@ import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Image from "next/image";
 import { registrarUsuario } from '@/services/usuario/api';
+import { TURBO_TRACE_DEFAULT_MEMORY_LIMIT } from 'next/dist/shared/lib/constants';
+import Swal from 'sweetalert2';
 export default function Registro() {
 
   const router = useRouter();
@@ -14,6 +16,9 @@ export default function Registro() {
   const [localidad, setLocalidad] = useState('');
   const [direccion, setDireccion] = useState('');
   const [numero, setNumero] = useState('');
+
+  const [agregoCorrectamente, setAgregoCorrectamente] = useState(false);
+  const [falloAlAgregar, setFalloAlAgregar] = useState(false);
 
   const enviar = async (e: React.FormEvent<HTMLFormElement>) => {
     
@@ -33,12 +38,42 @@ export default function Registro() {
 
     try {
       const response = await registrarUsuario(data);
-     
-      
-        router.push('/pages/login');
-      
+      console.log("Entro a Enviar, que tiene response", response);
+      if(response === true){
+        setAgregoCorrectamente (true);
+        console.log("Se agrego el usuario correctamente");
+        Swal.fire({
+          title: '¡Usuario registrado!',
+          text: 'Se ha registrado correctamente.',
+          icon: 'success',
+          confirmButtonText: 'Continuar',
+          confirmButtonColor: '#007bff', // Adjust color as needed
+        }).then(() => {
+          // Optional behavior after success (e.g., redirect to login)
+          router.push('/pages/login');
+        });
+
+      }else{
+        setFalloAlAgregar(true)
+        console.log("No se agrego una garcha!");
+
+        Swal.fire({
+          title: 'Error al registrarse',
+          text: 'Ha ocurrido un error al registrar el usuario.', // Replace with specific error message if available
+          icon: 'error',
+          confirmButtonColor: '#dc3545', // Adjust color as needed
+        });
+      }  
     } catch (error) {
       console.error('Error registering user:', error);
+      setFalloAlAgregar(true);
+
+      Swal.fire({
+        title: 'Error inesperado',
+        text: 'Se ha producido un error inesperado. Inténtelo nuevamente más tarde.',
+        icon: 'error',
+        confirmButtonColor: '#dc3545', // Adjust color as needed
+      });
     }
   };
 
@@ -54,7 +89,7 @@ export default function Registro() {
           className="absolute w-screen h-screen"
         />
       </div>
-  <div className="absolute inset-0 flex flex-col items-center justify-center">
+  <div className="absolute inset-0 flex flex-col items-center justify-center ">
   <div className="absolute z-10 flex flex-col items-center w-96 p-4 mx-auto bg-gray-800 bg-opacity-90 rounded-lg shadow-md">
   <h2 className="text-center text-sm text-gray-400 dark:text-gray-400 p-4">
         Registro
