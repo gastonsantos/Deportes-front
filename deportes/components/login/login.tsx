@@ -9,7 +9,7 @@ const LoginForm = () => {
     const router = useRouter();
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-
+    const [error, setError] = useState('');
 
     async function enviarLoginAlBackend() {
       const data = {
@@ -22,20 +22,26 @@ const LoginForm = () => {
         if (response) {
           router.push('/pages/deportes');
         } else {
+          console.log("Hay algo",response);
           console.error('No se Pudieron Enviar los datos al backend');
         }
       } catch (error:any) {
-        // Manejar excepciones específicas
-        if (error.message === 'El usuario no pudo ser encontrado.') {
-          // Mostrar mensaje de error: "Usuario o contraseña incorrecta"
-          console.error('Usuario o contraseña incorrecta');
-        } else if (error.message === 'EmailNoValidadoException') {
-          // Mostrar mensaje de error: "El email no está validado"
-          console.error('El email no está validado');
+        if (error.response) {
+          switch (error.response.status) {
+            case 404:
+              setError('No coinciden Email y/o Contraseña');
+              break;
+            case 409:
+              setError('Email no verificado, revisa tu casilla de correo');
+              break;
+            default:
+              setError('Error en la petición al servidor');
+          }
         } else {
-          // Mensaje de error genérico
-          console.error('Error al iniciar sesión:', error.message);
+          setError('Error en la petición al servidor');
         }
+      
+    
       }
     }
     
@@ -69,7 +75,11 @@ const LoginForm = () => {
   <div className="mb-5">
   <button onClick={() => { enviarLoginAlBackend() }} type="submit" className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Submit</button>
   </div>
- 
+  {error && (
+          <div className=" mb-5 text-red" >
+            <label htmlFor="" className="text-red-500">{error}</label>
+          </div>
+  )}
   <div className="mb-5">
   <a href="/pages/cambioContraseniaForm" >¿Olvidaste tu contraseña?</a>
   </div>

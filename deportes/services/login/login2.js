@@ -37,12 +37,25 @@ const login = async (data) => {
         } else {
             console.error('No se encontró el token en la respuesta del servidor');
         }
-
+        console.log("Que es lo que devuelve response.data", response.data);
         return response.data; // Puedes retornar más información si es necesario
 
     } catch (error) {
-        console.error('Error en la petición al servidor:', error.message);
-        throw new Error('Error');
+        
+        if(error.response.status === 409){
+            console.log("Error de que no valido email", error.response.data.Message);
+            
+        }else if(error.response.status === 400){
+
+            console.log("No coinciden Email y/o Contraseña",error.response.data);
+            
+        }else{
+            console.log('Error en la petición al servidor:', error.response.data.Message);
+            
+        }
+
+      
+        throw error;
     }
 }
 
