@@ -12,7 +12,7 @@ async function obtenerUsuarioPorId(){
       parseId = parseInt(idUsuario,10);
       const data ={
         id : parseId,
-        //id : 1002,
+       
       }
      
       console.log("Que hay en data", data);

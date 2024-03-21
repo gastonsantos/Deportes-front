@@ -4,6 +4,11 @@ import {obtenerUsuarioPorId} from "@/services/usuario/api";
 const SettingsComponent = () => {
   const [formData, setFormData] = useState({
     nombre: ' ',
+    apellido:'',
+    direccion:'',
+    numero:'',
+    provincia:'',
+    localidad:'',
     edad: '',
     email: ' ',
     telefono: ' ',
@@ -20,7 +25,7 @@ const SettingsComponent = () => {
         
         const response = await obtenerUsuarioPorId();
         if (response) {
-          console.log("obtenerDeportes", response.data);
+          console.log("obtener Usuario", response.data);
           
           const data = response
           setFormData(data); // Almacena los deportes en el estado local
@@ -39,10 +44,12 @@ const SettingsComponent = () => {
       {/* Sidebar */}
       <aside className="bg-gray-800 text-white w-1/4 hidden md:block">
         <div className="p-4">
-          <h2 className="text-2xl font-semibold">Settings</h2>
+          <h2 className="text-2xl font-semibold">Opciones</h2>
           <ul className="mt-4 space-y-2">
-            <li><a href="#" className="block px-4 py-2 text-sm hover:bg-gray-700">Profile</a></li>
-            <li><a href="#" className="block px-4 py-2 text-sm hover:bg-gray-700">Security</a></li>
+            <li><a href="#" className="block px-4 py-2 text-sm hover:bg-gray-700">Perfil</a></li>
+            <li><a href="#" className="block px-4 py-2 text-sm hover:bg-gray-700">Perfil Futbol</a></li>
+            <li><a href="#" className="block px-4 py-2 text-sm hover:bg-gray-700">Perfil Tenis</a></li>
+            <li><a href="#" className="block px-4 py-2 text-sm hover:bg-gray-700">Perfil Handball</a></li>
             <li><a href="#" className="block px-4 py-2 text-sm hover:bg-gray-700">Notifications</a></li>
           </ul>
         </div>
@@ -65,7 +72,7 @@ const SettingsComponent = () => {
               <img src="https://source.unsplash.com/300x300/?portrait" alt="Avatar" className="w-full h-full object-cover" />
             </div>
             <div>
-              <label htmlFor="avatar" className="cursor-pointer text-blue-500 hover:underline">Change Picture</label>
+              <label htmlFor="avatar" className="cursor-pointer text-blue-500 hover:underline">Cambiar</label>
               <input type="file" id="avatar" className="hidden" />
             </div>
           </div>
@@ -77,16 +84,34 @@ const SettingsComponent = () => {
                 <input type="text" id="firstName" value={formData.nombre} onChange={handleChange} className="w-full px-4 py-2 border rounded focus:outline-none focus:border-blue-500 text-gray-700 " />
               </div>
               <div>
-                <label htmlFor="lastName" className="block text-gray-700 text-sm font-bold mb-2">Telefono</label>
-                <input type="text" id="lastName" value={formData.telefono} onChange={handleChange} className="w-full px-4 py-2 border rounded focus:outline-none focus:border-blue-500 text-gray-700" />
+                <label htmlFor="lastName" className="block text-gray-700 text-sm font-bold mb-2">Apellido</label>
+                <input type="text" id="lastName" value={formData.apellido} onChange={handleChange} className="w-full px-4 py-2 border rounded focus:outline-none focus:border-blue-500 text-gray-700" />
               </div>
+            </div>
+            <div className="grid grid-cols-2 gap-4">
+              <div>
+                <label htmlFor="firstName" className="block text-gray-700 text-sm font-bold mb-2">Direccion</label>
+                <input type="text" id="firstName" value={formData.direccion} onChange={handleChange} className="w-full px-4 py-2 border rounded focus:outline-none focus:border-blue-500 text-gray-700 " />
+              </div>
+              <div>
+                <label htmlFor="lastName" className="block text-gray-700 text-sm font-bold mb-2">Numero</label>
+                <input type="text" id="lastName" value={formData.numero} onChange={handleChange} className="w-full px-4 py-2 border rounded focus:outline-none focus:border-blue-500 text-gray-700" />
+              </div>
+            </div>
+            <div className="mb-6">
+              <label htmlFor="text" className="block text-gray-700 text-sm font-bold mb-2">Provincia</label>
+              <input type="text" id="provincia" value={formData.provincia} onChange={handleChange} className="w-full px-4 py-2 border rounded focus:outline-none focus:border-blue-500 text-gray-700" />
+            </div>
+            <div className="mb-6">
+              <label htmlFor="text" className="block text-gray-700 text-sm font-bold mb-2">Localidad</label>
+              <input type="text" id="localidad" value={formData.localidad} onChange={handleChange} className="w-full px-4 py-2 border rounded focus:outline-none focus:border-blue-500 text-gray-700" />
             </div>
             <div className="mb-6">
               <label htmlFor="email" className="block text-gray-700 text-sm font-bold mb-2">Email</label>
               <input type="email" id="email" value={formData.email} onChange={handleChange} className="w-full px-4 py-2 border rounded focus:outline-none focus:border-blue-500 text-gray-700" />
             </div>
             <div className="mb-6">
-              <label htmlFor="password" className="block text-gray-700 text-sm font-bold mb-2">New Password</label>
+              <label htmlFor="password" className="block text-gray-700 text-sm font-bold mb-2">Password</label>
               <input type="password" id="password" value={formData.contrasenia} onChange={handleChange} className="w-full px-4 py-2 border rounded focus:outline-none focus:border-blue-500 text-gray-700" />
             </div>
             {/* Buttons */}
@@ -96,7 +121,7 @@ const SettingsComponent = () => {
                 type="button"
                 onClick={() => alert('Changes saved!')}
               >
-                Save Changes
+                Guardar
               </button>
             </div>
           </form>
