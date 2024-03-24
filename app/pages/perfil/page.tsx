@@ -1,6 +1,8 @@
 "use client"
 import React, { useEffect, useState } from 'react';
 import {obtenerUsuarioPorId} from "@/services/usuario/api";
+import AsideComponent from '@/components/navegation/AsideComponent';
+
 const SettingsComponent = () => {
   const [formData, setFormData] = useState({
     nombre: ' ',
@@ -38,28 +40,7 @@ const SettingsComponent = () => {
 
   return (
     <div className="bg-gray-400 md:bg-gray-100 min-h-screen flex">
-      {/* Sidebar */}
-      <aside className="bg-gray-800 text-white w-1/4 hidden md:block">
-        <div className="p-4">
-          <h2 className="text-2xl font-semibold">Settings</h2>
-          <ul className="mt-4 space-y-2">
-            <li><a href="#" className="block px-4 py-2 text-sm hover:bg-gray-700">Profile</a></li>
-            <li><a href="#" className="block px-4 py-2 text-sm hover:bg-gray-700">Security</a></li>
-            <li><a href="#" className="block px-4 py-2 text-sm hover:bg-gray-700">Notifications</a></li>
-          </ul>
-        </div>
-      </aside>
-      {/*Sidebar Mobile*/}
-      <aside className={`${openMenu ==false ? 'hidden' : 'flex absolute h-full bg-gray-800 text-white w-3/4 '} `}>
-        <div className="p-4">
-          <h2 className="text-2xl font-semibold">Settings</h2>
-          <ul className="mt-4 space-y-2">
-            <li><a href="#" className="block px-4 py-2 text-sm hover:bg-gray-700">Profile</a></li>
-            <li><a href="#" className="block px-4 py-2 text-sm hover:bg-gray-700">Security</a></li>
-            <li><a href="#" className="block px-4 py-2 text-sm hover:bg-gray-700">Notifications</a></li>
-          </ul>
-        </div>
-      </aside>
+      <AsideComponent openMenu={false}/>
       {/* Content */}
       <div className="flex-1 p-8">
         {/* Mobile Menu Toggle Button (hidden on larger screens) */}
