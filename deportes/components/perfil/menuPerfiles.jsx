@@ -10,7 +10,7 @@ const MenuPerfiles = () => {
           <li><a href="#" className="block px-4 py-2 text-sm hover:bg-gray-700">Perfil Usuario</a></li>
           <li><a href="#" className="block px-4 py-2 text-sm hover:bg-gray-700">Perfil Futbol</a></li>
           <li><a href="#" className="block px-4 py-2 text-sm hover:bg-gray-700">Perfil Tenis</a></li>
-          <li><a href="#" className="block px-4 py-2 text-sm hover:bg-gray-700">Perfil Handball</a></li>
+          <li><a href="#" className="block px-4 py-2 text-sm hover:bg-gray-700">Perfil Basquet</a></li>
           <li><a href="#" className="block px-4 py-2 text-sm hover:bg-gray-700">Notificationes</a></li>
         </ul>
       </div>

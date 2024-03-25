@@ -23,20 +23,27 @@ const PerfilJugador = () => {
           </div>
           <div className="grid grid-cols-1 gap-4 md:grid-cols-2 md:gap-4">
             <div>
-              <label htmlFor="firstName" className="block text-gray-700 text-sm font-bold mb-2">Edad</label>
-              <input type="number" id="firstName" className="w-full px-4 py-2 border rounded focus:outline-none focus:border-blue-500 text-gray-700" />
+              <label htmlFor="edad" className="block text-gray-700 text-sm font-bold mb-2">Edad</label>
+              <input type="number" id="edad" className="w-full px-4 py-2 border rounded focus:outline-none focus:border-blue-500 text-gray-700" />
             </div>
             <div>
-              <label htmlFor="lastName" className="block text-gray-700 text-sm font-bold mb-2">Altura cm</label>
-              <input type="number" id="lastName" className="w-full px-4 py-2 border rounded focus:outline-none focus:border-blue-500 text-gray-700" />
+              <label htmlFor="altura" className="block text-gray-700 text-sm font-bold mb-2">Altura cm</label>
+              <input type="number" id="altura" className="w-full px-4 py-2 border rounded focus:outline-none focus:border-blue-500 text-gray-700" />
             </div>
             <div>
-              <label htmlFor="firstName" className="block text-gray-700 text-sm font-bold mb-2">Peso</label>
-              <input type="number" id="firstName" className="w-full px-4 py-2 border rounded focus:outline-none focus:border-blue-500 text-gray-700" />
+              <label htmlFor="peso" className="block text-gray-700 text-sm font-bold mb-2">Peso</label>
+              <input type="number" id="peso" className="w-full px-4 py-2 border rounded focus:outline-none focus:border-blue-500 text-gray-700" />
             </div>
             <div className="relative">
               <label htmlFor="pieHabil" className="block text-gray-700 text-sm font-bold mb-2">Pie Hábil</label>
               <select id="pieHabil" name="pieHabil" className="w-full px-4 py-2 border rounded focus:outline-none focus:border-blue-500 text-gray-700">
+                <option value="derecho">Derecho</option>
+                <option value="izquierdo">Izquierdo</option>
+              </select>
+            </div>
+            <div className="relative">
+              <label htmlFor="manoHabil" className="block text-gray-700 text-sm font-bold mb-2">Brazo Hábil</label>
+              <select id="manoHabil" name="pieHabil" className="w-full px-4 py-2 border rounded focus:outline-none focus:border-blue-500 text-gray-700">
                 <option value="derecho">Derecho</option>
                 <option value="izquierdo">Izquierdo</option>
               </select>
