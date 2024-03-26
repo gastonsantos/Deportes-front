@@ -5,17 +5,28 @@ import AsideComponent from '@/components/navegation/AsideComponent';
 
 const SettingsComponent = () => {
   const [formData, setFormData] = useState({
-    nombre: ' ',
+    nombre: '',
+    apellido: '',
+    apodo: ' ',
     edad: '',
-    email: ' ',
-    telefono: ' ',
+    provincia: '',
+    localidad: '',
+    direccion: '',
+    numero: '',
+    email: '',
+    telefono: '',
     contrasenia: '',
   });
 
   const [openMenu, setOpenMenu] = useState(false)
 
-  const handleChange = () => {
-   
+  const handleChange = (e: any) => {
+    console.log(e, "que tiene e")
+    const { name, value } = e.target;
+    setFormData(prevFormData => ({
+      ...prevFormData,
+      [name]: value
+    }));
   };
 
   useEffect(() => {
@@ -72,12 +83,36 @@ const SettingsComponent = () => {
           <form>
             <div className="flex flex-col justify-center  md:grid md:grid-cols-2 gap-4">
               <div>
-                <label htmlFor="firstName" className="block text-gray-700 text-sm font-bold mb-2 text-center md:text-left">Nombre</label>
-                <input type="text" id="firstName" value={formData.nombre} onChange={handleChange} className="w-full px-4 py-2 border rounded focus:outline-none focus:border-green-500 text-gray-700 border-blue-500" />
+                <label htmlFor="nombre" className="block text-gray-700 text-sm font-bold mb-2 text-center md:text-left">Nombre</label>
+                <input type="text" id="nombre" value={formData.nombre} onChange={handleChange} className="w-full px-4 py-2 border rounded focus:outline-none focus:border-green-500 text-gray-700 border-blue-500" />
               </div>
               <div>
-                <label htmlFor="lastName" className="block text-gray-700 text-sm font-bold mb-2 text-center md:text-left">Telefono</label>
-                <input type="text" id="lastName" value={formData.telefono} onChange={handleChange} className="w-full px-4 py-2 border rounded focus:outline-none focus:border-green-500 text-gray-700 border-blue-500" />
+                <label htmlFor="apellido" className="block text-gray-700 text-sm font-bold mb-2 text-center md:text-left">Apellido</label>
+                <input type="text" id="apellido" value={formData.apellido} onChange={handleChange} className="w-full px-4 py-2 border rounded focus:outline-none focus:border-green-500 text-gray-700 border-blue-500" />
+              </div>
+            </div>
+            <div className="mb-6">
+              <label htmlFor="apodo" className="block text-gray-700 text-sm font-bold mb-2 text-center md:text-left">Apodo</label>
+              <input type="text" id="apodo" value={formData.apodo} onChange={handleChange} className="w-full px-4 py-2 border rounded focus:outline-none focus:border-green-500 text-gray-700 border-blue-500" />
+            </div>
+            <div className="flex flex-col justify-center  md:grid md:grid-cols-2 gap-4">
+              <div>
+                <label htmlFor="provincia" className="block text-gray-700 text-sm font-bold mb-2 text-center md:text-left">Provincia</label>
+                <input type="text" id="provincia" value={formData.provincia} onChange={handleChange} className="w-full px-4 py-2 border rounded focus:outline-none focus:border-green-500 text-gray-700 border-blue-500" />
+              </div>
+              <div>
+                <label htmlFor="localidad" className="block text-gray-700 text-sm font-bold mb-2 text-center md:text-left">Localidad</label>
+                <input type="text" id="localidad" value={formData.localidad} onChange={handleChange} className="w-full px-4 py-2 border rounded focus:outline-none focus:border-green-500 text-gray-700 border-blue-500" />
+              </div>
+            </div>
+            <div className="flex flex-col justify-center  md:grid md:grid-cols-2 gap-4 mb-6">
+              <div>
+                <label htmlFor="direccion" className="block text-gray-700 text-sm font-bold mb-2 text-center md:text-left">Direccion</label>
+                <input type="text" id="direccion" value={formData.direccion} onChange={handleChange} className="w-full px-4 py-2 border rounded focus:outline-none focus:border-green-500 text-gray-700 border-blue-500" />
+              </div>
+              <div>
+                <label htmlFor="numero" className="block text-gray-700 text-sm font-bold mb-2 text-center md:text-left">Numero</label>
+                <input type="text" id="numero" value={formData.numero} onChange={handleChange} className="w-full px-4 py-2 border rounded focus:outline-none focus:border-green-500 text-gray-700 border-blue-500" />
               </div>
             </div>
             <div className="mb-6">
@@ -95,7 +130,7 @@ const SettingsComponent = () => {
                 type="button"
                 onClick={() => alert('Changes saved!')}
               >
-                Save Changes
+               Guardar
               </button>
             </div>
           </form>

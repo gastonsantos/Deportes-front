@@ -1,5 +1,6 @@
 'use client'
 import React, {useState, useEffect} from "react";
+import {obtenerFichaDeportistaPorId,actualizarFichaDeportistaPorId } from "@/services/perfiles/api";
 import AsideComponent from "@/components/navegation/AsideComponent";
 import { Radar } from 'react-chartjs-2';
 import {
@@ -46,7 +47,7 @@ const options = {
 
       },
       suggestedMin: 0,
-      suggestedMax: 100,
+      suggestedMax: 10,
       ticks:{
         display:false
       }
@@ -70,11 +71,13 @@ export default function PerfilFutbol()
 {
     
   const [formData, setFormData] = useState({
-    nombre: '',
+    idUsuario: localStorage.getItem("id"),
     edad: '',
-    email: '',
-    telefono: '',
-    contrasenia: '',
+    altura: '',
+    peso: '',
+    pieHabil: '',
+    manoHabil:'',
+    posicion: '',
     velocidad: 0,
     disparo: 0,
     regate: 0,
@@ -87,24 +90,23 @@ export default function PerfilFutbol()
       const [data, setData] = useState(defaultData);
 
       useEffect(() => {
-        const newData = {
-          ...defaultData,
-          datasets: [
-            {
-              ...defaultData.datasets[0],
-              data: [
-                formData.velocidad,
-                formData.disparo,
-                formData.regate,
-                formData.fuerza,
-                formData.pase,
-                formData.defensa
-              ]
+        const fetchData = async () => {
+          try {
+            
+            const response = await obtenerFichaDeportistaPorId();
+            if (response) {
+              console.log("que trae la respuesta", response);
+              
+              const data = response
+              setFormData(data); // Almacena los datos
             }
-          ]
+          } catch (error) {
+            console.error("Error al obtener deportes:", error);
+          }
         };
-        setData(newData);
-      }, [formData]);
+    
+        fetchData();
+      }, []);
     
       const handleChange = (e: any) => {
         console.log(e, "que tiene e")
@@ -115,7 +117,17 @@ export default function PerfilFutbol()
         }));
       };
     
-    
+      const handleSubmit = async () => {
+        try {
+          const response = await actualizarFichaDeportistaPorId(formData);
+          if (response) {
+            console.log('Ficha deportista actualizada:', response);
+            // Realizar cualquier acción adicional después de actualizar la ficha deportista
+          }
+        } catch (error) {
+          console.error('Error al actualizar la ficha deportista:', error);
+        }
+      };
 
 return(
     <>
@@ -148,35 +160,70 @@ return(
           {/* Form Section */}
           <form >
             <div className="flex flex-col justify-center  md:grid md:grid-cols-2 gap-4">
+          
               <div>
-                <label htmlFor="firstName" className="block text-gray-700 text-sm font-bold mb-2 text-center md:text-left">Edad</label>
-                <input type="text" id="firstName" value={formData.nombre} onChange={handleChange} className="w-full px-4 py-2 border rounded focus:outline-none focus:border-green-500 text-gray-700 border-blue-500" />
+                <label htmlFor="edad" className="block text-gray-700 text-sm font-bold mb-2 text-center md:text-left">Edad</label>
+                <input type="number" name="edad" id="edad" value={formData.edad} onChange={handleChange} className="w-full px-4 py-2 border rounded focus:outline-none focus:border-green-500 text-gray-700 border-blue-500" />
               </div>
               <div>
-                <label htmlFor="lastName" className="block text-gray-700 text-sm font-bold mb-2 text-center md:text-left">Altura</label>
-                <input type="text" id="lastName" value={formData.telefono} onChange={handleChange} className="w-full px-4 py-2 border rounded focus:outline-none focus:border-green-500 text-gray-700 border-blue-500" />
+                <label htmlFor="altura" className="block text-gray-700 text-sm font-bold mb-2 text-center md:text-left">Altura</label>
+                <input type="number" name="altura" id="altura" value={formData.altura} onChange={handleChange} className="w-full px-4 py-2 border rounded focus:outline-none focus:border-green-500 text-gray-700 border-blue-500" />
               </div>
               <div>
-                <label htmlFor="firstName" className="block text-gray-700 text-sm font-bold mb-2 text-center md:text-left">Peso</label>
-                <input type="text" id="firstName" value={formData.nombre} onChange={handleChange} className="w-full px-4 py-2 border rounded focus:outline-none focus:border-green-500 text-gray-700 border-blue-500" />
+                <label htmlFor="peso" className="block text-gray-700 text-sm font-bold mb-2 text-center md:text-left">Peso</label>
+                <input type="number" name="peso" id="peso" value={formData.peso} onChange={handleChange} className="w-full px-4 py-2 border rounded focus:outline-none focus:border-green-500 text-gray-700 border-blue-500" />
               </div>
-              <div>
-                <label htmlFor="lastName" className="block text-gray-700 text-sm font-bold mb-2 text-center md:text-left">Pie habil</label>
-                <input type="text" id="lastName" value={formData.telefono} onChange={handleChange} className="w-full px-4 py-2 border rounded focus:outline-none focus:border-green-500 text-gray-700 border-blue-500" />
-              </div>
+              
+              
+              <div className="mb-6">
+              <label htmlFor="pieHabil" className="block text-gray-700 text-sm font-bold mb-2 text-center md:text-left">Pie habil</label>
+              <select
+               id="pieHabil"
+               value={formData.pieHabil}
+               name="pieHabil"
+                onChange={handleChange}
+               className="w-full px-4 py-2 border rounded focus:outline-none focus:border-green-500 text-gray-700 border-blue-500"
+               >
+              <option value="Derecho">Derecho</option>
+             <option value="Izquierdo">Izquierdo</option>
+            </select>
             </div>
             <div className="mb-6">
-              <label htmlFor="password" className="block text-gray-700 text-sm font-bold mb-2 text-center md:text-left">posicion</label>
-              <input type="password" id="password" value={formData.contrasenia} onChange={handleChange} className="w-full px-4 py-2 border rounded focus:outline-none focus:border-green-500 text-gray-700 border-blue-500" />
+              <label htmlFor="manoHabil" className="block text-gray-700 text-sm font-bold mb-2 text-center md:text-left">Mano habil</label>
+              <select
+               id="manoHabil"
+               name="manoHabil"
+               value={formData.manoHabil}
+                onChange={handleChange}
+               className="w-full px-4 py-2 border rounded focus:outline-none focus:border-green-500 text-gray-700 border-blue-500"
+               >
+              <option value="Derecho">Derecho</option>
+             <option value="Izquierdo">Izquierdo</option>
+            </select>
+            </div>
+            </div>
+            <div className="mb-6">
+              <label htmlFor="posicion" className="block text-gray-700 text-sm font-bold mb-2 text-center md:text-left">Posicion</label>
+              <select id="posicion"
+              name="posicion"
+               value={formData.posicion}
+                onChange={handleChange}
+               className="w-full px-4 py-2 border rounded focus:outline-none focus:border-green-500 text-gray-700 border-blue-500"
+               >
+              <option value="Arquero">Arquero</option>
+             <option value="Defensor">Defensor</option>
+             <option value="Mediocampista">Mediocampista</option>
+             <option value="Delantero">Delantero</option>
+            </select>
             </div>
             {/* Buttons */}
             <div className="flex justify-center md:justify-end">
               <button
                 className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 focus:outline-none focus:shadow-outline-blue"
                 type="button"
-                onClick={() => alert('Changes saved!')}
+                onClick={handleSubmit}
               >
-                Save Changes
+                Guardar
               </button>
             </div>
           </form>
@@ -186,28 +233,28 @@ return(
         <form >
             <div className="flex flex-col justify-center  md:grid md:grid-cols-2 gap-4">
               <div>
-                <label htmlFor="velocidad" className="block text-gray-700 text-sm font-bold mb-2 text-center md:text-left">velocidad</label>
-                <input type="text" name="velocidad" id="velocidad" value={formData.velocidad} onChange={(e)=>handleChange(e)} className="w-full px-4 py-2 border rounded focus:outline-none focus:border-green-500 text-gray-700 border-blue-500" />
+                <label htmlFor="velocidad" className="block text-gray-700 text-sm font-bold mb-2 text-center md:text-left">Velocidad</label>
+                <input type="number" name="velocidad" id="velocidad" value={formData.velocidad} onChange={(e)=>handleChange(e)} className="w-full px-4 py-2 border rounded focus:outline-none focus:border-green-500 text-gray-700 border-blue-500" />
               </div>
               <div>
-                <label htmlFor="disparo" className="block text-gray-700 text-sm font-bold mb-2 text-center md:text-left">disparo</label>
-                <input type="text" name="disparo" id="disparo" value={formData.disparo} onChange={(e)=>handleChange(e)} className="w-full px-4 py-2 border rounded focus:outline-none focus:border-green-500 text-gray-700 border-blue-500" />
+                <label htmlFor="disparo" className="block text-gray-700 text-sm font-bold mb-2 text-center md:text-left">Disparo</label>
+                <input type="number" name="disparo" id="disparo" value={formData.disparo} onChange={(e)=>handleChange(e)} className="w-full px-4 py-2 border rounded focus:outline-none focus:border-green-500 text-gray-700 border-blue-500" />
               </div>
               <div>
-                <label htmlFor="regate" className="block text-gray-700 text-sm font-bold mb-2 text-center md:text-left">regate</label>
-                <input type="text" name="regate" id="regate" value={formData.regate} onChange={(e)=>handleChange(e)} className="w-full px-4 py-2 border rounded focus:outline-none focus:border-green-500 text-gray-700 border-blue-500" />
+                <label htmlFor="regate" className="block text-gray-700 text-sm font-bold mb-2 text-center md:text-left">Regate</label>
+                <input type="number" name="regate" id="regate" value={formData.regate} onChange={(e)=>handleChange(e)} className="w-full px-4 py-2 border rounded focus:outline-none focus:border-green-500 text-gray-700 border-blue-500" />
               </div>
               <div>
-                <label htmlFor="fuerza" className="block text-gray-700 text-sm font-bold mb-2 text-center md:text-left">fuerza</label>
-                <input type="text" name="fuerza" id="fuerza" value={formData.fuerza} onChange={(e)=>handleChange(e)} className="w-full px-4 py-2 border rounded focus:outline-none focus:border-green-500 text-gray-700 border-blue-500" />
+                <label htmlFor="fuerza" className="block text-gray-700 text-sm font-bold mb-2 text-center md:text-left">Fuerza</label>
+                <input type="number" name="fuerza" id="fuerza" value={formData.fuerza} onChange={(e)=>handleChange(e)} className="w-full px-4 py-2 border rounded focus:outline-none focus:border-green-500 text-gray-700 border-blue-500" />
               </div>
               <div>
-                <label htmlFor="pase" className="block text-gray-700 text-sm font-bold mb-2 text-center md:text-left">pase</label>
-                <input type="text" name="pase" id="pase" value={formData.pase} onChange={(e)=>handleChange(e)} className="w-full px-4 py-2 border rounded focus:outline-none focus:border-green-500 text-gray-700 border-blue-500" />
+                <label htmlFor="pase" className="block text-gray-700 text-sm font-bold mb-2 text-center md:text-left">Pase</label>
+                <input type="number" name="pase" id="pase" value={formData.pase} onChange={(e)=>handleChange(e)} className="w-full px-4 py-2 border rounded focus:outline-none focus:border-green-500 text-gray-700 border-blue-500" />
               </div>
               <div>
-                <label htmlFor="defensa" className="block text-gray-700 text-sm font-bold mb-2 text-center md:text-left">defensa</label>
-                <input type="text" name="defensa" id="defensa" value={formData.defensa} onChange={(e)=>handleChange(e)} className="w-full px-4 py-2 border rounded focus:outline-none focus:border-green-500 text-gray-700 border-blue-500" />
+                <label htmlFor="defensa" className="block text-gray-700 text-sm font-bold mb-2 text-center md:text-left">Defensa</label>
+                <input type="number" name="defensa" id="defensa" value={formData.defensa} onChange={(e)=>handleChange(e)} className="w-full px-4 py-2 border rounded focus:outline-none focus:border-green-500 text-gray-700 border-blue-500" />
               </div>
             </div>
             
