@@ -11,10 +11,10 @@ import Cookies from 'js-cookie';
 import signalRService from "@/services/chat/api";
 
 const navigation = [
-  { name: 'Dashboard', href: '#', current: true },
-  { name: 'Team', href: '#', current: false },
-  { name: 'Projects', href: '#', current: false },
-  { name: 'Calendar', href: '#', current: false },
+  { name: 'DeportesApp', href: '#', current: true },
+  { name: 'Eventos', href: '#', current: false },
+  { name: 'Crear evento', href: '#', current: false },
+  { name: '¿Que es DeportesApp?', href: '#', current: false },
 ]
 
 function classNames(...classes) {
