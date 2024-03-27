@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from 'react';
 import {obtenerUsuarioPorId} from "@/services/usuario/api";
 import AsideComponent from '@/components/navegation/AsideComponent';
-
+import { NavBar } from "@/components/navBar/navBar";
 const SettingsComponent = () => {
   const [formData, setFormData] = useState({
     nombre: '',
@@ -50,7 +50,10 @@ const SettingsComponent = () => {
 
 
   return (
+    <>
+    <NavBar/>
     <div className="bg-gray-400 md:bg-gray-100 min-h-screen flex">
+      
       <AsideComponent openMenu={false}/>
       {/* Content */}
       <div className="flex-1 p-8">
@@ -137,6 +140,7 @@ const SettingsComponent = () => {
         </div>
       </div>
     </div>
+    </>
   );
 };
 

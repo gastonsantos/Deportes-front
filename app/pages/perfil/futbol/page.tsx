@@ -2,69 +2,10 @@
 import React, {useState, useEffect} from "react";
 import {obtenerFichaDeportistaPorId,actualizarFichaDeportistaPorId } from "@/services/perfiles/api";
 import AsideComponent from "@/components/navegation/AsideComponent";
-import { Radar } from 'react-chartjs-2';
+import { NavBar } from "@/components/navBar/navBar";
+
+import PerfilesStats from "@/components/perfiles/PerfilesStats";
 import Swal from 'sweetalert2';
-import {
-  Chart as ChartJS,
-  RadialLinearScale,
-  PointElement,
-  LineElement,
-  Filler,
-  Tooltip,
-  Legend,
-} from 'chart.js';
-
-
-ChartJS.register(
-  RadialLinearScale,
-  PointElement,
-  LineElement,
-  Filler,
-  Tooltip,
-  Legend
-);
-
-const defaultData = {
-  labels: ['Velocidad', 'Disparo', 'Regate', 'Fuerza', 'Pase', 'Defensa'],
-  datasets: [
-    {
-      label: 'Jugador 1',
-      data: [0, 0, 0, 0, 0, 0],
-      backgroundColor: 'rgba(00, 00, 256, 0.2)',
-      borderColor: 'rgba(00, 00, 00, 1)',
-      borderWidth: 1.5,
-
-
-    },
-  ],
-};
-
-const options = {
-  scales: {
-    r: {
-      display: true, // Oculta las escalas de valores
-      angleLines: {
-        display: false
-
-      },
-      suggestedMin: 0,
-      suggestedMax: 10,
-      ticks:{
-        display:false
-      }
-    }
-   
-  },
-  plugins: {
-    legend: {
-      display: false // Opcionalmente, puedes ocultar la leyenda si lo deseas
-    }
-  }
-};
-
-
-
-
 
 
 
@@ -82,17 +23,9 @@ export default function PerfilFutbol()
     
   });
 
-  const [formDataStats, setFormDataStats] = useState({
-    velocidad: 0,
-    disparo: 0,
-    regate: 0,
-    fuerza: 0,
-    pase: 0,
-    defensa: 0
-  })
-    
-      const [openMenu, setOpenMenu] = useState(false)
-      const [data, setData] = useState(defaultData);
+
+  const [openMenu, setOpenMenu] = useState(false)
+      
       
 //agregar Handle de perfil usuario deportista
 
@@ -121,7 +54,7 @@ export default function PerfilFutbol()
         const { name, value } = e.target;
         console.log("Name", name, value);
 
-        setFormDataStats(prevFormData => ({
+        setFormData(prevFormData => ({
           ...prevFormData,
           [name]: value
         }));
@@ -131,6 +64,7 @@ export default function PerfilFutbol()
       const handleSubmit = async () => {
         try {
           const response = await actualizarFichaDeportistaPorId(formData);
+          console.log("Que trae Response", response)
           if (response) {
             console.log('Ficha deportista actualizada:', response);
             Swal.fire({
@@ -148,28 +82,11 @@ export default function PerfilFutbol()
           console.error('Error al actualizar la ficha deportista:', error);
         }
       };
-      useEffect(() => {
-        const newData = {
-          ...defaultData,
-          datasets: [
-            {
-              ...defaultData.datasets[0],
-              data: [
-                formDataStats.velocidad,
-                formDataStats.disparo,
-                formDataStats.regate,
-                formDataStats.fuerza,
-                formDataStats.pase,
-                formDataStats.defensa
-              ]
-            }
-          ]
-        };
-        setData(newData);
-      }, [formDataStats]);
+     
 
 return(
     <>
+    <NavBar/>
         <div className="bg-gray-400 md:bg-blue-400 min-h-screen flex">
       <AsideComponent openMenu={false}/>
       {/* Content */}
@@ -267,44 +184,8 @@ return(
             </div>
           </form>
         </div>
-        {/*stats card*/}
-        <div className="w-1/2 bg-gray-300 p-8 rounded shadow-md mt-10 md:mt-0">
-        <form >
-            <div className="flex flex-col justify-center  md:grid md:grid-cols-2 gap-4">
-              <div>
-                <label htmlFor="velocidad" className="block text-gray-700 text-sm font-bold mb-2 text-center md:text-left">Velocidad</label>
-                <input type="number" name="velocidad" id="velocidad" value={formDataStats.velocidad} onChange={(e)=>handleChange(e)} className="w-full px-4 py-2 border rounded focus:outline-none focus:border-green-500 text-gray-700 border-blue-500" />
-              </div>
-              <div>
-                <label htmlFor="disparo" className="block text-gray-700 text-sm font-bold mb-2 text-center md:text-left">Disparo</label>
-                <input type="number" name="disparo" id="disparo" value={formDataStats.disparo} onChange={(e)=>handleChange(e)} className="w-full px-4 py-2 border rounded focus:outline-none focus:border-green-500 text-gray-700 border-blue-500" />
-              </div>
-              <div>
-                <label htmlFor="regate" className="block text-gray-700 text-sm font-bold mb-2 text-center md:text-left">Regate</label>
-                <input type="number" name="regate" id="regate" value={formDataStats.regate} onChange={(e)=>handleChange(e)} className="w-full px-4 py-2 border rounded focus:outline-none focus:border-green-500 text-gray-700 border-blue-500" />
-              </div>
-              <div>
-                <label htmlFor="fuerza" className="block text-gray-700 text-sm font-bold mb-2 text-center md:text-left">Fuerza</label>
-                <input type="number" name="fuerza" id="fuerza" value={formDataStats.fuerza} onChange={(e)=>handleChange(e)} className="w-full px-4 py-2 border rounded focus:outline-none focus:border-green-500 text-gray-700 border-blue-500" />
-              </div>
-              <div>
-                <label htmlFor="pase" className="block text-gray-700 text-sm font-bold mb-2 text-center md:text-left">Pase</label>
-                <input type="number" name="pase" id="pase" value={formDataStats.pase} onChange={(e)=>handleChange(e)} className="w-full px-4 py-2 border rounded focus:outline-none focus:border-green-500 text-gray-700 border-blue-500" />
-              </div>
-              <div>
-                <label htmlFor="defensa" className="block text-gray-700 text-sm font-bold mb-2 text-center md:text-left">Defensa</label>
-                <input type="number" name="defensa" id="defensa" value={formDataStats.defensa} onChange={(e)=>handleChange(e)} className="w-full px-4 py-2 border rounded focus:outline-none focus:border-green-500 text-gray-700 border-blue-500" />
-              </div>
-            </div>
-            
-          
-          </form>
-        <Radar
-          data={data}
-          options={options}
-        />
-      
-        </div>
+      {/*statsCards*/}
+    <PerfilesStats/>
       </div>
     </div>
     </>

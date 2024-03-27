@@ -42,19 +42,6 @@ const login = async (data) => {
         return response.data; // Puedes retornar más información si es necesario
 
     } catch (error) {
-        if(error.response.status === 409){
-            console.log("Error de que no valido email", error.response.data.Message);
-
-        }else if(error.response.status === 400){
-
-            console.log("No coinciden Email y/o Contraseña",error.response.data);
-
-        }else{
-            console.log('Error en la petición al servidor:', error.response.data.Message);
-
-        }
-
-
         throw error;
     }
 }

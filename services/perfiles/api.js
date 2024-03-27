@@ -29,15 +29,7 @@ async function obtenerFichaDeportistaPorId(){
                   
       const response = await axiosInstance.post('fichas/ActualizaFichaDeportista', data)
       console.log('Que trae Ficha deportista', response.data);
-      return response.data;
-      if (response.status === 200) {
-       
-        alert('Usuario registrado correctamente');
-        return true; 
-      } else {
-      
-        return false; 
-      }
+      return response;
     } catch (error) {
       return false;
       //alert('Ocurrió un error al registrar el usuario entro al Catch');

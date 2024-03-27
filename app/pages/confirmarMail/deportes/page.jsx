@@ -4,7 +4,8 @@ import { NavBar } from "@/components/navBar/navBar";
 
 export default function Deportes() {
   return (
-    <div>       
+    <div>   
+      <NavBar/>   
       <section>
       <Dep/>  
       </section>
