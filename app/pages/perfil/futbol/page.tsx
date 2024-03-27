@@ -3,6 +3,7 @@ import React, {useState, useEffect} from "react";
 import {obtenerFichaDeportistaPorId,actualizarFichaDeportistaPorId } from "@/services/perfiles/api";
 import AsideComponent from "@/components/navegation/AsideComponent";
 import { Radar } from 'react-chartjs-2';
+import Swal from 'sweetalert2';
 import {
   Chart as ChartJS,
   RadialLinearScale,
@@ -78,16 +79,22 @@ export default function PerfilFutbol()
     pieHabil: '',
     manoHabil:'',
     posicion: '',
+    
+  });
+
+  const [formDataStats, setFormDataStats] = useState({
     velocidad: 0,
     disparo: 0,
     regate: 0,
     fuerza: 0,
     pase: 0,
     defensa: 0
-  });
+  })
     
       const [openMenu, setOpenMenu] = useState(false)
       const [data, setData] = useState(defaultData);
+      
+//agregar Handle de perfil usuario deportista
 
       useEffect(() => {
         const fetchData = async () => {
@@ -98,6 +105,7 @@ export default function PerfilFutbol()
               console.log("que trae la respuesta", response);
               
               const data = response
+              
               setFormData(data); // Almacena los datos
             }
           } catch (error) {
@@ -109,12 +117,15 @@ export default function PerfilFutbol()
       }, []);
     
       const handleChange = (e: any) => {
-        console.log(e, "que tiene e")
+        console.log(e.target, "que tiene e")
         const { name, value } = e.target;
-        setFormData(prevFormData => ({
+        console.log("Name", name, value);
+
+        setFormDataStats(prevFormData => ({
           ...prevFormData,
           [name]: value
         }));
+        console.log("AVERR", formData);
       };
     
       const handleSubmit = async () => {
@@ -122,12 +133,40 @@ export default function PerfilFutbol()
           const response = await actualizarFichaDeportistaPorId(formData);
           if (response) {
             console.log('Ficha deportista actualizada:', response);
-            // Realizar cualquier acción adicional después de actualizar la ficha deportista
+            Swal.fire({
+              title: '¡Ficha deportista actualizada!',
+              text: 'Se ha modificado correctamente.',
+              icon: 'success',
+              confirmButtonText: 'Continuar',
+              confirmButtonColor: '#007bff', // Adjust color as needed
+            }).then(() => {
+              // Optional behavior after success (e.g., redirect to login)
+              
+            });
           }
         } catch (error) {
           console.error('Error al actualizar la ficha deportista:', error);
         }
       };
+      useEffect(() => {
+        const newData = {
+          ...defaultData,
+          datasets: [
+            {
+              ...defaultData.datasets[0],
+              data: [
+                formDataStats.velocidad,
+                formDataStats.disparo,
+                formDataStats.regate,
+                formDataStats.fuerza,
+                formDataStats.pase,
+                formDataStats.defensa
+              ]
+            }
+          ]
+        };
+        setData(newData);
+      }, [formDataStats]);
 
 return(
     <>
@@ -234,27 +273,27 @@ return(
             <div className="flex flex-col justify-center  md:grid md:grid-cols-2 gap-4">
               <div>
                 <label htmlFor="velocidad" className="block text-gray-700 text-sm font-bold mb-2 text-center md:text-left">Velocidad</label>
-                <input type="number" name="velocidad" id="velocidad" value={formData.velocidad} onChange={(e)=>handleChange(e)} className="w-full px-4 py-2 border rounded focus:outline-none focus:border-green-500 text-gray-700 border-blue-500" />
+                <input type="number" name="velocidad" id="velocidad" value={formDataStats.velocidad} onChange={(e)=>handleChange(e)} className="w-full px-4 py-2 border rounded focus:outline-none focus:border-green-500 text-gray-700 border-blue-500" />
               </div>
               <div>
                 <label htmlFor="disparo" className="block text-gray-700 text-sm font-bold mb-2 text-center md:text-left">Disparo</label>
-                <input type="number" name="disparo" id="disparo" value={formData.disparo} onChange={(e)=>handleChange(e)} className="w-full px-4 py-2 border rounded focus:outline-none focus:border-green-500 text-gray-700 border-blue-500" />
+                <input type="number" name="disparo" id="disparo" value={formDataStats.disparo} onChange={(e)=>handleChange(e)} className="w-full px-4 py-2 border rounded focus:outline-none focus:border-green-500 text-gray-700 border-blue-500" />
               </div>
               <div>
                 <label htmlFor="regate" className="block text-gray-700 text-sm font-bold mb-2 text-center md:text-left">Regate</label>
-                <input type="number" name="regate" id="regate" value={formData.regate} onChange={(e)=>handleChange(e)} className="w-full px-4 py-2 border rounded focus:outline-none focus:border-green-500 text-gray-700 border-blue-500" />
+                <input type="number" name="regate" id="regate" value={formDataStats.regate} onChange={(e)=>handleChange(e)} className="w-full px-4 py-2 border rounded focus:outline-none focus:border-green-500 text-gray-700 border-blue-500" />
               </div>
               <div>
                 <label htmlFor="fuerza" className="block text-gray-700 text-sm font-bold mb-2 text-center md:text-left">Fuerza</label>
-                <input type="number" name="fuerza" id="fuerza" value={formData.fuerza} onChange={(e)=>handleChange(e)} className="w-full px-4 py-2 border rounded focus:outline-none focus:border-green-500 text-gray-700 border-blue-500" />
+                <input type="number" name="fuerza" id="fuerza" value={formDataStats.fuerza} onChange={(e)=>handleChange(e)} className="w-full px-4 py-2 border rounded focus:outline-none focus:border-green-500 text-gray-700 border-blue-500" />
               </div>
               <div>
                 <label htmlFor="pase" className="block text-gray-700 text-sm font-bold mb-2 text-center md:text-left">Pase</label>
-                <input type="number" name="pase" id="pase" value={formData.pase} onChange={(e)=>handleChange(e)} className="w-full px-4 py-2 border rounded focus:outline-none focus:border-green-500 text-gray-700 border-blue-500" />
+                <input type="number" name="pase" id="pase" value={formDataStats.pase} onChange={(e)=>handleChange(e)} className="w-full px-4 py-2 border rounded focus:outline-none focus:border-green-500 text-gray-700 border-blue-500" />
               </div>
               <div>
                 <label htmlFor="defensa" className="block text-gray-700 text-sm font-bold mb-2 text-center md:text-left">Defensa</label>
-                <input type="number" name="defensa" id="defensa" value={formData.defensa} onChange={(e)=>handleChange(e)} className="w-full px-4 py-2 border rounded focus:outline-none focus:border-green-500 text-gray-700 border-blue-500" />
+                <input type="number" name="defensa" id="defensa" value={formDataStats.defensa} onChange={(e)=>handleChange(e)} className="w-full px-4 py-2 border rounded focus:outline-none focus:border-green-500 text-gray-700 border-blue-500" />
               </div>
             </div>
             

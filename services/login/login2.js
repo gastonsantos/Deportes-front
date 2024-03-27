@@ -3,6 +3,7 @@ import { API } from "@/config/constants";
 import { jwtDecode } from "jwt-decode";
 import Cookies from 'js-cookie';
 
+
 const login = async (data) => {
     try {
         const response = await axios.post(API + '/usuarios/Login', data, {
@@ -41,8 +42,20 @@ const login = async (data) => {
         return response.data; // Puedes retornar más información si es necesario
 
     } catch (error) {
-        console.error('Error en la petición al servidor:', error.message);
-        throw new Error('Error');
+        if(error.response.status === 409){
+            console.log("Error de que no valido email", error.response.data.Message);
+
+        }else if(error.response.status === 400){
+
+            console.log("No coinciden Email y/o Contraseña",error.response.data);
+
+        }else{
+            console.log('Error en la petición al servidor:', error.response.data.Message);
+
+        }
+
+
+        throw error;
     }
 }
 
@@ -55,6 +68,9 @@ const Logout =  () => {
     Cookies.remove("email");
     Cookies.remove("refreshToken");
     
+    localStorage.removeItem("token");
+    localStorage.removeItem("refreshToken");
+    localStorage.removeItem("id");
     return true;
 }
 
