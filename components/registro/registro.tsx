@@ -3,7 +3,6 @@ import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Image from "next/image";
 import { registrarUsuario } from '@/services/usuario/api';
-import { TURBO_TRACE_DEFAULT_MEMORY_LIMIT } from 'next/dist/shared/lib/constants';
 import Swal from 'sweetalert2';
 export default function Registro() {
 
