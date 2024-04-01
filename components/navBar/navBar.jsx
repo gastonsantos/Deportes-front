@@ -12,8 +12,8 @@ import signalRService from "@/services/chat/api";
 
 const navigation = [
   { name: 'DeportesApp', href: '#', current: true },
-  { name: 'Eventos', href: '#', current: false },
-  { name: 'Crear evento', href: '#', current: false },
+  { name: 'Eventos', href: '/pages/deportes', current: false },
+  { name: 'Crear evento', href: '/pages/crearEvento', current: false },
   { name: '¿Que es DeportesApp?', href: '#', current: false },
 ]
 
