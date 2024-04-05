@@ -35,7 +35,7 @@ const Carousel = () => {
     }, [deportes]);
     return (
 
-        <div className="flex items-center justify-center p-4 relative">
+        <div className="flex items-center justify-center p-1 relative">
             {/* Carousel for desktop and large size devices */}
             <CarouselProvider className="" naturalSlideWidth={100} isIntrinsicHeight={true} totalSlides={8} visibleSlides={1} step={1} infinite={true}>
                 <div className="max-w-96 h-full flex m-16 relative">
@@ -45,8 +45,9 @@ const Carousel = () => {
                         </svg>
                     </ButtonBack>
 
-                    <Slider>
-                        <div id="slider" className="transition ease-out duration-700">
+                    <Slider className="border-8 border-gray-400 m-2">
+                        
+                        <div id="slider" className="transition ease-out duration-700 ">
                             {deportes.map((deporte) => (
                                 <Slide key={deporte.id} index={deporte.id}>
                                     <CardCarrusel deportes={deporte} />

@@ -56,7 +56,7 @@ const InfoLanding =()=>{
               </div>
             </div>
           </div>
-          <div class="lg:w-1/2 w-full pl-4 mb-10 pt-4 lg:mb-0 rounded-lg overflow-hidden">
+          <div class="lg:w-1/2 w-full pl-4 mb-10 spt-4 lg:mb-0 rounded-lg overflow-hidden">
             <img
               alt="feature"
               class="object-cover object-center h-full w-full"
