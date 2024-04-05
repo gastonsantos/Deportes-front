@@ -21,9 +21,9 @@ export default function Imagenes() {
               Somos la plataforma perfecta para organizar y disfrutar de eventos deportivos emocionantes. Con DeportesAPP, puedes crear fácilmente tus propios partidos de baloncesto, fútbol, pádel, tenis y más en segundos.
             </p>
             <div className="flex justify-center mt-6"> {/* Alineación horizontal */}
-              <button className="w-32 bg-gray-500 hover:bg-gray-400 text-white font-bold py-2 px-4 hover:border-gray-500 rounded">
+              <a href="/pages/login" className="w-32 bg-gray-500 hover:bg-gray-400 text-white font-bold py-2 px-4 hover:border-gray-500 rounded">
                 Empezar
-              </button>
+              </a>
             </div>
           </div>
         </div>

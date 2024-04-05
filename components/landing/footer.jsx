@@ -7,7 +7,7 @@ const Footer = () => {
         <div
           class="flex items-center justify-center border-b-2 border-neutral-200 p-6 dark:border-white/10 lg:justify-between">
           <div class="me-12 hidden lg:block">
-            <span>Get connected with us on social networks:</span>
+            <span>Contactate con nosotros:</span>
           </div>
 
           <div class="flex justify-center">
@@ -83,48 +83,46 @@ const Footer = () => {
                       d="M12.378 1.602a.75.75 0 00-.756 0L3 6.632l9 5.25 9-5.25-8.622-5.03zM21.75 7.93l-9 5.25v9l8.628-5.032a.75.75 0 00.372-.648V7.93zM11.25 22.18v-9l-9-5.25v8.57a.75.75 0 00.372.648l8.628 5.033z" />
                   </svg>
                 </span>
-                TW Elements
+                DeportesAPP
               </h6>
               <p>
-                Here you can use rows and columns to organize your footer
-                content. Lorem ipsum dolor sit amet, consectetur adipisicing
-                elit.
+              Somos la plataforma perfecta para organizar y disfrutar de eventos deportivos emocionantes. Con DeportesAPP, puedes crear fácilmente tus propios partidos de baloncesto, fútbol, pádel, tenis y más en segundos.
               </p>
             </div>
             <div>
               <h6
                 class="mb-4 flex justify-center font-semibold uppercase md:justify-start">
-                Products
+                Deportes
               </h6>
               <p class="mb-4">
-                <a href="#!">Angular</a>
+                <a href="#!">Futbol</a>
               </p>
               <p class="mb-4">
-                <a href="#!">React</a>
+                <a href="#!">Tenis</a>
               </p>
               <p class="mb-4">
-                <a href="#!">Vue</a>
+                <a href="#!">Padel</a>
               </p>
               <p>
-                <a href="#!">Laravel</a>
+                <a href="#!">Basquet</a>
               </p>
             </div>
             <div>
               <h6
                 class="mb-4 flex justify-center font-semibold uppercase md:justify-start">
-                Useful links
+                Quienes somos?
               </h6>
               <p class="mb-4">
-                <a href="#!">Pricing</a>
+                <a href="#!">Nosotros</a>
               </p>
               <p class="mb-4">
-                <a href="#!">Settings</a>
+                <a href="#!">Precios</a>
               </p>
               <p class="mb-4">
-                <a href="#!">Orders</a>
+                <a href="#!"></a>
               </p>
               <p>
-                <a href="#!">Help</a>
+                <a href="#!">Ayuda</a>
               </p>
             </div>
             <div>
@@ -144,7 +142,7 @@ const Footer = () => {
                       d="M12 5.432l8.159 8.159c.03.03.06.058.091.086v6.198c0 1.035-.84 1.875-1.875 1.875H15a.75.75 0 01-.75-.75v-4.5a.75.75 0 00-.75-.75h-3a.75.75 0 00-.75.75V21a.75.75 0 01-.75.75H5.625a1.875 1.875 0 01-1.875-1.875v-6.198a2.29 2.29 0 00.091-.086L12 5.43z" />
                   </svg>
                 </span>
-                New York, NY 10012, US
+                Buenos Aires, Calle falsa 123
               </p>
               <p class="mb-4 flex items-center justify-center md:justify-start">
                 <span class="me-3 [&>svg]:h-5 [&>svg]:w-5">
