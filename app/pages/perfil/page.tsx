@@ -52,7 +52,7 @@ const SettingsComponent = () => {
   return (
     <>
     <NavBar/>
-    <div className="bg-gray-400 md:bg-gray-100 min-h-screen flex">
+    <div className="bg-gray-400 md:bg-gray-20 lg:bg-gray-200 min-h-screen flex">
       
       <AsideComponent openMenu={false}/>
       {/* Content */}

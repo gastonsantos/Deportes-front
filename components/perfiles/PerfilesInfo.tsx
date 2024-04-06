@@ -133,7 +133,7 @@ const PerfilesInfo = () => {
             {/* Buttons */}
             <div className="flex justify-center md:justify-end">
               <button
-                className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 focus:outline-none focus:shadow-outline-blue"
+                className="bg-gray-500 text-white px-4 py-2 rounded hover:bg-gray-600 focus:outline-none focus:shadow-outline-gray"
                 type="button"
                 onClick={handleSubmit}
               >

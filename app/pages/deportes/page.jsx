@@ -1,19 +1,22 @@
 "use client"
 import { Dep } from '@/components/deportes/dep';
 import { NavBar } from "@/components/navBar/navBar";
-
+import Buscador from "@/components/buscador/buscador";
 export default function Deportes() {
   return (
     <div>
-        <NavBar/>  
-        
+      <NavBar />
+
       <section>
-      <Dep/>  
+
+      <Buscador />
+
+        <Dep />
 
 
       </section>
-  </div>
+    </div>
 
-    
+
   );
 }
