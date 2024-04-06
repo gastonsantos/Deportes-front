@@ -1,6 +1,8 @@
 "use client"
 import React, {useState, useEffect} from "react";
+import {obtengoPerfilFutbolPorId} from "@/services/login/perfiles/api";
 import { Radar } from 'react-chartjs-2';
+import Swal from 'sweetalert2';
 import {
   Chart as ChartJS,
   RadialLinearScale,
@@ -54,7 +56,7 @@ const options = {
   },
   plugins: {
     legend: {
-      display: false // Opcionalmente, puedes ocultar la leyenda si lo deseas
+      display: false 
     }
   }
 };
@@ -103,6 +105,51 @@ const PerfilesStats = () => {
         };
         setData(newData);
       }, [formDataStats]);
+
+      useEffect(() => {
+        const fetchData = async () => {
+          try {
+            
+            const response = await obtengoPerfilFutbolPorId();
+            if (response) {
+              console.log("que trae la respuesta", response);
+              
+              const data = response
+              
+              setFormDataStats(data); // Almacena los datos
+            }
+          } catch (error) {
+            console.error("Error al obtener deportes:", error);
+          }
+        };
+    
+        fetchData();
+      }, []);
+
+
+      const handleSubmit = async () => {
+        try {/*
+          const response = await actualizarFichaDeportistaPorId(formDataStats);
+          console.log("Que trae Response", response)
+          if (response) {
+            console.log('Ficha deportista actualizada:', response);
+            Swal.fire({
+              title: '¡Ficha deportista actualizada!',
+              text: 'Se ha modificado correctamente.',
+              icon: 'success',
+              confirmButtonText: 'Continuar',
+              confirmButtonColor: '#007bff', // Adjust color as needed
+            }).then(() => {
+              // Optional behavior after success (e.g., redirect to login)
+              
+            });
+          }*/
+        } catch (error) {
+          console.error('Error al actualizar la ficha deportista:', error);
+        }
+      };
+
+
   return (
     <>
 
@@ -135,6 +182,8 @@ const PerfilesStats = () => {
                 <input type="number" name="defensa" id="defensa" value={formDataStats.defensa} onChange={(e)=>handleChange(e)} className="w-full px-4 py-2 border rounded focus:outline-none focus:border-green-500 text-gray-700 border-blue-500" />
               </div>
             </div>
+
+          
             
           
           </form>
@@ -142,7 +191,15 @@ const PerfilesStats = () => {
           data={data}
           options={options}
         />
-      
+          <div className="flex justify-center md:justify-end mt-1">
+              <button
+                className="bg-gray-500 text-white px-4 py-2 rounded hover:bg-gray-600 focus:outline-none focus:shadow-outline-gray"
+                type="button"
+                onClick={handleSubmit}
+              >
+                Aplicar
+              </button>
+            </div>
         </div>
       
     </>
