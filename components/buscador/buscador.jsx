@@ -116,7 +116,7 @@ const Buscador = () => {
                         placeholder="Busca por deporte o ciudad"
                         required
                         value={searchText}
-                        onChange={handleInputChange} // Aquí se muestra el deporte seleccionado en el input
+                        onChange={handleInputChange} 
                     />
                     <button
                         type="submit"
