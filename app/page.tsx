@@ -7,7 +7,7 @@ import Footer from "@/components/landing/footer";
 export default function Home() {
     return (
 
-        <div className="container flex min-h-screen flex-col items-center justify-center p-5">
+        <div className="w-full flex min-h-screen flex-col items-center justify-center ">
             {/*Aqui agregaria la landing*/}
 
             <Imagenes/>

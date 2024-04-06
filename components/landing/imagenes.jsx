@@ -1,13 +1,14 @@
 export default function Imagenes() {
   return (
-    <section className="text-black body-font">
+    <section className="text-black body-font w-full">
       <div
-        className="container flex flex-col items-center justify-center min-h-screen"
+        className="w-full flex flex-col items-center justify-center min-h-screen"
         style={{
           backgroundImage: `url(/images/imagen-login.jpg)`,
           backgroundSize: "cover",
           backgroundPosition: "center",
           backgroundRepeat: "no-repeat",
+          width: "100%"
         }}
       >
         <div className="relative z-10 flex flex-col items-center justify-center text-white ">
