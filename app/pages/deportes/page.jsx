@@ -5,15 +5,10 @@ import Buscador from "@/components/buscador/buscador";
 export default function Deportes() {
   return (
     <div>
-      <NavBar />
-
+      <NavBar/>
       <section>
-
-      <Buscador />
-
-        <Dep />
-
-
+      <Buscador/>
+      <Dep/>
       </section>
     </div>
 
