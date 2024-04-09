@@ -9,9 +9,9 @@ export default function Formulario() {
   const router = useRouter();
   const [formData, setFormData] = useState({
     nombre: '',
-    direccion: '',
     provincia: '',
     localidad: '',
+    direccion: '',
     numero: 0,
     idUsuarioCreador: localStorage.getItem("id"),
     idDeporte: localStorage.getItem("selectedDeporteId"),

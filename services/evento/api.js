@@ -13,7 +13,24 @@ const agregarEvento = async (data) =>  {
     throw error; 
   }
 }
+async function obtenerEventos() {
+  try {
+    const response = await axiosInstance.get('/evento/ObtenerEventos');
+    console.log('ObtenerEventos', response.data);
+    return response.data;
+  } catch (error) {
+    throw error; // Re-throw error for handling in the calling component
+  }
+}
 
+async function obtenerEventoDetalle(id) {
+  try {
+    const response = await axiosInstance.get(`/evento/EventoDetalle/${id}`);
+    console.log('ObtenerEvento', response.data);
+    return response.data;
+  } catch (error) {
+    throw error; 
+  }
+}
 
-
-export { agregarEvento};
+export { agregarEvento,obtenerEventos,obtenerEventoDetalle};
