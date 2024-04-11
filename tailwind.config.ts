@@ -15,6 +15,12 @@ const config: Config = {
       },
     },
   },
+  colors:
+  {
+    'color-gray': '#575757',
+    
+   
+  },
   plugins: [],
 };
 export default config;

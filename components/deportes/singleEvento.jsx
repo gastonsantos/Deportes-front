@@ -12,8 +12,8 @@ const SingleEvento = ({ evento }) => {
   useEffect(() => {
 
     const fetchData = async () => {
-  
-     
+
+
       if (evento) {
         const direccionCompleta = `${provincia}, ${localidad}, ${direccion} ${numero}`;
         try {
@@ -23,15 +23,20 @@ const SingleEvento = ({ evento }) => {
             const data = response
             const latitud = parseFloat(data[0].lat);
             const longitud = parseFloat(data[0].lon);
+
             setLatitud(latitud);
             setLongitud(longitud);
+
             setCoordenadas({ latitud, longitud });
             console.log("Latitud", latitud);
-            console.log("longitud", longitud); 
-            //script.src = `https://maps.googleapis.com/maps/api/js?key=AIzaSyBqLokY8ybKgp1k7N-5Ja29S-K5xxIfcFU&callback=initMap`;
-            script.src = `https://maps.googleapis.com/maps/api/js?key=` + APIMAP + `&callback=initMap`;
+            console.log("longitud", longitud);
+            // Cargar la API de Google Maps JavaScript de forma asíncrona
+            const script = document.createElement('script');
+            script.src = `https://maps.googleapis.com/maps/api/js?key=`+APIMAP+`&callback=initMap`;
+
             script.defer = true;
             document.head.appendChild(script);
+
 
             // Función de inicialización del mapa
             window.initMap = () => {
