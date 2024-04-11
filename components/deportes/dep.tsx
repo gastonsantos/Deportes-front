@@ -1,6 +1,7 @@
 "use client";
 import React, { useEffect, useState } from 'react';
-import {SingleDeporte} from "./singleDeporte";
+//import {SingleDeporte} from "./singleDeporte";
+import {SingleDeporte} from "@/components/deportes/singleDeporte1";
 import {obtenerEventos} from "@/services/evento/api";
 import {Evento} from "@/model/Evento";
 
@@ -31,7 +32,7 @@ useEffect(() => {
     <>
     <section
       id="deporte"
-      className="bg-primary/[.03] py-16 md:py-20 lg:py-28"
+      className="bg-primary/[.03] py-16 "
     >
       <div className="container">
     

@@ -27,7 +27,7 @@ const Mapa = ({ latitud, longitud }) => {
 
   return (
       
-      <div className='rounded-t rounded-t rounded-l w-full h-full' id="map" />
+      <div className='flex-auto w-96 h-96 m-12 bg-white rounded-b lg:rounded-b-none lg:rounded-r ' id="map" />
       
   )
 

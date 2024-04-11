@@ -36,7 +36,7 @@ export default function EventoDetalle() {
   return (
     <>
     <NavBar />
-    <div className="w-full flex min-h-96 items-center justify-center mt-8 mr-8 mb-8">
+    <div className="w-full min-h-96 items-center justify-center mt-8 mr-8 mb-8">
       <SingleEvento evento={evento} />
     </div>
     <Footer/>
