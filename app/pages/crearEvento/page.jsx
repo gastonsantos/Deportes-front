@@ -17,11 +17,11 @@ export default function Crear() {
           className="absolute w-screen h-screen"
         />
       </div>
-      
-        <div className="container fluid items-center justify-center flex flex-wrap">
-        <div className="relative hidden sm:block">
+      <div className="relative hidden sm:block">
         <Informacion/>
         </div>
+        <div className="container fluid items-center justify-center flex flex-wrap">
+        
           <div className="relative w-1/2 text-center font-medium text-3xl leading-tight text-white dark:text-white">
 
             <h2>¿Qué vas a jugar?</h2>
