@@ -19,7 +19,9 @@ export default function Imagenes() {
             </h1>
             <br />
             <p className="mx-auto text-xl font-normal leading-relaxed text-gray-600 dark:text-gray-300 lg:w-2/3 md:text-3xl sm:text-2xl hidden sm:block">
-              Somos la plataforma perfecta para organizar y disfrutar de eventos deportivos emocionantes. Con DeportesAPP, puedes crear fácilmente tus propios partidos de baloncesto, fútbol, pádel, tenis y más en segundos.
+              
+              Somos la plataforma perfecta para organizar y disfrutar de eventos deportivos emocionantes. Con DeportesAPP, puedes crear fácilmente tus propios partidos de  <a className="underline decoration-pink-500"> baloncesto</a> , 
+              <a className="underline decoration-indigo-500/30">fútbol</a>, <a className="underline decoration-violet-500">pádel</a>, <a className="underline decoration-amber-600">tenis</a> y más en segundos.
             </p>
             <div className="flex justify-center mt-6"> {/* Alineación horizontal */}
               <a href="/pages/login" className="w-32 bg-gray-500 hover:bg-gray-400 text-white font-bold py-2 px-4 hover:border-gray-500 rounded">

@@ -22,13 +22,12 @@ const Informacion = ({reglas}) => {
           initial={{ opacity: 0, x: "-100%" }}
           animate={{ opacity: 0.5, x: 0 }}
           transition={{ duration: 0.5, staggerChildren: 0.1 }}
-          className={"absolute md:w-1/4 text-center z-40 p-4 mt-4 md:mt-6 bg-black shadow-lg rounded-lg overflow-hidden text-justify" } 
+          className={"absolute md:w-1/4 lg:w-1/4 xl:w-1/4 text-center z-40 p-4 mt-4 md:mt-6 bg-black shadow-lg rounded-lg overflow-hidden text-justify" } 
         >
           <div className="rounded-md  max-w-sm flex-col py-1 px-4 text-base font-semibold duration-300 ease-in-out ">
             <h1 className="text-white dark:text-white">Información:</h1>
             <p className="text-white dark:text-white justify-center text-aling">
-              En esta parte podras elegir el deporte vas a realizar en el evento que estas creando, al hacer click en el deporte
-              tendras que seguir llenando los datos del evento, para completar la creación.
+            Recuerda que todos los campos son obligatorios. Asegúrate de ingresar correctamente la fecha y hora del evento que estás creando, así como los datos de ubicación. La precisión en la información de la ubicación es crucial, ya que se mostrará en un mapa del lugar del evento.
             </p>
           </div>
         </motion.div>

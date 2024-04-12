@@ -38,7 +38,7 @@ const Carousel = () => {
         <div className="flex items-center justify-center p-1 relative">
             {/* Carousel for desktop and large size devices */}
             <CarouselProvider className="" naturalSlideWidth={100} isIntrinsicHeight={true} totalSlides={8} visibleSlides={1} step={1} infinite={true}>
-                <div className="max-w-96 h-full flex m-16 relative">
+                <div className="max-w-96 h-full flex m-8 relative">
                     <ButtonBack role="button" aria-label="slide backward" className="p-4 cursor-pointer" id="prev">
                         <svg width={16} height={24} viewBox="0 0 8 14" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M7 1L1 7L7 13" stroke="gray" strokeWidth={3} strokeLinecap="round" strokeLinejoin="round" />

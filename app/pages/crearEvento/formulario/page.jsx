@@ -4,6 +4,8 @@ import { NavBar } from "@/components/navBar/navBar";
 import { useEffect, useState } from 'react';
 import {agregarEvento} from '@/services/evento/api';
 import Swal from 'sweetalert2';
+import Image from "next/image";
+import Informacion from "@/components/infoAd/informacionEvento";
 export default function Formulario() {
   const [deporteCreado, setDeporteCreado] = useState();
   const router = useRouter();
@@ -33,8 +35,45 @@ export default function Formulario() {
     setDeporteCreado(localStorage.getItem("selectedDeporteNombre"));
   })
 
+  const isFechaValida = (fecha) => {
+    const fechaSeleccionada = new Date(fecha);
+    const fechaActual = new Date();
+    return fechaSeleccionada >= fechaActual;
+  };
+
+
+
   const handleSubmit = async () => {
     try {
+      const horaInicio = new Date();
+    horaInicio.setHours(7, 0, 0); // Establece la hora de inicio permitida a las 07:00
+
+    const horaFin = new Date();
+    horaFin.setHours(0, 0, 0); // Establece la hora de fin permitida a las 00:00 del día siguiente
+
+    const horaSeleccionada = new Date(`2000-01-01T${formData.hora}`);
+    
+    if (horaSeleccionada < horaInicio || horaSeleccionada >= horaFin) {
+      Swal.fire({
+        title: 'Hora Inválida',
+        text: 'La hora seleccionada debe estar entre las 07:00 y las 00:00',
+        icon: 'error',
+        confirmButtonText: 'OK',
+        confirmButtonColor: '#007bff'
+      });
+      return; // Evita enviar el formulario si la hora no es válida
+    }
+
+      if (!isFechaValida(formData.fecha)) {
+        Swal.fire({
+          title: 'Fecha Inválida',
+          text: 'La fecha seleccionada no puede ser anterior a la fecha actual',
+          icon: 'error',
+          confirmButtonText: 'OK',
+          confirmButtonColor: '#007bff'
+        });
+        return; // Evita enviar el formulario si la fecha no es válida
+      }
        const response = await agregarEvento(formData);
        console.log("Que trae agregarEvento response", response)
        if (response) {
@@ -59,9 +98,25 @@ export default function Formulario() {
 
     <div>
       <NavBar />
-
-      <div className="container fluid items-center justify-center flex flex-wrap">
-        <div className="w-1/2 ">
+      <div className="absolute w-screen h-screen">
+        <Image
+          src="/images/imagen-login.jpg"
+          alt="Background Image"
+          layout="fill"
+          objectFit="cover"
+          quality={100}
+          className="absolute w-screen h-screen"
+        />
+      </div>
+      <div className="container fluid items-center justify-center">
+      <div className="relative hidden sm:block">
+        <Informacion/>
+        </div>
+    
+      <div className="container fluid items-center justify-center flex flex-wrap m-4 text-white">
+      
+        <div className="relative w-1/2 ">
+        
           <h2>¿Qué vas a jugar?</h2>
           <h4>Van a jugar a {deporteCreado}</h4>
           <form >
@@ -136,7 +191,7 @@ export default function Formulario() {
         </div>
       </div>
     </div>
-
+    </div>
 
   );
 }
