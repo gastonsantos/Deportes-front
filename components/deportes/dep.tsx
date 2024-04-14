@@ -1,6 +1,5 @@
 "use client";
 import React, { useEffect, useState } from 'react';
-//import {SingleDeporte} from "./singleDeporte";
 import {SingleDeporte} from "@/components/deportes/singleDeporte1";
 import {obtenerEventos} from "@/services/evento/api";
 import {Evento} from "@/model/Evento";

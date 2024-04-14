@@ -75,9 +75,8 @@ export default function Formulario() {
         return; // Evita enviar el formulario si la fecha no es válida
       }
        const response = await agregarEvento(formData);
-       console.log("Que trae agregarEvento response", response)
+      
        if (response) {
-         console.log('Evento Creado', response);
          Swal.fire({
            title: '¡Evento Creado',
            text: 'Se ha creado el evento satisfactoriamente',
@@ -92,8 +91,9 @@ export default function Formulario() {
     } catch (error) {
       console.error('Error al actualizar la ficha deportista:', error);
     }
-
   };
+
+  
   return (
 
     <div>
