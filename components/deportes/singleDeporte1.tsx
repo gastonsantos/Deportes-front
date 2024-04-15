@@ -16,7 +16,7 @@ const SingleDeporte = ({ evento }: { evento: Evento }) => {
     }, [evento]);
 
     return (
-        <div>
+        <div className="transform transition duration-300 hover:scale-105">
             <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css" rel="stylesheet" />
 
             <div className="antialiased text-gray-900 ">
