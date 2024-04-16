@@ -59,7 +59,7 @@ const FormularioModificar = ({ evento }) => {
     };
 
 
-    const handleSubmit = async () => {
+    const handleSubmit1 = async () => {
         try {
             if (!isFechaValida(formData.fecha)) {
                 Swal.fire({
@@ -67,7 +67,8 @@ const FormularioModificar = ({ evento }) => {
                     text: 'La fecha seleccionada no puede ser anterior a la fecha actual',
                     icon: 'error',
                     confirmButtonText: 'OK',
-                    confirmButtonColor: '#007bff'
+                    confirmButtonColor: '#007bff',
+                    allowOutsideClick: false,
                 });
                 return;
             }
@@ -82,9 +83,9 @@ const FormularioModificar = ({ evento }) => {
                     icon: 'success',
                     confirmButtonText: 'Continuar',
                     confirmButtonColor: '#007bff', // Adjust color as needed
+                    allowOutsideClick: true,
                 }).then(() => {
                     router.push('/pages/misEventos');
-
                 });
             }
         } catch (error) {
@@ -192,9 +193,9 @@ const FormularioModificar = ({ evento }) => {
                                         {/* Buttons */}
                                         <div className="flex justify-center md:justify-end mt-1">
 
-                                            <button onClick={handleSubmit} className="ml-3 relative bg-neutral-500 hover:bg-neutral-700 text-white font-bold py-1 px-2 rounded-full rounded inline-flex items-center">
+                                            <button onClick={handleSubmit1} className="ml-3 relative bg-neutral-500 hover:bg-neutral-700 text-white font-bold py-1 px-2 rounded-full rounded inline-flex items-center">
 
-                                                <svg class="w-[15px] h-[15px] fill-[#dbdbdb]" viewBox="0 0 384 512" xmlns="http://www.w3.org/2000/svg">
+                                                <svg className="w-[15px] h-[15px] fill-[#dbdbdb]" viewBox="0 0 384 512" xmlns="http://www.w3.org/2000/svg">
 
                                                     <path d="M64 0C28.7 0 0 28.7 0 64V448c0 35.3 28.7 64 64 64H320c35.3 0 64-28.7 64-64V160H256c-17.7 0-32-14.3-32-32V0H64zM256 0V128H384L256 0zM216 232V334.1l31-31c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9l-72 72c-9.4 9.4-24.6 9.4-33.9 0l-72-72c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l31 31V232c0-13.3 10.7-24 24-24s24 10.7 24 24z"></path>
 

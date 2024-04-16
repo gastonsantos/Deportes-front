@@ -3,15 +3,15 @@ const Footer = () => {
     <div>
 
       <footer
-        class="bg-zinc-50 text-center text-surface/75 dark:bg-neutral-700 dark:text-white/75 lg:text-left">
+        className="bg-zinc-50 text-center text-surface/75 dark:bg-neutral-700 dark:text-white/75 lg:text-left">
         <div
-          class="flex items-center justify-center border-b-2 border-neutral-200 p-6 dark:border-white/10 lg:justify-between">
-          <div class="me-12 hidden lg:block">
+          className="flex items-center justify-center border-b-2 border-neutral-200 p-6 dark:border-white/10 lg:justify-between">
+          <div className="me-12 hidden lg:block">
             <span>Contactate con nosotros:</span>
           </div>
 
-          <div class="flex justify-center">
-            <a href="#!" class="me-6 [&>svg]:h-4 [&>svg]:w-4">
+          <div className="flex justify-center">
+            <a href="#!" className="me-6 [&>svg]:h-4 [&>svg]:w-4">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 fill="currentColor"
@@ -21,7 +21,7 @@ const Footer = () => {
                   d="M80 299.3V512H196V299.3h86.5l18-97.8H196V166.9c0-51.7 20.3-71.5 72.7-71.5c16.3 0 29.4 .4 37 1.2V7.9C291.4 4 256.4 0 236.2 0C129.3 0 80 50.5 80 159.4v42.1H14v97.8H80z" />
               </svg>
             </a>
-            <a href="#!" class="me-6 [&>svg]:h-4 [&>svg]:w-4 ">
+            <a href="#!" className="me-6 [&>svg]:h-4 [&>svg]:w-4 ">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 fill="currentColor"
@@ -30,7 +30,7 @@ const Footer = () => {
                   d="M389.2 48h70.6L305.6 224.2 487 464H345L233.7 318.6 106.5 464H35.8L200.7 275.5 26.8 48H172.4L272.9 180.9 389.2 48zM364.4 421.8h39.1L151.1 88h-42L364.4 421.8z" />
               </svg>
             </a>
-            <a href="#!" class="me-6 [&>svg]:h-4 [&>svg]:w-4">
+            <a href="#!" className="me-6 [&>svg]:h-4 [&>svg]:w-4">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 fill="currentColor"
@@ -39,7 +39,7 @@ const Footer = () => {
                   d="M488 261.8C488 403.3 391.1 504 248 504 110.8 504 0 393.2 0 256S110.8 8 248 8c66.8 0 123 24.5 166.3 64.9l-67.5 64.9C258.5 52.6 94.3 116.6 94.3 256c0 86.5 69.1 156.6 153.7 156.6 98.2 0 135-70.4 140.8-106.9H248v-85.3h236.1c2.3 12.7 3.9 24.9 3.9 41.4z" />
               </svg>
             </a>
-            <a href="#!" class="me-6 [&>svg]:h-4 [&>svg]:w-4">
+            <a href="#!" className="me-6 [&>svg]:h-4 [&>svg]:w-4">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 fill="currentColor"
@@ -69,12 +69,12 @@ const Footer = () => {
           </div>
         </div>
 
-        <div class="mx-6 py-10 text-center md:text-left">
-          <div class="grid-1 grid gap-8 md:grid-cols-2 lg:grid-cols-4">
-            <div class="">
+        <div className="mx-6 py-10 text-center md:text-left">
+          <div className="grid-1 grid gap-8 md:grid-cols-2 lg:grid-cols-4">
+            <div className="">
               <h6
-                class="mb-4 flex items-center justify-center font-semibold uppercase md:justify-start">
-                <span class="me-3 [&>svg]:h-4 [&>svg]:w-4">
+                className="mb-4 flex items-center justify-center font-semibold uppercase md:justify-start">
+                <span className="me-3 [&>svg]:h-4 [&>svg]:w-4">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     viewBox="0 0 24 24"
@@ -91,16 +91,16 @@ const Footer = () => {
             </div>
             <div>
               <h6
-                class="mb-4 flex justify-center font-semibold uppercase md:justify-start">
+                className="mb-4 flex justify-center font-semibold uppercase md:justify-start">
                 Deportes
               </h6>
-              <p class="mb-4">
+              <p className="mb-4">
                 <a href="#!">Futbol</a>
               </p>
-              <p class="mb-4">
+              <p className="mb-4">
                 <a href="#!">Tenis</a>
               </p>
-              <p class="mb-4">
+              <p className="mb-4">
                 <a href="#!">Padel</a>
               </p>
               <p>
@@ -109,13 +109,13 @@ const Footer = () => {
             </div>
             <div>
               <h6
-                class="mb-4 flex justify-center font-semibold uppercase md:justify-start">
+                className="mb-4 flex justify-center font-semibold uppercase md:justify-start">
                 Quienes somos?
               </h6>
-              <p class="mb-4">
+              <p className="mb-4">
                 <a href="#!">Nosotros</a>
               </p>
-              <p class="mb-4">
+              <p className="mb-4">
                 <a href="#!">Precios</a>
               </p>
               <p class="mb-4">
@@ -127,11 +127,11 @@ const Footer = () => {
             </div>
             <div>
               <h6
-                class="mb-4 flex justify-center font-semibold uppercase md:justify-start">
+                className="mb-4 flex justify-center font-semibold uppercase md:justify-start">
                 Contact
               </h6>
-              <p class="mb-4 flex items-center justify-center md:justify-start">
-                <span class="me-3 [&>svg]:h-5 [&>svg]:w-5">
+              <p className="mb-4 flex items-center justify-center md:justify-start">
+                <span className="me-3 [&>svg]:h-5 [&>svg]:w-5">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     viewBox="0 0 24 24"
@@ -144,8 +144,8 @@ const Footer = () => {
                 </span>
                 Buenos Aires, Calle falsa 123
               </p>
-              <p class="mb-4 flex items-center justify-center md:justify-start">
-                <span class="me-3 [&>svg]:h-5 [&>svg]:w-5">
+              <p className="mb-4 flex items-center justify-center md:justify-start">
+                <span className="me-3 [&>svg]:h-5 [&>svg]:w-5">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     viewBox="0 0 24 24"
@@ -158,8 +158,8 @@ const Footer = () => {
                 </span>
                 info@example.com
               </p>
-              <p class="mb-4 flex items-center justify-center md:justify-start">
-                <span class="me-3 [&>svg]:h-5 [&>svg]:w-5">
+              <p className="mb-4 flex items-center justify-center md:justify-start">
+                <span className="me-3 [&>svg]:h-5 [&>svg]:w-5">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     viewBox="0 0 24 24"
@@ -172,8 +172,8 @@ const Footer = () => {
                 </span>
                 + 01 234 567 88
               </p>
-              <p class="flex items-center justify-center md:justify-start">
-                <span class="me-3 [&>svg]:h-5 [&>svg]:w-5">
+              <p className="flex items-center justify-center md:justify-start">
+                <span className="me-3 [&>svg]:h-5 [&>svg]:w-5">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     viewBox="0 0 24 24"
@@ -190,9 +190,9 @@ const Footer = () => {
           </div>
         </div>
 
-        <div class="bg-black/5 p-6 text-center">
+        <div className="bg-black/5 p-6 text-center">
           <span>© 2023 Copyright:</span>
-          <a class="font-semibold" href="https://tw-elements.com/"
+          <a className="font-semibold" href="https://tw-elements.com/"
           >TW Elements</a
           >
         </div>

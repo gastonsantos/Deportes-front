@@ -1,42 +1,34 @@
 "use client"
-import { Evento } from "@/model/Evento";
 import { useRouter } from 'next/navigation';
 import Image from "next/image";
 import React, { useEffect, useState } from 'react';
 import FormularioModificar from "@/components/misEventos/formModificar";
+import ModalConfirmar from "@/components/misEventos/modalConfirmar";
 import { cancelarEvento } from '@/services/evento/api';
 import Swal from 'sweetalert2';
 import Link from 'next/link'; // Importar Link de next/link
 
-const MisEventosCard = ({ evento }) => {
+const MisEventosCard = ({ evento, onDelete }) => {
     const router = useRouter();
+    const [showModal, setShowModal] = useState(false);
     const { idEvento, nombre, imagen, nombreDep, idDeporte, cantJugadores, provincia, localidad, direccion, numero, fecha, hora } = evento;
     const [fechaFormateada, setFechaFormateada] = useState("");
-
     const [open, setOpen] = useState(false);
     const [eventoEliminar, setEvento] = useState();
     const [error, setError] = useState('');
     const toggleOpen = () => setOpen((cur) => !cur);
     const [formData, setFormData] = useState({
         id: evento.idEvento
-        //id: 546
+        
     });
-    console.log("FORMDATA", formData);
+    
+    const toggleCancelarEvento =  async () => {
+     
 
-    const toggleCancelarEvento = async () => {
-        try {
-            const response = await cancelarEvento(formData);
+       try {
+            const response = await cancelarEvento(formData);       
             if (response) {
-                Swal.fire({
-                    title: '¡Evento Eliminado',
-                    text: 'Se ha eliminado correctamente el evento',
-                    icon: 'success',
-                    confirmButtonText: 'Continuar',
-                    confirmButtonColor: '#007bff', // Adjust color as needed
-                }).then(() => {
-                    router.push('/pages/misEventos');
-
-                });
+                onDelete(evento.idEvento);
             }
         } catch (error) {
             if (error.response) {
@@ -51,10 +43,8 @@ const MisEventosCard = ({ evento }) => {
 
                 setError('Error en la petición al servidor');
             }
-
-        }
-
-
+        }   
+         
     }
 
     useEffect(() => {
@@ -74,12 +64,12 @@ const MisEventosCard = ({ evento }) => {
             <div className="md:flex lg:flex ">
                 <div className="fixed bottom-0 mb-10 left-1/2  transform -translate-x-1/2 z-50 flex justify-center items-center w-full">
                     <Link href="/pages/crearEvento">
-                    <button className="animate-bounce bg-emerald-700 hover:bg-emerald-700 text-white font-bold py-2 px-4 rounded-full inline-flex items-center w-28 h-28 text-justify ">
-                        <svg className="w-10 h-10 fill-[#f1f5f9]" viewBox="0 0 448 512" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M64 80c-8.8 0-16 7.2-16 16V416c0 8.8 7.2 16 16 16H384c8.8 0 16-7.2 16-16V96c0-8.8-7.2-16-16-16H64zM0 96C0 60.7 28.7 32 64 32H384c35.3 0 64 28.7 64 64V416c0 35.3-28.7 64-64 64H64c-35.3 0-64-28.7-64-64V96zM200 344V280H136c-13.3 0-24-10.7-24-24s10.7-24 24-24h64V168c0-13.3 10.7-24 24-24s24 10.7 24 24v64h64c13.3 0 24 10.7 24 24s-10.7 24-24 24H248v64c0 13.3-10.7 24-24 24s-24-10.7-24-24z"></path>
-                        </svg>
-                        <span>Crear</span>
-                    </button>
+                        <button className="animate-bounce bg-emerald-700 hover:bg-emerald-700 text-white font-bold py-2 px-4 rounded-full inline-flex items-center w-28 h-28 text-justify border">
+                            <svg className="w-10 h-10 fill-[#f1f5f9]" viewBox="0 0 448 512" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M64 80c-8.8 0-16 7.2-16 16V416c0 8.8 7.2 16 16 16H384c8.8 0 16-7.2 16-16V96c0-8.8-7.2-16-16-16H64zM0 96C0 60.7 28.7 32 64 32H384c35.3 0 64 28.7 64 64V416c0 35.3-28.7 64-64 64H64c-35.3 0-64-28.7-64-64V96zM200 344V280H136c-13.3 0-24-10.7-24-24s10.7-24 24-24h64V168c0-13.3 10.7-24 24-24s24 10.7 24 24v64h64c13.3 0 24 10.7 24 24s-10.7 24-24 24H248v64c0 13.3-10.7 24-24 24s-24-10.7-24-24z"></path>
+                            </svg>
+                            <span>Crear</span>
+                        </button>
                     </Link>
                 </div>
 
@@ -109,14 +99,13 @@ const MisEventosCard = ({ evento }) => {
                                     <span>🥎</span>
                                     <span>🎾</span>
                                     <span>⚽</span></span>
-                           
+
                             </div>
                             <div className="mt-1 flex item-center">
-                                <svg className="w-[20px] h-[20px] fill-#252825] mr-2" viewBox="0 0 576 512" xmlns="http://www.w3.org/2000/svg">
-
-                                    <path d="M384 476.1L192 421.2V35.9L384 90.8V476.1zm32-1.2V88.4L543.1 37.5c15.8-6.3 32.9 5.3 32.9 22.3V394.6c0 9.8-6 18.6-15.1 22.3L416 474.8zM15.1 95.1L160 37.2V423.6L32.9 474.5C17.1 480.8 0 469.2 0 452.2V117.4c0-9.8 6-18.6 15.1-22.3z"></path>
-
+                                <svg className="w-[20px] h-[20px] fill-[#252825] mr-2" viewBox="0 0 576 512" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M384 476.1L192 421.2V35.9L384 90.8V476.1zm32-1.2V88.4L543.1 37.5c15.8-6.3 32.9 5.3 32.9 22.3V394.6c0 9.8-6 18.6-15.1 22.3L416 474.8zM15.1 95.1L160 37.2V423.6L32.9 474.5C17.1 480.8 0 469.2 0 452.2V117.4c0-9.8 6-18.6 15.1-22.3z" clipRule="evenodd"></path>
                                 </svg>
+
                                 <span className="">{provincia}, {localidad} </span>
                             </div>
                             <div className="mt-1 flex item-center">
@@ -158,7 +147,7 @@ const MisEventosCard = ({ evento }) => {
                             <span>Modificar evento</span>
 
                         </button>
-                        <button onClick={toggleCancelarEvento} className="mb-3 ml-3 relative bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-full  rounded inline-flex items-center">
+                        <button onClick={() => setShowModal(true)}className="mb-3 ml-3 relative bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-full  rounded inline-flex items-center">
 
                             <svg class="w-[15px] h-[15px] fill-[#dbdbdb] mr-1" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
 
@@ -182,6 +171,12 @@ const MisEventosCard = ({ evento }) => {
                     }
                 </div>
             </div>
+            {showModal ? (
+            <ModalConfirmar 
+            setShowModal={setShowModal}
+            toggleCancelarEvento={toggleCancelarEvento}
+            />
+        ) : null}
         </>
 
 

@@ -52,7 +52,7 @@ export default function Formulario() {
     horaFin.setHours(0, 0, 0); // Establece la hora de fin permitida a las 00:00 del día siguiente
 
     const horaSeleccionada = new Date(`2000-01-01T${formData.hora}`);
-    
+    /*
     if (horaSeleccionada < horaInicio || horaSeleccionada >= horaFin) {
       Swal.fire({
         title: 'Hora Inválida',
@@ -63,7 +63,7 @@ export default function Formulario() {
       });
       return; // Evita enviar el formulario si la hora no es válida
     }
-
+*/
       if (!isFechaValida(formData.fecha)) {
         Swal.fire({
           title: 'Fecha Inválida',
