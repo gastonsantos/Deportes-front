@@ -4,6 +4,7 @@ import Image from "next/image";
 import React, { useEffect, useState } from 'react';
 import FormularioModificar from "@/components/misEventos/formModificar";
 import ModalConfirmar from "@/components/misEventos/modalConfirmar";
+import ModalInvitar from "@/components/misEventos/modalInvitar";
 import { cancelarEvento } from '@/services/evento/api';
 import Swal from 'sweetalert2';
 import Link from 'next/link'; // Importar Link de next/link
@@ -11,6 +12,7 @@ import Link from 'next/link'; // Importar Link de next/link
 const MisEventosCard = ({ evento, onDelete }) => {
     const router = useRouter();
     const [showModal, setShowModal] = useState(false);
+    const [showModalInvitar, setShowModalInvitar] = useState(false);
     const { idEvento, nombre, imagen, nombreDep, idDeporte, cantJugadores, provincia, localidad, direccion, numero, fecha, hora } = evento;
     const [fechaFormateada, setFechaFormateada] = useState("");
     const [open, setOpen] = useState(false);
@@ -19,14 +21,14 @@ const MisEventosCard = ({ evento, onDelete }) => {
     const toggleOpen = () => setOpen((cur) => !cur);
     const [formData, setFormData] = useState({
         id: evento.idEvento
-        
-    });
-    
-    const toggleCancelarEvento =  async () => {
-     
 
-       try {
-            const response = await cancelarEvento(formData);       
+    });
+
+    const toggleCancelarEvento = async () => {
+
+
+        try {
+            const response = await cancelarEvento(formData);
             if (response) {
                 onDelete(evento.idEvento);
             }
@@ -43,8 +45,8 @@ const MisEventosCard = ({ evento, onDelete }) => {
 
                 setError('Error en la petición al servidor');
             }
-        }   
-         
+        }
+
     }
 
     useEffect(() => {
@@ -147,7 +149,7 @@ const MisEventosCard = ({ evento, onDelete }) => {
                             <span>Modificar evento</span>
 
                         </button>
-                        <button onClick={() => setShowModal(true)}className="mb-3 ml-3 relative bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-full  rounded inline-flex items-center">
+                        <button onClick={() => setShowModal(true)} className="mb-3 ml-3 relative bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-full  rounded inline-flex items-center">
 
                             <svg class="w-[15px] h-[15px] fill-[#dbdbdb] mr-1" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
 
@@ -156,6 +158,18 @@ const MisEventosCard = ({ evento, onDelete }) => {
                             </svg>
                             <span>Cancelar evento</span>
                         </button>
+
+
+                        <button onClick={() => setShowModalInvitar(true)} className="mb-3 ml-auto mr-2 relative bg-orange-300 hover:bg-orange-500 text-white font-bold py-2 px-4 rounded-full  rounded inline-flex items-right">
+
+                            <svg class="w-[25px] h-[25px] fill-[#e9e7e7]" viewBox="0 0 640 512" xmlns="http://www.w3.org/2000/svg">
+
+                                <path d="M96 128a128 128 0 1 1 256 0A128 128 0 1 1 96 128zM0 482.3C0 383.8 79.8 304 178.3 304h91.4C368.2 304 448 383.8 448 482.3c0 16.4-13.3 29.7-29.7 29.7H29.7C13.3 512 0 498.7 0 482.3zM504 312V248H440c-13.3 0-24-10.7-24-24s10.7-24 24-24h64V136c0-13.3 10.7-24 24-24s24 10.7 24 24v64h64c13.3 0 24 10.7 24 24s-10.7 24-24 24H552v64c0 13.3-10.7 24-24 24s-24-10.7-24-24z"></path>
+
+                            </svg>
+
+                        </button>
+
                     </div>
                     {error && (
                         <div className="absolute mb-5 text-red" >
@@ -172,11 +186,21 @@ const MisEventosCard = ({ evento, onDelete }) => {
                 </div>
             </div>
             {showModal ? (
-            <ModalConfirmar 
-            setShowModal={setShowModal}
-            toggleCancelarEvento={toggleCancelarEvento}
-            />
-        ) : null}
+                <ModalConfirmar
+                    setShowModal={setShowModal}
+                    toggleCancelarEvento={toggleCancelarEvento}
+                />
+            ) : null}
+            {showModalInvitar ? (
+                <ModalInvitar
+                    setShowModalInvitar={setShowModalInvitar}
+                    toggleCancelarEvento={toggleCancelarEvento}
+                />
+            ) : null}
+
+
+
+
         </>
 
 
