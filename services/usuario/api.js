@@ -109,4 +109,22 @@ async function obtenerUsuarioPorId(){
     }
   }
 
-  export { obtenerUsuarioPorId, registrarUsuario, confirmarEmail, cambioContransenia, realizarCambioContraseña};
+const traerTodosLosUsuariosParaInvitacion=async()=>{
+try{
+
+  const response = await axiosInstance.get(API+"/usuarios/ObtenerUsuariosParaInvitacion");
+  console.log("Usuarios para invitacion", response.data)
+  return response.data
+  
+
+}catch(error){
+  throw error;
+}
+}
+const traerUsuariosPorEmail=async(data)=>{
+
+
+}
+
+
+  export { obtenerUsuarioPorId, registrarUsuario, confirmarEmail, cambioContransenia, realizarCambioContraseña, traerTodosLosUsuariosParaInvitacion};

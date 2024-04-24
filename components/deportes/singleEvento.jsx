@@ -2,18 +2,18 @@
 import React, { useEffect, useState } from 'react';
 import Mapa from "@/components/deportes/mapa";
 import { obtenerCoordenadas } from "@/services/mapa/api";
+import {enviarNotificacion} from "@/services/notificaciones/api";
 import { APIMAP } from "@/config/constants";
+import Swal from 'sweetalert2';
 const SingleEvento = ({ evento }) => {
   const [coordenadas, setCoordenadas] = useState(null);
   const [latitud, setLatitud] = useState();
   const [longitud, setLongitud] = useState();
   const [fechaFormateada, setFechaFormateada] = useState("");
-
+  const [seEnvioNoificacion, setSeEnvioNotificacion] = useState(false);
+  const [error, setError]= useState("");
   useEffect(() => {
-
     const fetchData = async () => {
-
-
       if (evento) {
         const direccionCompleta = `${provincia}, ${localidad}, ${direccion} ${numero}`;
         try {
@@ -77,6 +77,7 @@ const SingleEvento = ({ evento }) => {
     return <div>Evento no encontrado</div>;
   }
   const {
+    id,
     nombre,
     imagen,
     nombreDep,
@@ -85,8 +86,62 @@ const SingleEvento = ({ evento }) => {
     localidad,
     direccion,
     numero,
-    hora
+    hora,
+    idUsusarioDuenio,
+    nombreDuenio
   } = evento;
+
+  const handleEnviarNotificacion = async ()=>{
+    const data = {
+      idUsuarioQueInvita: localStorage.getItem("id"),
+      idUsuarioInvitado: evento.idUsuarioDuenio,
+      idEvento: evento.idEvento     
+  }
+   
+      try{
+          const response = await enviarNotificacion(data);
+        if(response){
+          Swal.fire({
+            title: '¡Se ah enviado la Notificación',
+            text: 'Se ha enviado la notificación',
+            icon: 'success',
+            confirmButtonText: 'Continuar',
+            confirmButtonColor: '#007bff', // Adjust color as needed
+           
+          }).then(() => {
+
+            setSeEnvioNotificacion(true);
+          });
+          setSeEnvioNotificacion(true);
+      }
+    }  catch(error){
+      if (error.response) {
+        console.log('Me da error', error.response.status);
+        switch (error.response.status) {
+          case 423:
+            setError('Ya le enviaste una notificación, espera a que responda!');
+            setSeEnvioNotificacion(true);
+            break;
+          case 400:
+            setError('No podes invitarte una invitación a tu propio evento');
+            setSeEnvioNotificacion(true);
+            break;
+          default:
+            setError('Error en la petición al servidor');
+        }
+      } else {
+       
+        console.log('Me da error', error.response.status);
+        setError('Error en la petición al servidor');
+      }
+       
+        } 
+
+
+      
+
+
+  }
 
 
 
@@ -156,16 +211,28 @@ const SingleEvento = ({ evento }) => {
 
               <div class="text-sm">
                 <p className="text-gray-900 font-bold mb-2">Dueño</p>
-                <p class="text-gray-900 leading-none">Jonathan Reinink</p>
+                <p class="text-gray-900 leading-none">{nombreDuenio}</p>
 
                 <p class="text-gray-600">{latitud},{longitud}</p>
               </div>
             </div>
-            <button
-              type="button"
-              class="py-2.5 px-5 me-2 mb-2 mt-4 text-sm font-medium text-gray-900 focus:outline-none bg-gray-400 rounded-lg border border-gray-200 hover:bg-gray-600 hover:text-gray-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">
-              Unirse
-            </button>
+            {seEnvioNoificacion == false ? (
+                               
+                               <button
+                               type="button"
+                               onClick={handleEnviarNotificacion}
+                               class="py-2.5 px-5 me-2 mb-2 mt-4 text-sm font-medium text-gray-900 focus:outline-none bg-gray-400 rounded-lg border border-gray-200 hover:bg-gray-600 hover:text-gray-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">
+                               Unirse
+                              </button>
+                                
+                            ) : (
+                                <></>
+
+                            )}
+         
+
+                      {error && ( <div class="text-sm text-red-700">{error}
+                      </div>)}
           </div>
         </div>
       </div>
@@ -175,13 +242,6 @@ const SingleEvento = ({ evento }) => {
         />
 
       }
-
-
-
-
-
-
-
 
     </div>
   );

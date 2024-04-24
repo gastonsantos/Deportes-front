@@ -5,18 +5,19 @@ import React, { useEffect, useState } from 'react';
 import FormularioModificar from "@/components/misEventos/formModificar";
 import ModalConfirmar from "@/components/misEventos/modalConfirmar";
 import ModalInvitar from "@/components/misEventos/modalInvitar";
+import BotonCrear from "@/components/misEventos/botonCrear";
 import { cancelarEvento } from '@/services/evento/api';
 import Swal from 'sweetalert2';
 import Link from 'next/link'; // Importar Link de next/link
 
-const MisEventosCard = ({ evento, onDelete }) => {
+const MisEventosCard = ({ evento, onDelete, actualice }) => {
     const router = useRouter();
     const [showModal, setShowModal] = useState(false);
     const [showModalInvitar, setShowModalInvitar] = useState(false);
     const { idEvento, nombre, imagen, nombreDep, idDeporte, cantJugadores, provincia, localidad, direccion, numero, fecha, hora } = evento;
     const [fechaFormateada, setFechaFormateada] = useState("");
     const [open, setOpen] = useState(false);
-    const [eventoEliminar, setEvento] = useState();
+    const [btnCrear, setBtnCrear] = useState(true);
     const [error, setError] = useState('');
     const toggleOpen = () => setOpen((cur) => !cur);
     const [formData, setFormData] = useState({
@@ -63,20 +64,8 @@ const MisEventosCard = ({ evento, onDelete }) => {
     return (
         <>
 
+
             <div className="md:flex lg:flex ">
-                <div className="fixed bottom-0 mb-10 left-1/2  transform -translate-x-1/2 z-50 flex justify-center items-center w-full">
-                    <Link href="/pages/crearEvento">
-                        <button className="animate-bounce bg-emerald-700 hover:bg-emerald-700 text-white font-bold py-2 px-4 rounded-full inline-flex items-center w-28 h-28 text-justify border">
-                            <svg className="w-10 h-10 fill-[#f1f5f9]" viewBox="0 0 448 512" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M64 80c-8.8 0-16 7.2-16 16V416c0 8.8 7.2 16 16 16H384c8.8 0 16-7.2 16-16V96c0-8.8-7.2-16-16-16H64zM0 96C0 60.7 28.7 32 64 32H384c35.3 0 64 28.7 64 64V416c0 35.3-28.7 64-64 64H64c-35.3 0-64-28.7-64-64V96zM200 344V280H136c-13.3 0-24-10.7-24-24s10.7-24 24-24h64V168c0-13.3 10.7-24 24-24s24 10.7 24 24v64h64c13.3 0 24 10.7 24 24s-10.7 24-24 24H248v64c0 13.3-10.7 24-24 24s-24-10.7-24-24z"></path>
-                            </svg>
-                            <span>Crear</span>
-                        </button>
-                    </Link>
-                </div>
-
-
-
                 <div className="flex-1 w-1/2 min-w-96 m-4 relative bg-white border shadow-sm rounded-xl transform transition duration-300 hover:translate-x-4">
                     <div className="image-container" style={{ width: '144px', height: '244px' }}>
                         <Image
@@ -138,15 +127,22 @@ const MisEventosCard = ({ evento, onDelete }) => {
                         </div>
                     </div >
                     <div className="mt-4 flex item-center mb-4">
-                        <button onClick={toggleOpen} className="mb-3 ml-3 relative bg-neutral-500 hover:bg-neutral-700 text-white font-bold py-2 px-4 rounded-full rounded inline-flex items-center">
+                        <button onClick={toggleOpen} className="mb-3 ml-3 relative bg-neutral-500 hover:bg-neutral-700 text-white font-bold py-2 px-4 rounded-full rounded inline-flex items-center ">
 
                             <svg class="w-[15px] h-[15px] fill-[#dbdbdb] mr-1" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
 
                                 <path d="M471.6 21.7c-21.9-21.9-57.3-21.9-79.2 0L362.3 51.7l97.9 97.9 30.1-30.1c21.9-21.9 21.9-57.3 0-79.2L471.6 21.7zm-299.2 220c-6.1 6.1-10.8 13.6-13.5 21.9l-29.6 88.8c-2.9 8.6-.6 18.1 5.8 24.6s15.9 8.7 24.6 5.8l88.8-29.6c8.2-2.7 15.7-7.4 21.9-13.5L437.7 172.3 339.7 74.3 172.4 241.7zM96 64C43 64 0 107 0 160V416c0 53 43 96 96 96H352c53 0 96-43 96-96V320c0-17.7-14.3-32-32-32s-32 14.3-32 32v96c0 17.7-14.3 32-32 32H96c-17.7 0-32-14.3-32-32V160c0-17.7 14.3-32 32-32h96c17.7 0 32-14.3 32-32s-14.3-32-32-32H96z"></path>
 
                             </svg>
-
-                            <span>Modificar evento</span>
+                            {
+                                open ? (
+                                    <span className='hidden sm:block'>Cancelar modificación</span>
+                                   
+                                ) : (
+                                    <span className='hidden sm:block'>Modificar evento</span> 
+                                )
+                            }
+                           
 
                         </button>
                         <button onClick={() => setShowModal(true)} className="mb-3 ml-3 relative bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-full  rounded inline-flex items-center">
@@ -156,17 +152,19 @@ const MisEventosCard = ({ evento, onDelete }) => {
                                 <path d="M367.2 412.5L99.5 144.8C77.1 176.1 64 214.5 64 256c0 106 86 192 192 192c41.5 0 79.9-13.1 111.2-35.5zm45.3-45.3C434.9 335.9 448 297.5 448 256c0-106-86-192-192-192c-41.5 0-79.9 13.1-111.2 35.5L412.5 367.2zM0 256a256 256 0 1 1 512 0A256 256 0 1 1 0 256z"></path>
 
                             </svg>
-                            <span>Cancelar evento</span>
+                            <span className='hidden sm:block'>Cancelar evento</span>
                         </button>
 
 
-                        <button onClick={() => setShowModalInvitar(true)} className="mb-3 ml-auto mr-2 relative bg-orange-300 hover:bg-orange-500 text-white font-bold py-2 px-4 rounded-full  rounded inline-flex items-right">
+                        <button onClick={() => { setShowModalInvitar(true), setBtnCrear(false) }}
+                            className="mb-3 ml-3 ml-auto mr-2 relative bg-orange-300 hover:bg-orange-500 text-white font-bold py-1 px-2 rounded-full  rounded inline-flex items-center">
 
-                            <svg class="w-[25px] h-[25px] fill-[#e9e7e7]" viewBox="0 0 640 512" xmlns="http://www.w3.org/2000/svg">
+                            <svg class="w-[20px] h-[20px] fill-[#e9e7e7]" viewBox="0 0 640 512" xmlns="http://www.w3.org/2000/svg">
 
                                 <path d="M96 128a128 128 0 1 1 256 0A128 128 0 1 1 96 128zM0 482.3C0 383.8 79.8 304 178.3 304h91.4C368.2 304 448 383.8 448 482.3c0 16.4-13.3 29.7-29.7 29.7H29.7C13.3 512 0 498.7 0 482.3zM504 312V248H440c-13.3 0-24-10.7-24-24s10.7-24 24-24h64V136c0-13.3 10.7-24 24-24s24 10.7 24 24v64h64c13.3 0 24 10.7 24 24s-10.7 24-24 24H552v64c0 13.3-10.7 24-24 24s-24-10.7-24-24z"></path>
 
                             </svg>
+
 
                         </button>
 
@@ -195,6 +193,7 @@ const MisEventosCard = ({ evento, onDelete }) => {
                 <ModalInvitar
                     setShowModalInvitar={setShowModalInvitar}
                     toggleCancelarEvento={toggleCancelarEvento}
+                    evento={evento}
                 />
             ) : null}
 

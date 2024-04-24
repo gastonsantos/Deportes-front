@@ -4,6 +4,7 @@ import React, { useEffect, useState } from 'react';
 import { Card, Typography, CardBody } from "@material-tailwind/react";
 import { modificarEvento } from '@/services/evento/api';
 import Swal from 'sweetalert2';
+import { setActive } from "@material-tailwind/react/components/Tabs/TabsContext";
 
 const FormularioModificar = ({ evento }) => {
 
@@ -76,7 +77,8 @@ const FormularioModificar = ({ evento }) => {
             const response = await modificarEvento(formData);
 
             if (response) {
-            
+                console.log("me active");
+                
                 Swal.fire({
                     title: '¡Evento Modificado',
                     text: 'Se ha modificado correctamente el evento',
@@ -85,6 +87,7 @@ const FormularioModificar = ({ evento }) => {
                     confirmButtonColor: '#007bff', // Adjust color as needed
                     allowOutsideClick: true,
                 }).then(() => {
+                    console.log("Cualquier cosa")
                     router.push('/pages/misEventos');
                 });
             }

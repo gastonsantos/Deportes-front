@@ -69,4 +69,6 @@ async function cancelarEvento(data){
     throw error;
   }
 }
+
+
 export { agregarEvento,obtenerEventos,obtenerEventoDetalle, obtenerEventoPorIdUsuario, modificarEvento, cancelarEvento};

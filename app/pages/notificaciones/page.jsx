@@ -1,0 +1,108 @@
+"use client"
+import Link from 'next/link';
+import { NavBar } from "@/components/navBar/navBar";
+import React, { useState, useEffect } from 'react';
+import Footer from "@/components/landing/footer";
+import { traerTodasLasNotificaciones } from "@/services/notificaciones/api"
+const Notificaciones = () => {
+
+    const [notificaciones, setNotificaciones] = useState([]);
+    const [cantidad, setCantidad] = useState();
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const response = await traerTodasLasNotificaciones();
+                if (response) {
+                    const data = response
+                    console.log("Notificaciones", data);
+                    setNotificaciones(data); // Almacena los deportes en el estado local
+                }
+            } catch (error) {
+                console.error("Error al obtener las notificaciones:", error);
+            }
+        };
+
+        fetchData();
+    }, []);
+    return (
+        <div className=" items-center justify-center">
+            <NavBar />
+            <div className="sm:bg-[#dde7ee]">
+                <div className="sm:mx-auto sm:w-[45rem] sm:bg-[#ffffff] sm:mt-6 sm:p-10 text-sm ">
+                    <section className="header m-5">
+                        <div className="container flex justify-between">
+                            <p className="text-xl sm:text-2xl text-gray-700 font-bold sm:font-extrabold">Invitaciones <span className="px-4 ml-2 rounded-lg text-white bg-blue-900 sm:text-xl">{notificaciones.length}</span></p>
+                            <p className="hover:text-[#0a317b] cursor-pointer text-[#5e6778]">Borrar todas</p>
+                        </div>
+                    </section>
+                    {notificaciones.map((notificaciones) => (
+                        <section className="messages m-2">
+                            {notificaciones.invitaEsDuenio ? (
+                                <div className="profile_pic rounded-lg flex justify-start items-start gap-4 m-2 p-4 bg-[#f7fafd]">
+                                    <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="Mark-Webber" className="pl-2 w-[13%] sm:w-[8%] rounded-full" />
+                                    <div className="notification-msg hover:bg-gray-200">
+                                        <div className="msg-1">
+                                            <p className="text-gray-500 hover:text-[#0a317b] cursor-pointer">
+                                                <b>{notificaciones.nombreUsuarioInvito} {notificaciones.apellidoUsuarioInvito}</b>
+                                                <span className="text-gray-700"> &nbsp;
+                                                    te invita a jugar {notificaciones.nombreDeporte}
+                                                </span>
+                                                <span className="text-[#5e6778] font-semibold hover:text-[#0a317b] cursor-pointer">
+                                                    en {notificaciones.provincia}, {notificaciones.localidad} Direccion: {notificaciones.direccion} {notificaciones.numero} el día {notificaciones.fecha} a las {notificaciones.hora}
+                                                </span>
+                                                <span className="inline-flex items-center justify-center rounded-full bg-red-500 border-red-500 border-4"></span>
+                                            </p>
+                                            <p className="text-[#939dae]"></p>
+
+                                            <Link href={`/pages/deportes/${notificaciones.idEvento}`} className="flex justify-center">
+                                                <button type="button" className="text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-full text-sm px-5 py-2.5 me-2 mb-2 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700">Ver evento</button>
+                                            </Link>
+                                        </div>
+                                    </div>
+                                </div>
+                            ) : (
+                                <div className="profile_pic rounded-lg flex justify-start items-start gap-4 m-2 p-4 bg-transparent">
+                                    <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="Mark-Webber" className="pl-2 w-[13%] sm:w-[8%] rounded-full" />
+                                    <div className="notification-msg hover:bg-gray-200">
+                                        <div className="msg-1">
+                                            <p className="text-gray-500 hover:bg-gray-200 cursor-pointer">
+                                                <b>{notificaciones.nombreUsuarioInvito} {notificaciones.apellidoUsuarioInvito}</b>
+                                                <span className="text-gray-700"> &nbsp;
+                                                    quiere unirse al partido  {notificaciones.nombreDeporte}
+                                                </span>
+                                                <span className="text-[#5e6778] font-semibold hover:text-[#0a317b] cursor-pointer">
+                                                    en {notificaciones.provincia}, {notificaciones.localidad} Direccion: {notificaciones.direccion} {notificaciones.numero} el día {notificaciones.fecha} a las {notificaciones.hora}
+                                                </span>
+                                                <span className="inline-flex items-center justify-center rounded-full bg-red-500 border-red-500 border-4"></span>
+                                            </p>
+                                            <p className="text-[#939dae]"></p>
+                                            <button className="text-whie bg-gray-800 p-1 rounded"> Ver perfil</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            )}
+
+                        </section>
+
+
+
+
+                    ))}
+
+
+                </div>
+
+
+            </div>
+            <Footer />
+
+        </div>
+
+
+
+
+    );
+}
+
+export default Notificaciones
+

@@ -1,5 +1,4 @@
 "use client"
-
 import React, { useEffect, useState } from 'react';
 import { Fragment } from 'react'
 import { Disclosure, Menu, Transition } from '@headlessui/react'
@@ -26,6 +25,21 @@ const NavBar = () => {
   const [userName, setUserName] = useState("");
   const [mensajeNotificacion, setMensajeNotificacion] = useState([]);
 
+ 
+
+  useEffect(() => {
+    
+  let storedUserName = Cookies.get("nombre");
+
+    // Si no hay valor en la cookie, intenta obtenerlo del localStorage
+    if (!storedUserName) {
+      storedUserName = localStorage.getItem("nombre");
+    }
+    if (storedUserName) {
+      setUserName(storedUserName);
+    }
+  }, []);
+
   useEffect(() => {
     signalRService.startConnection()
       .then(() => {
@@ -42,21 +56,9 @@ const NavBar = () => {
   }, []);
 
 
-  useEffect(() => {
-    
-  let storedUserName = Cookies.get("nombre");
-
-    // Si no hay valor en la cookie, intenta obtenerlo del localStorage
-    if (!storedUserName) {
-      storedUserName = localStorage.getItem("nombre");
-    }
-    if (storedUserName) {
-      setUserName(storedUserName);
-    }
-  }, []);
-
   const iniciarEscuchaAlertas = async () => {
-    const idUsuario = Cookies.get("id"); // Replace with the actual user ID
+    const idUsuario1 = Cookies.get("id");
+    const idUsuario = localStorage.getItem("id") // Replace with the actual user ID
     try {
       await signalRService.iniciarEscuchaAlertas(idUsuario);
      //console.log("Escuchando alertas para el usuario desde el componente", idUsuario);
@@ -222,10 +224,10 @@ const NavBar = () => {
                       <Menu.Item>
                         {({ active }) => (
                           <a
-                            href="#"
+                            href="/pages/notificaciones"
                             className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700')}
                           >
-                            Opciones
+                            Invitaciones
                           </a>
                         )}
                       </Menu.Item>
