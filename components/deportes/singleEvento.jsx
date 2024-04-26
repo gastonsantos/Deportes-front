@@ -119,7 +119,7 @@ const SingleEvento = ({ evento }) => {
         console.log('Me da error', error.response.status);
         switch (error.response.status) {
           case 423:
-            setError('Ya le enviaste una notificación, espera a que responda!');
+            setError('Ya hay una invitación en curso');
             setSeEnvioNotificacion(true);
             break;
           case 400:

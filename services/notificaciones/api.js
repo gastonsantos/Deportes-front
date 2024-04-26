@@ -34,5 +34,31 @@ const enviarNotificacion = async (data) => {
     }
 
 }
+const aceptarNotificacion = async (data) => {
+    console.log("Que hay en el data d Notificaciones", data);
+try {
 
-export { traerTodasLasNotificaciones, enviarNotificacion }
+    const response = await axiosInstance.post(API + "/participantes/AceptarInvitacion", data);
+    console.log("Recibo respuesta de agregarParticipante", response.status)
+    return response.status
+} catch (error) {
+    throw error;
+}
+
+}
+const rechazarNotificacion = async (data) => {
+    console.log("Que hay en el data d Notificaciones", data);
+try {
+
+    const response = await axiosInstance.post(API + "/participantes/RechazarInvitacion", data);
+    console.log("Recibo respuesta de agregarParticipante", response.status)
+    return response.status
+
+
+} catch (error) {
+    throw error;
+}
+
+}
+
+export { traerTodasLasNotificaciones, enviarNotificacion,aceptarNotificacion, rechazarNotificacion }

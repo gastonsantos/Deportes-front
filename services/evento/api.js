@@ -38,6 +38,22 @@ const data ={
   }
 }
 
+async function obtenerEventoQueParticipo(){
+  const id = localStorage.getItem("id");
+  const data ={
+    id: id
+  }
+   console.log("obtener Eventos", data)
+    try {
+      const response = await axiosInstance.post('/evento/ObtenerEventosQueParticipo',data);
+      console.log('ObtenerEventosPorIdUsuario', response.data);
+      return response.data;
+    } catch (error) {
+      throw error; 
+    }
+  }
+
+
 async function obtenerEventoDetalle(id) {
   try {
     const response = await axiosInstance.get(`/evento/EventoDetalle/${id}`);
@@ -71,4 +87,4 @@ async function cancelarEvento(data){
 }
 
 
-export { agregarEvento,obtenerEventos,obtenerEventoDetalle, obtenerEventoPorIdUsuario, modificarEvento, cancelarEvento};
+export { agregarEvento,obtenerEventos,obtenerEventoDetalle, obtenerEventoPorIdUsuario, modificarEvento, cancelarEvento, obtenerEventoQueParticipo};

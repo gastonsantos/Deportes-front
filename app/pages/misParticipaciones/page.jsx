@@ -1,0 +1,83 @@
+"use client"
+import { obtenerEventoQueParticipo } from "@/services/evento/api";
+import { NavBar } from "@/components/navBar/navBar";
+import MisParticipacionesCard from "@/components/misParticipaciones/misParticipaciones";
+import Image from "next/image";
+import React, { useState, useEffect } from 'react';
+import Footer from "@/components/landing/footer";
+import Link from 'next/link';
+const Misventos = () => {
+
+    const [evento, setEvento] = useState([]);
+
+
+    const handleDelete = (eventId) => {
+        setEvento(evento.filter(evento => evento.idEvento !== eventId)); 
+    };
+    useEffect(() => {
+
+        const fetchData = async () => {
+            try {
+                const response = await obtenerEventoQueParticipo();
+                if (response) {
+                    console.log("obtengoEventos", response);
+                    const data = response
+                    setEvento(data);
+                }
+            } catch (error) {
+                console.error("Error al obtener deportes:", error);
+            }
+        };
+
+        fetchData();
+    }, []);
+
+    return (
+        <div className=" items-center justify-center">
+            <NavBar />
+            <h2>Mis Participaciones</h2>
+
+            {
+                evento.length != 0 ? (
+
+                    <div className="grid grid-cols-1 gap-x-10 gap-y-14">
+                        {evento.map((evento) => (
+                            <MisParticipacionesCard key={evento.idEvento} evento={evento} onDelete={handleDelete} />
+                        ))}
+                    </div>
+                ) : (
+                    <>
+
+                        <div className="flex flex-col items-center justify-center h-screen -mt-10">
+
+                            <div className="relative">
+                                <h2>No tienes participaciones</h2>
+                                <Image
+                                    src="/images/no-eventos.jpg"
+                                    alt="Image Description"
+                                    width={600}
+                                    height={600}
+                                    className="shadow-sm rounded-xl object-cover grayscale"
+                                />
+
+                            </div>
+                        </div>
+
+
+
+                    </>
+
+                )}
+
+            <Footer />
+
+        </div>
+
+
+
+
+    );
+}
+
+export default Misventos
+

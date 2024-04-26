@@ -2,28 +2,95 @@
 import Link from 'next/link';
 import { NavBar } from "@/components/navBar/navBar";
 import React, { useState, useEffect } from 'react';
+import { useRouter } from 'next/navigation';
 import Footer from "@/components/landing/footer";
-import { traerTodasLasNotificaciones } from "@/services/notificaciones/api"
+import Swal from 'sweetalert2';
+import { traerTodasLasNotificaciones, aceptarNotificacion, rechazarNotificacion } from "@/services/notificaciones/api"
 const Notificaciones = () => {
-
+    const router = useRouter();
     const [notificaciones, setNotificaciones] = useState([]);
     const [cantidad, setCantidad] = useState();
-    useEffect(() => {
+
+
+    
         const fetchData = async () => {
             try {
                 const response = await traerTodasLasNotificaciones();
                 if (response) {
                     const data = response
                     console.log("Notificaciones", data);
-                    setNotificaciones(data); // Almacena los deportes en el estado local
+                    setNotificaciones(data); 
                 }
             } catch (error) {
                 console.error("Error al obtener las notificaciones:", error);
             }
         };
 
+    
+    useEffect(() => {
         fetchData();
     }, []);
+  
+    const handleAceptar = async (idParticipantes) => {
+        const data = {
+            idUsuario: idParticipantes
+        }
+        try {
+            const response = await aceptarNotificacion(data)
+            if (response) {
+                Swal.fire({
+                  title: '¡Se acepto la notificación',
+                  text: 'Te has unido al evento!',
+                  icon: 'success',
+                  confirmButtonText: 'Continuar',
+                  confirmButtonColor: '#007bff', // Adjust color as needed
+                }).then(() => {
+                    fetchData();;
+        
+                });
+              }
+        } catch (error) {
+            Swal.fire({
+                title: 'No se pudo aceptar la notificación',
+                text: 'Puedes intentarlo mas tarde',
+                icon: 'error',
+                confirmButtonText: 'OK',
+                confirmButtonColor: '#007bff'
+              });
+        }
+    }
+    const handleRechazar = async (idParticipantes) => {
+        const data = {
+            idUsuario: idParticipantes
+        }
+      
+        try {
+            const response = await rechazarNotificacion(data)
+            if (response) {
+                Swal.fire({
+                  title: '¡Se rechazó satisfactoriamente la invitación',
+                  text: 'Has rechazado el evento',
+                  icon: 'warning',
+                  confirmButtonText: 'Continuar',
+                  confirmButtonColor: '#007bff', // Adjust color as needed
+                }).then(() => {
+                    fetchData();;
+        
+                });
+              }
+        } catch (error) {
+            Swal.fire({
+                title: 'No se pudo aceptar la notificación',
+                text: 'Puedes intentarlo mas tarde',
+                icon: 'error',
+                confirmButtonText: 'OK',
+                confirmButtonColor: '#007bff'
+              });
+        }
+
+
+
+    }
     return (
         <div className=" items-center justify-center">
             <NavBar />
@@ -50,12 +117,27 @@ const Notificaciones = () => {
                                                 <span className="text-[#5e6778] font-semibold hover:text-[#0a317b] cursor-pointer">
                                                     en {notificaciones.provincia}, {notificaciones.localidad} Direccion: {notificaciones.direccion} {notificaciones.numero} el día {notificaciones.fecha} a las {notificaciones.hora}
                                                 </span>
+
                                                 <span className="inline-flex items-center justify-center rounded-full bg-red-500 border-red-500 border-4"></span>
+                                                <div className='inline-flex items-center justify-center'>
+                                                    <button className='text-white bg-green-700 rounded p-1 mr-1 mt-1'
+                                                        onClick= {()=>{
+                                                            handleAceptar(notificaciones.idParticipantes)
+                                                        }}
+                                                            
+                                                    >Aceptar</button>
+                                                    <button className='text-white bg-red-700 rounded p-1 mt-1'
+                                                        onClick={()=>{
+                                                            handleRechazar(notificaciones.idParticipantes)
+                                                        }}
+                                                    >Rechazar</button>
+                                                </div>
                                             </p>
                                             <p className="text-[#939dae]"></p>
 
+
                                             <Link href={`/pages/deportes/${notificaciones.idEvento}`} className="flex justify-center">
-                                                <button type="button" className="text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-full text-sm px-5 py-2.5 me-2 mb-2 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700">Ver evento</button>
+                                                <button type="button" className="text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-full text-sm px-4 py-2 mb-2 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700">Ver evento</button>
                                             </Link>
                                         </div>
                                     </div>
@@ -76,7 +158,9 @@ const Notificaciones = () => {
                                                 <span className="inline-flex items-center justify-center rounded-full bg-red-500 border-red-500 border-4"></span>
                                             </p>
                                             <p className="text-[#939dae]"></p>
-                                            <button className="text-whie bg-gray-800 p-1 rounded"> Ver perfil</button>
+                                            <Link href={`/pages/deportes/${notificaciones.idEvento}`} className="flex justify-center">
+                                                <button type="button" className="text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-full text-sm px-4 py-2  mb-2 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700">Ver perfil</button>
+                                            </Link>
                                         </div>
                                     </div>
                                 </div>
