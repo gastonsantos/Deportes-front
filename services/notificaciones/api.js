@@ -5,7 +5,6 @@ import { jwtDecode } from "jwt-decode";
 import axiosInstance from '@/services/interceptor/api'
 const traerTodasLasNotificaciones = async () => {
     const id = localStorage.getItem("id");
-
     const data = {
         idUsuario: id
     }

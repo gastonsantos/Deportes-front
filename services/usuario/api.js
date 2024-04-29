@@ -4,12 +4,10 @@ import Cookies from 'js-cookie';
 import { jwtDecode } from "jwt-decode";
 import axiosInstance from '@/services/interceptor/api'
 
-async function obtenerUsuarioPorId(){
+async function obtenerUsuarioPorId(id){
     try{
-      //const idUsuario = Cookies.get("id");
-      const idUsuario = localStorage.getItem("id");
       let parseId;
-      parseId = parseInt(idUsuario,10);
+      parseId = parseInt(id);
       const data ={
         id : parseId,
         //id : 1002,

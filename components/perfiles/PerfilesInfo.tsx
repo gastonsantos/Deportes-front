@@ -18,7 +18,7 @@ const PerfilesInfo = () => {
         const fetchData = async () => {
           try {
             
-            const response = await obtenerFichaDeportistaPorId();
+            const response = await obtenerFichaDeportistaPorId(localStorage.getItem("id"));
             if (response) {
               console.log("que trae la respuesta", response);
               

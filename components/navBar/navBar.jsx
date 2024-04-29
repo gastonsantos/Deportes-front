@@ -13,6 +13,7 @@ const navigation = [
   { name: 'DeportesApp', href: '/', current: true },
   { name: 'Eventos', href: '/pages/deportes', current: false },
   { name: 'Crear evento', href: '/pages/crearEvento', current: false },
+  { name: 'Perfiles', href: '/pages/perfil', current: false },
   { name: '¿Que es DeportesApp?', href: '#', current: false },
 ]
 
