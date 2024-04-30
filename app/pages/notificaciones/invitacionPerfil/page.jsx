@@ -99,9 +99,9 @@ export default function InvitacionPerfilCard() {
     return (
         <div>
             <NavBar />
-            <div className="container fluid flex lg:flex  items-center justify-center ">
-                <div className="flex-1 w-1/2 min-w-96 max-w-lg shadow-md m-4 items-center justify-center">
-                    <div className="bg-gray-900 rounded-lg " style={{ backgroundImage: `url('/images/Fondo1.jpg')`, backgroundSize: 'cover', backgroundPosition: 'center', backgroundRepeat: 'no-repeat' }}>
+            <div className="container fluid flex lg:flex hidden sm:block items-center justify-center ">
+                <div className="flex-1 min-w-96 max-w-96 shadow-md hidden sm:block mt-7">
+                    <div className="bg-gray-900 rounded-lg shadow-md p-4 text-white " style={{ backgroundImage: `url('/images/Fondo1.jpg')`, backgroundSize: 'cover', backgroundPosition: 'center', backgroundRepeat: 'no-repeat' }}>
 
                         <p className="text-white-500 ml-20 pt-4">{player.deporte}<span> ⚽</span> </p>
 

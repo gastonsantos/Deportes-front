@@ -147,15 +147,14 @@ const PerfilesStats = ({statsFutbol}) => {
 
 
   if (!statsFutbol) {
-    return <div>Loading...</div>; // Puedes mostrar un mensaje de carga mientras se obtienen los datos
+    return <div>Loading...</div>; 
 }
 
 
   return (
     <>
-
-      <div className="flex-1 min-w-96 max-w-96 shadow-md hidden sm:block mt-7 " >
-        <div className="bg-gray-900 rounded-lg shadow-md p-4 text-white" style={{ backgroundImage: `url('/images/Fondo3.jpg')`, backgroundSize: 'cover', backgroundPosition: 'center', backgroundRepeat: 'no-repeat' }} >
+      <div className="flex-1 min-w-96 max-w-96 shadow-md hidden sm:block mt-2" >
+        <div className="bg-gray-900 rounded-lg shadow-md p-4 text-white" style={{ backgroundImage: `url('/images/Fondo1.jpg')`, backgroundSize: 'cover', backgroundPosition: 'center', backgroundRepeat: 'no-repeat' }} >
           <div className="flex flex-col justify-center md:grid md:grid-cols-2 gap-2 m-10 items-center">
             <div>
               <p className="block text-white text-sm font-bold mb-1 text-center bg-amber-700 rounded-full p-1 w-32">Velocidad</p>
