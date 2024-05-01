@@ -15,7 +15,7 @@ useEffect(() => {
         if (response) {
           console.log("obtenerDeportes", response);
           const data = response
-          setEvento(data); // Almacena los deportes en el estado local
+          setEvento(data); 
         }
       } catch (error) {
         console.error("Error al obtener deportes:", error);

@@ -10,6 +10,7 @@ export type Evento = {
   fecha: string,
   nombreDep: string,
   cantJugadores: number,
+  cantJugadoresAnotados: number,
   imagen: string,
   idUsusarioDuenio: number
   };

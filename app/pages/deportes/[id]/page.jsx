@@ -21,9 +21,9 @@ export default function EventoDetalle() {
         const response = await obtenerEventoDetalle(id);
         if (response) {
 
-          console.log("que hay en response.data", response.data);
+          
           setEvento(response);
-          console.log("Que hay en Evento", evento)
+      
 
         }
       } catch (error) {
