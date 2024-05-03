@@ -7,6 +7,7 @@ import { useRouter } from 'next/navigation';
 import React, { useEffect, useState } from 'react';
 import Swal from 'sweetalert2';
 
+
 const Notificaciones = () => {
     const router = useRouter();
     const [notificaciones, setNotificaciones] = useState([]);

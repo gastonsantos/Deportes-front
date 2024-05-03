@@ -4,13 +4,13 @@ import Image from "next/image";
 import React, { useEffect, useState } from 'react';
 import { cancelarEvento } from '@/services/evento/api';
 import Swal from 'sweetalert2';
-
+import Participantes from "@/components/misEventos/participantes";
 
 const MisParticipacionesCard = ({ evento, onDelete, actualice }) => {
     const router = useRouter();
     const [showModal, setShowModal] = useState(false);
     const [showModalInvitar, setShowModalInvitar] = useState(false);
-    const { idEvento, nombre, imagen, nombreDep, idDeporte, cantJugadores,cantJugadoresAnotados, provincia, localidad, direccion, numero, fecha, hora } = evento;
+    const { idEvento, nombre, imagen, nombreDep, nombreDuenio,idDeporte, cantJugadores,cantJugadoresAnotados, provincia, localidad, direccion, numero, fecha, hora } = evento;
     const [fechaFormateada, setFechaFormateada] = useState("");
     const [open, setOpen] = useState(false);
     const [btnCrear, setBtnCrear] = useState(true);
@@ -157,7 +157,7 @@ const MisParticipacionesCard = ({ evento, onDelete, actualice }) => {
                     )}   
                 </div>
                 <div className="flex-1">
-
+                <Participantes  evento={evento.dtoUsuarios} />
                 </div>
             
             </div>

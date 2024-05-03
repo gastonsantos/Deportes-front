@@ -2,6 +2,7 @@
 import { obtenerEventoQueParticipo } from "@/services/evento/api";
 import { NavBar } from "@/components/navBar/navBar";
 import MisParticipacionesCard from "@/components/misParticipaciones/misParticipaciones";
+import Participantes from "@/components/misEventos/participantes";
 import Image from "next/image";
 import React, { useState, useEffect } from 'react';
 import Footer from "@/components/landing/footer";
@@ -12,7 +13,7 @@ const Misventos = () => {
 
 
     const handleDelete = (eventId) => {
-        setEvento(evento.filter(evento => evento.idEvento !== eventId)); 
+        setEvento(evento.filter(evento => evento.idEvento !== eventId));
     };
     useEffect(() => {
 
@@ -20,9 +21,14 @@ const Misventos = () => {
             try {
                 const response = await obtenerEventoQueParticipo();
                 if (response) {
-                    console.log("obtengoEventos", response);
+                    
                     const data = response
-                    setEvento(data);
+                    if(data){
+                        setEvento(data);
+                    }
+                    console.log("EVENTOSSS", data.dtoUsuarios
+                )
+                    
                 }
             } catch (error) {
                 console.error("Error al obtener deportes:", error);
@@ -44,7 +50,14 @@ const Misventos = () => {
                         {evento.map((evento) => (
                             <MisParticipacionesCard key={evento.idEvento} evento={evento} onDelete={handleDelete} />
                         ))}
+                        <div className="flex-1">
+
+
+                            
+
+                        </div>
                     </div>
+
                 ) : (
                     <>
 

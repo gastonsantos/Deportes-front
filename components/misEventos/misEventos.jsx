@@ -4,17 +4,15 @@ import Image from "next/image";
 import React, { useEffect, useState } from 'react';
 import FormularioModificar from "@/components/misEventos/formModificar";
 import ModalConfirmar from "@/components/misEventos/modalConfirmar";
+import Participantes from "@/components/misEventos/participantes";
 import ModalInvitar from "@/components/misEventos/modalInvitar";
-import BotonCrear from "@/components/misEventos/botonCrear";
 import { cancelarEvento } from '@/services/evento/api';
-import Swal from 'sweetalert2';
-import Link from 'next/link'; // Importar Link de next/link
 
 const MisEventosCard = ({ evento, onDelete, actualice }) => {
     const router = useRouter();
     const [showModal, setShowModal] = useState(false);
     const [showModalInvitar, setShowModalInvitar] = useState(false);
-    const { idEvento, nombre, imagen, nombreDep, idDeporte, cantJugadores, cantJugadoresAnotados, provincia, localidad, direccion, numero, fecha, hora } = evento;
+    const { idEvento, nombre, imagen, nombreDep,nombreDuenio, idDeporte, cantJugadores, cantJugadoresAnotados, provincia, localidad, direccion, numero, fecha, hora } = evento;
     const [fechaFormateada, setFechaFormateada] = useState("");
     const [open, setOpen] = useState(false);
     const [btnCrear, setBtnCrear] = useState(true);
@@ -186,10 +184,10 @@ const MisEventosCard = ({ evento, onDelete, actualice }) => {
                         </div>
                     )}
                     {cantJugadoresAnotados >= cantJugadores && (
-                        <div className="absolute top-5 -right-5 ">
-                            <div className="w-56 h-8 absolute top-4 -right-8">
+                        <div class="absolute top-5 -right-5 ">
+                            <div class="w-56 h-8 absolute top-4 -right-8">
                                 <div
-                                    className="h-full w-full bg-red-500 text-white text-center leading-8 font-semibold transform rotate-45">
+                                    class="h-full w-full bg-red-500 text-white text-center leading-8 font-semibold transform rotate-45">
                                     LLENO</div>
                             </div>
                         </div>
@@ -197,11 +195,12 @@ const MisEventosCard = ({ evento, onDelete, actualice }) => {
                 </div>
                 <div className="flex-1">
                     {
-                        open && (
+                        open ? (
                             <FormularioModificar evento={evento} />
-                        )
+                        ):( <Participantes duenio={nombreDuenio} evento={evento.dtoUsuarios} />)
                     }
                 </div>
+                
             </div>
             {showModal ? (
                 <ModalConfirmar
