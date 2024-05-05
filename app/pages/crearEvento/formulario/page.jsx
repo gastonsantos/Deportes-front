@@ -15,8 +15,8 @@ export default function Formulario() {
     localidad: '',
     direccion: '',
     numero: 0,
-    idUsuarioCreador: localStorage.getItem("id"),
-    idDeporte: localStorage.getItem("selectedDeporteId"),
+    idUsuarioCreador: typeof window !== 'undefined' ? localStorage.getItem("id") : '',
+    idDeporte: typeof window !== 'undefined' ? localStorage.getItem("selectedDeporteId") : '',
     fecha: '',
     hora: ''
   });

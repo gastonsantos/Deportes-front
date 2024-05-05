@@ -33,7 +33,7 @@ const SettingsComponent = () => {
     const fetchData = async () => {
       try {
         
-        const response = await obtenerUsuarioPorId(localStorage.getItem("id"));
+        const response = await obtenerUsuarioPorId(typeof window !== 'undefined' ? localStorage.getItem("id") : '');
         if (response) {
           console.log("obtenerDeportes", response.data);
           
