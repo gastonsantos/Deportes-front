@@ -38,7 +38,7 @@ const Participantes = ({ duenio, evento }) => {
                         <p>Participantes: </p>
                         <div>{duenio}</div>
                     {evento.map((evento) => (
-                        <div>{evento.nombre} {evento.apellido}</div>
+                        <div key={evento.id}>{evento.nombre} {evento.apellido}</div>
 
                     ) )}
 
