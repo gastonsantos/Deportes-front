@@ -5,7 +5,7 @@ import Swal from 'sweetalert2';
 const PerfilesInfo = () => {
 
     const [formData, setFormData] = useState({
-        idUsuario: localStorage.getItem("id"),
+        idUsuario: typeof window !== 'undefined' ? localStorage.getItem("id") : '',
         edad: '',
         altura: '',
         peso: '',
@@ -18,7 +18,7 @@ const PerfilesInfo = () => {
         const fetchData = async () => {
           try {
             
-            const response = await obtenerFichaDeportistaPorId(localStorage.getItem("id"));
+            const response = await obtenerFichaDeportistaPorId(typeof window !== 'undefined' ? localStorage.getItem("id") : '');
             if (response) {
               console.log("que trae la respuesta", response);
               

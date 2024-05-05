@@ -66,7 +66,7 @@ const options = {
 const PerfilesStats = () => {
   const [data, setData] = useState(defaultData);
   const [formDataStats, setFormDataStats] = useState({
-    idUsuario: localStorage.getItem("id"),
+    idUsuario: typeof window !== 'undefined' ? localStorage.getItem("id") : '',
     posicion: " ",
     media: 0,
     velocidad: 0,
@@ -114,7 +114,7 @@ const PerfilesStats = () => {
     const fetchData = async () => {
       try {
 
-        const response = await obtengoPerfilFutbolPorId(localStorage.getItem("id"));
+        const response = await obtengoPerfilFutbolPorId(typeof window !== 'undefined' ? localStorage.getItem("id") : '');
         if (response) {
           console.log("que trae la respuesta", response);
 
