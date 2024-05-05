@@ -6,14 +6,14 @@ const SingleDeporte = ({ evento }: { evento: Evento }) => {
     const { idEvento, nombre, imagen, nombreDep, cantJugadores, cantJugadoresAnotados, provincia, localidad, direccion, numero, fecha, hora, idUsusarioDuenio } = evento;
     const [fechaFormateada, setFechaFormateada] = useState("");
     useEffect(() => {
-
-        if (evento && evento.fecha) { // Verifica si evento y evento.fecha están definidos
+        if (evento && evento.fecha) { 
             const fecha = new Date(evento.fecha);
-            const opcionesFecha = { year: 'numeric', month: 'long', day: 'numeric' };
+            const opcionesFecha = { year: 'numeric', month: 'long', day: 'numeric' } as const; // Asegurarse de que las opciones sean del tipo correcto
             const fechaFormateada = fecha.toLocaleDateString('es-ES', opcionesFecha);
             setFechaFormateada(fechaFormateada);
         }
     }, [evento]);
+
 
     return (
         <div className="transform transition duration-300 hover:scale-105 ">
