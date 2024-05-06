@@ -24,7 +24,7 @@ ChartJS.register(
 );
 
 const defaultData = {
-  labels: ['Velocidad', 'Disparo', 'Regate', 'Fuerza', 'Pase', 'Defensa'],
+  labels: ['Velocidad', 'Resistencia', 'Precision', 'Fuerza', 'Tecnica', 'Agilidad'],
   datasets: [
     {
       label: 'Jugador 1',
@@ -104,22 +104,22 @@ const PerfilesStats = ({statsFutbol}) => {
   const [data, setData] = useState(defaultData);
   const [formDataStats, setFormDataStats] = useState({
     velocidad: 0,
-    disparo: 0,
-    regate: 0,
+    resistencia: 0,
+    precision: 0,
     fuerza: 0,
-    pase: 0,
-    defensa: 0
+    tecnica: 0,
+    agilidad: 0
   })
 
   useEffect(() => {
     if (statsFutbol) {
       setFormDataStats({
         velocidad: statsFutbol.velocidad || 0,
-        disparo: statsFutbol.disparo || 0,
-        regate: statsFutbol.regate || 0,
+        resistencia: statsFutbol.resistencia || 0,
+        precision: statsFutbol.precision || 0,
         fuerza: statsFutbol.fuerza || 0,
-        pase: statsFutbol.pase || 0,
-        defensa: statsFutbol.defensa || 0,
+        tecnica: statsFutbol.tecnica || 0,
+        agilidad: statsFutbol.agilidad || 0,
       });
     }
   }, [statsFutbol]);
@@ -133,11 +133,11 @@ const PerfilesStats = ({statsFutbol}) => {
           ...defaultData.datasets[0],
           data: [
             formDataStats.velocidad,
-            formDataStats.disparo,
-            formDataStats.regate,
+            formDataStats.resistencia,
+            formDataStats.precision,
             formDataStats.fuerza,
-            formDataStats.pase,
-            formDataStats.defensa
+            formDataStats.tecnica,
+            formDataStats.agilidad
           ]
         }
       ]
@@ -161,24 +161,24 @@ const PerfilesStats = ({statsFutbol}) => {
               <p className="w-full px-2 py-1 font-bold rounded text-white-700 text-center ">{formDataStats.velocidad}</p>
             </div>
             <div>
-              <p className="block text-white text-sm font-bold mb-1 text-center bg-amber-700 rounded-full p-1 w-32">Disparo</p>
-              <p className="w-full px-2 py-1 rounded font-bold text-white-700 text-center">{formDataStats.disparo}</p>
+              <p className="block text-white text-sm font-bold mb-1 text-center bg-amber-700 rounded-full p-1 w-32">Resistencia</p>
+              <p className="w-full px-2 py-1 rounded font-bold text-white-700 text-center">{formDataStats.resistencia}</p>
             </div>
             <div>
-              <p className="block text-white text-sm font-bold mb-1 text-center bg-amber-700 rounded-full p-1 w-32 ">Regate</p>
-              <p className="w-full px-2 py-1 rounded  font-bold text-white-700 text-center">{formDataStats.regate}</p>
+              <p className="block text-white text-sm font-bold mb-1 text-center bg-amber-700 rounded-full p-1 w-32 ">Precision</p>
+              <p className="w-full px-2 py-1 rounded  font-bold text-white-700 text-center">{formDataStats.precision}</p>
             </div>
             <div>
               <p className="block text-white text-sm font-bold mb-1 text-center bg-amber-700 rounded-full p-1 w-32">Fuerza</p>
               <p className="w-full px-2 py-1  rounded font-bold text-white-700 text-center">{formDataStats.fuerza}</p>
             </div>
             <div>
-              <p className="block text-white text-sm font-bold mb-1 text-center bg-amber-700 rounded-full p-1 w-32">Pase</p>
-              <p className="w-full px-2 py-1  rounded font-bold  text-white-700 text-center">{formDataStats.pase}</p>
+              <p className="block text-white text-sm font-bold mb-1 text-center bg-amber-700 rounded-full p-1 w-32">Tecnica</p>
+              <p className="w-full px-2 py-1  rounded font-bold  text-white-700 text-center">{formDataStats.tecnica}</p>
             </div>
             <div>
-              <p className="block text-white text-sm font-bold mb-1 text-center bg-amber-700 rounded-full p-1 w-32">Defensa</p>
-              <p className="w-full px-2 py-1 font-bold rounded text-white-700 text-center">{formDataStats.defensa}</p>
+              <p className="block text-white text-sm font-bold mb-1 text-center bg-amber-700 rounded-full p-1 w-32">Agilidad</p>
+              <p className="w-full px-2 py-1 font-bold rounded text-white-700 text-center">{formDataStats.agilidad}</p>
             </div>
           </div>
 

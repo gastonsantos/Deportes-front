@@ -11,7 +11,7 @@ const PerfilesInfo = () => {
         peso: '',
         pieHabil: '',
         manoHabil:'',
-        posicion: '',
+        
         
       });
       useEffect(() => {
@@ -116,20 +116,7 @@ const PerfilesInfo = () => {
             </select>
             </div>
             </div>
-            <div className="mb-6">
-              <label htmlFor="posicion" className="block text-gray-700 text-sm font-bold mb-2 text-center md:text-left">Posicion</label>
-              <select id="posicion"
-              name="posicion"
-               value={formData.posicion}
-                onChange={handleChange}
-               className="w-full px-4 py-2 border rounded focus:outline-none focus:border-green-500 text-gray-700 border-blue-500"
-               >
-              <option value="Arquero">Arquero</option>
-             <option value="Defensor">Defensor</option>
-             <option value="Mediocampista">Mediocampista</option>
-             <option value="Delantero">Delantero</option>
-            </select>
-            </div>
+            
             {/* Buttons */}
             <div className="flex justify-center md:justify-end">
               <button

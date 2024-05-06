@@ -5,8 +5,6 @@ import React, { useEffect, useState } from 'react';
 import Swal from 'sweetalert2';
 import Footer from "@/components/landing/footer";
 import PerfilesStats from "@/components/invitacionesPerfil/PerfilesStats";
-import { aceptarNotificacion, rechazarNotificacion } from "@/services/notificaciones/api";
-
 import { obtenerFichaDeportistaPorId, obtengoPerfilFutbolPorId, ObtenerUsuarioParaPerfilInvitacion } from "@/services/login/perfiles/api";
 export default function InvitacionPerfilCard() {
     const [usuario, setUsuario] = useState();
@@ -80,12 +78,13 @@ export default function InvitacionPerfilCard() {
         manoHabil: fichaDeportista ? fichaDeportista.manoHabil : "",
         position: fichaDeportista ? fichaDeportista.posicion : "",
         media: fichaFutbol ? fichaFutbol.media : "",
-        defensa: fichaFutbol ? fichaFutbol.defensa : "",
-        disparo: fichaFutbol ? fichaFutbol.disparo : "",
-        fuerza: fichaFutbol ? fichaFutbol.fuerza : "",
-        pase: fichaFutbol ? fichaFutbol.pase : "",
-        regate: fichaFutbol ? fichaFutbol.regate : "",
         velocidad: fichaFutbol ? fichaFutbol.velocidad : "",
+        resistencia: fichaFutbol ? fichaFutbol.resistencia : "",
+        precision: fichaFutbol ? fichaFutbol.precision : "",
+        fuerza: fichaFutbol ? fichaFutbol.fuerza : "",
+        tecnica: fichaFutbol ? fichaFutbol.tecnica : "",
+        agilidad: fichaFutbol ? fichaFutbol.agilidad : "",
+       
         deporte: "Fútbol"
 
     };
@@ -111,7 +110,7 @@ export default function InvitacionPerfilCard() {
                                 <img src={player.image} alt={player.name} className="w-10 h-10 rounded-full" />
                                 <div className="ml-4 ">
                                     <h3 className="text-sm font-medium bg-amber-700 rounded-e-full pl-6 pr-4 pt-1 pb-1">{player.name}</h3>
-                                    <p className="text-white-500 mt-2">{player.position}</p>
+                                    
                                 </div>
                             </div>
                             <div className="flex items-center justify-center font-bold text-lg text-white-500 mr-1 bg-amber-700 w-12 h-12 rounded-full -mt-14">{player.media}</div>
@@ -176,19 +175,19 @@ export default function InvitacionPerfilCard() {
 
 
                             <div className="relative">
-                                <p className="text-white-600">Disparo</p>
+                                <p className="text-white-600">Resistencia</p>
                                 <span className="inline-block w-full  bg-white rounded-md relative p-3">
-                                    <span style={{ width: `${player.disparo}%` }} className="absolute top-0 left-0 h-full bg-blue-800 rounded-md">
-                                        <span className="text-sm m-2">{player.disparo}</span>
+                                    <span style={{ width: `${player.resistencia}%` }} className="absolute top-0 left-0 h-full bg-blue-800 rounded-md">
+                                        <span className="text-sm m-2">{player.resistencia}</span>
                                     </span>
                                 </span>
                             </div>
 
                             <div className="relative">
-                                <p className="text-white-600">Regate</p>
+                                <p className="text-white-600">Precision</p>
                                 <span className="inline-block w-full bg-white rounded-md relative p-3">
-                                    <span style={{ width: `${player.regate}%` }} className="absolute top-0 left-0 h-full bg-blue-800 rounded-md">
-                                        <span className="text-sm m-2">{player.regate}</span>
+                                    <span style={{ width: `${player.precision}%` }} className="absolute top-0 left-0 h-full bg-blue-800 rounded-md">
+                                        <span className="text-sm m-2">{player.precision}</span>
                                     </span>
                                 </span>
                             </div>
@@ -201,18 +200,18 @@ export default function InvitacionPerfilCard() {
                                 </span>
                             </div>
                             <div className="relative">
-                                <p className="text-white-600">Pase</p>
+                                <p className="text-white-600">Tecnica</p>
                                 <span className="inline-block w-full bg-white rounded-md relative p-3">
-                                    <span style={{ width: `${player.pase}%` }} className="absolute top-0 left-0 h-full bg-blue-800 rounded-md">
-                                        <span className="text-sm m-2">{player.pase}</span>
+                                    <span style={{ width: `${player.tecnica}%` }} className="absolute top-0 left-0 h-full bg-blue-800 rounded-md">
+                                        <span className="text-sm m-2">{player.tecnica}</span>
                                     </span>
                                 </span>
                             </div>
                             <div className="relative">
-                                <p className="text-white-600">Defensa</p>
+                                <p className="text-white-600">Agilidad</p>
                                 <span className="inline-block w-full  bg-white rounded-md relative p-3">
-                                    <span style={{ width: `${player.defensa}%` }} className="absolute top-0 left-0 h-full bg-blue-800 rounded-md">
-                                        <span className="text-sm m-2">{player.defensa}</span>
+                                    <span style={{ width: `${player.agilidad}%` }} className="absolute top-0 left-0 h-full bg-blue-800 rounded-md">
+                                        <span className="text-sm m-2">{player.agilidad}</span>
                                     </span>
                                 </span>
                             </div>
