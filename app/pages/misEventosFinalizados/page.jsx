@@ -1,12 +1,13 @@
 "use client"
-import { obtenerEventoQueParticipo } from "@/services/evento/api";
+import { obtenerEventosPorUsuarioFinalizados,obtenerEventosQueParticipoFinalizados } from "@/services/evento/api";
 import { NavBar } from "@/components/navBar/navBar";
-import MisParticipacionesCard from "@/components/misParticipaciones/misParticipaciones";
+import MisEventosFinalizadosCard from "@/components/misEventosFinalizados/misEventosFinalizados";
+import Participantes from "@/components/misEventos/participantes";
 import Image from "next/image";
 import React, { useState, useEffect } from 'react';
 import Footer from "@/components/landing/footer";
 import Link from 'next/link';
-const Misventos = () => {
+const MisEventosFinalizados = () => {
 
     const [evento, setEvento] = useState([]);
 
@@ -14,18 +15,18 @@ const Misventos = () => {
     const handleDelete = (eventId) => {
         setEvento(evento.filter(evento => evento.idEvento !== eventId));
     };
-    
+    useEffect(() => {
 
         const fetchData = async () => {
             try {
-                const response = await obtenerEventoQueParticipo();
+                const response = await obtenerEventosPorUsuarioFinalizados();
                 if (response) {
                     
                     const data = response
                     if(data){
                         setEvento(data);
                     }
-                    console.log("EVENTOSSS", data.dtoUsuarios
+                    console.log("EVENTOS FINALIZADOS", data.dtoUsuarios
                 )
                     
                 }
@@ -34,8 +35,6 @@ const Misventos = () => {
             }
         };
 
-    
-    useEffect(() => {
         fetchData();
     }, []);
 
@@ -49,7 +48,7 @@ const Misventos = () => {
 
                     <div className="grid grid-cols-1 gap-x-10 gap-y-14">
                         {evento.map((evento) => (
-                            <MisParticipacionesCard key={evento.idEvento} evento={evento} onDelete={handleDelete} actualizar={fetchData} />
+                            <MisEventosFinalizadosCard key={evento.idEvento} evento={evento} onDelete={handleDelete} />
                         ))}
                         <div className="flex-1">
 
@@ -93,5 +92,5 @@ const Misventos = () => {
     );
 }
 
-export default Misventos
+export default MisEventosFinalizados
 

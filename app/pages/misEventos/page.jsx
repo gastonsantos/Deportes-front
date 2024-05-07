@@ -10,11 +10,11 @@ const Misventos = () => {
 
     const [evento, setEvento] = useState([]);
     
-
     const handleDelete = (eventId) => {
         setEvento(evento.filter(evento => evento.idEvento !== eventId)); // Elimina el evento de la lista
     };
-    useEffect(() => {
+
+    
 
         const fetchData = async () => {
             try {
@@ -29,8 +29,10 @@ const Misventos = () => {
             }
         };
 
-        fetchData();
-    }, []);
+        useEffect(() => {
+            fetchData();
+        }, []);
+     
 
     return (
         <div className=" items-center justify-center">
@@ -42,7 +44,7 @@ const Misventos = () => {
 
                     <div className="grid grid-cols-1 gap-x-10 gap-y-14">
                         {evento.map((evento) => (
-                            <MisEventosCard key={evento.idEvento} evento={evento} onDelete={handleDelete}/>
+                            <MisEventosCard key={evento.idEvento} evento={evento} onDelete={handleDelete} actualizar={fetchData}/>
                         ))}
                     </div>
                 ) : (

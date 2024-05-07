@@ -58,8 +58,10 @@ export default function ModalInvitar({ setShowModalInvitar, toggleCancelarEvento
                     confirmButtonColor: '#007bff', // Adjust color as needed
 
                 }).then(() => {
-
-
+                    setTimeout(() => {
+                        setShowModalInvitar(false);
+                    }, 1000);
+              
                 });
 
             }

@@ -1,0 +1,37 @@
+import React, { useEffect, useState } from 'react';
+import { Card, Typography, CardBody } from "@material-tailwind/react";
+
+const Participantes = ({ duenio, evento }) => {
+    const { id, apellido, nombre, apodo, email } = evento;
+    const [formData, setFormData] = useState({
+        id: id,
+        nombre: nombre,
+        apellido: apellido,
+        apodo: apodo,
+        email: email,
+    });
+
+    useEffect(() => {
+        if (evento) {
+            setFormData(evento);
+        }
+    }, [evento]);
+
+    return (
+        <div className="w-1/2 min-w-96 bg-white rounded-xl mt-4 text-justify ml-2">
+            <Card className="">
+                <CardBody>
+                    <Typography>
+                        <p>Participantes: </p>
+                        <div>{duenio}</div>
+                        {evento.map((evento) => (
+                            <div key={evento.id}>{evento.nombre} {evento.apellido} <button className='bg-gray-700 text-white rounded-full p-1'>Calificar</button></div> 
+                        ))}
+                    </Typography>
+                </CardBody>
+            </Card>
+        </div>
+    );
+};
+
+export default Participantes;

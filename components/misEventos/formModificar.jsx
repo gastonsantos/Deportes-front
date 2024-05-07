@@ -87,7 +87,7 @@ const FormularioModificar = ({ evento }) => {
                     confirmButtonColor: '#007bff', // Adjust color as needed
                     allowOutsideClick: true,
                 }).then(() => {
-                    console.log("Cualquier cosa")
+                    
                     router.push('/pages/misEventos');
                 });
             }
@@ -126,11 +126,15 @@ const FormularioModificar = ({ evento }) => {
                                 <Typography>
                                     <form >
                                         <div className="flex flex-col justify-center md:grid md:grid-cols-2 gap-2 mb-1">
+                                       
+
                                             <div>
-                                                <input type="text" name="nombre" id="nombre" value={formData.nombre} onChange={handleChange} className="w-full px-2 py-2 border rounded focus:outline-none focus:border-green-500 text-gray-700 border-blue-500 pb-1"
+                                            <label htmlFor="fecha" className="block text-gray-500 text-sm font-bold mb-1 text-center md:text-left pb-1">Nombre</label>
+                                                <input type="text" name="nombre" id="nombre" value={formData.nombre} onChange={handleChange} className="w-full px-2 py-1 border rounded focus:outline-none focus:border-green-500 text-gray-700 border-blue-500 pb-1"
                                                     placeholder={nombre} />
                                             </div>
                                             <div>
+                                            <label htmlFor="fecha" className="block text-gray-500 text-sm font-bold mb-1 text-center md:text-left pb-1">Deporte</label>
                                                 <select name="idDeporte" id="deporte" value={formData.idDeporte} onChange={handleChange} className="w-full px-2 py-2 border rounded focus:outline-none focus:border-green-500 text-gray-700 border-blue-500 pb-1">
                                                     <option value="0">Deporte</option>
                                                     <option value="1">Fútbol 5</option>

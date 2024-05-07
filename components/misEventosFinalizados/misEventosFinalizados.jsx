@@ -2,50 +2,56 @@
 import { useRouter } from 'next/navigation';
 import Image from "next/image";
 import React, { useEffect, useState } from 'react';
-import FormularioModificar from "@/components/misEventos/formModificar";
-import ModalConfirmar from "@/components/misEventos/modalConfirmar";
-import Participantes from "@/components/misEventos/participantes";
-import ModalInvitar from "@/components/misEventos/modalInvitar";
 import { cancelarEvento } from '@/services/evento/api';
+import Swal from 'sweetalert2';
+import Participantes from "@/components/misEventosFinalizados/participantes";
+import { rechazarNotificacion } from "@/services/notificaciones/api";
 
-const MisEventosCard = ({ evento, onDelete, actualice, actualizar }) => {
+const MisEventosFinalizadosCard = ({ evento, onDelete, actualice }) => {
     const router = useRouter();
     const [showModal, setShowModal] = useState(false);
     const [showModalInvitar, setShowModalInvitar] = useState(false);
-    const { idEvento, nombre, imagen, nombreDep,nombreDuenio, idDeporte, cantJugadores, cantJugadoresAnotados, provincia, localidad, direccion, numero, fecha, hora } = evento;
+    const { idEvento, nombre, imagen, nombreDep, nombreDuenio,idDeporte,idParticipante, cantJugadores,cantJugadoresAnotados, provincia, localidad, direccion, numero, fecha, hora } = evento;
     const [fechaFormateada, setFechaFormateada] = useState("");
     const [open, setOpen] = useState(false);
     const [btnCrear, setBtnCrear] = useState(true);
     const [error, setError] = useState('');
     const toggleOpen = () => setOpen((cur) => !cur);
+   
     const [formData, setFormData] = useState({
         id: evento.idEvento
 
     });
 
-    const toggleCancelarEvento = async () => {
+    const handleEliminarEvento = async (idParticipantes) => {
+        const data = {
+            idUsuario: idParticipantes
+        }
 
 
         try {
-            const response = await cancelarEvento(formData);
+            const response = await eliminarEvento(data)
             if (response) {
-                onDelete(evento.idEvento);
+                Swal.fire({
+                    title: '¡Se evento se elimino de forma permanente',
+                    text: 'Has evento se elimino.',
+                    icon: 'warning',
+                    confirmButtonText: 'Continuar',
+                    confirmButtonColor: '#007bff', // Adjust color as needed
+                }).then(() => {
+                    router.push('/pages/misEventos')
+
+                });
             }
         } catch (error) {
-            if (error.response) {
-                switch (error.response.status) {
-                    case 404:
-                        setError('No se pudo cancelar el evento');
-                        break;
-                    default:
-                        setError('Error en la petición al servidor');
-                }
-            } else {
-
-                setError('Error en la petición al servidor');
-            }
+            Swal.fire({
+                title: 'No se pudo celiminar el evento',
+                text: 'Puedes intentarlo más tarde',
+                icon: 'error',
+                confirmButtonText: 'OK',
+                confirmButtonColor: '#007bff'
+            });
         }
-
     }
 
     useEffect(() => {
@@ -61,18 +67,15 @@ const MisEventosCard = ({ evento, onDelete, actualice, actualizar }) => {
 
     return (
         <>
-
-
             <div className="md:flex lg:flex ">
-                <div className="flex-1 w-1/2 min-w-96 m-4 relative bg-white border shadow-sm rounded-xl transform transition duration-300 hover:translate-x-4 overflow-hidden ">
-                    <div className=" image-container" style={{ width: '144px', height: '244px' }}>
+                <div className="flex-1 w-1/2 min-w-96 m-4 relative bg-white border shadow-sm rounded-xl transform transition duration-300 hover:translate-x-4 overflow-hidden">
+                    <div className="image-container" style={{ width: '144px', height: '244px' }}>
                         <Image
                             src={imagen}
                             alt="Image Description"
                             layout="fill" // Use "fill" for responsive image scaling
                             className="border shadow-sm rounded-xl object-cover" // Maintain aspect ratio
                         />
-
                     </div>
                     <div className="absolute top-0 start-0 end-0 bg-neutral-700 shadow-sm rounded-xl rounded-b-none opacity-75">
                         <div className="p-4 md:p-5">
@@ -132,89 +135,45 @@ const MisEventosCard = ({ evento, onDelete, actualice, actualizar }) => {
                             </div>
 
                         </div>
+                        
                     </div >
-                    <div className="mt-10 flex item-center mb-4">
-                        <button onClick={toggleOpen} className="mb-3 ml-3 relative bg-neutral-500 hover:bg-neutral-700 text-white font-bold py-2 px-4 rounded-full rounded inline-flex items-center ">
+                    <div className="pt-10 flex item-center mb-2">
 
-                            <svg class="w-[15px] h-[15px] fill-[#dbdbdb] mr-1" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
-
-                                <path d="M471.6 21.7c-21.9-21.9-57.3-21.9-79.2 0L362.3 51.7l97.9 97.9 30.1-30.1c21.9-21.9 21.9-57.3 0-79.2L471.6 21.7zm-299.2 220c-6.1 6.1-10.8 13.6-13.5 21.9l-29.6 88.8c-2.9 8.6-.6 18.1 5.8 24.6s15.9 8.7 24.6 5.8l88.8-29.6c8.2-2.7 15.7-7.4 21.9-13.5L437.7 172.3 339.7 74.3 172.4 241.7zM96 64C43 64 0 107 0 160V416c0 53 43 96 96 96H352c53 0 96-43 96-96V320c0-17.7-14.3-32-32-32s-32 14.3-32 32v96c0 17.7-14.3 32-32 32H96c-17.7 0-32-14.3-32-32V160c0-17.7 14.3-32 32-32h96c17.7 0 32-14.3 32-32s-14.3-32-32-32H96z"></path>
-
-                            </svg>
-                            {
-                                open ? (
-                                    <span className='hidden sm:block'>Cancelar modificación</span>
-
-                                ) : (
-                                    <span className='hidden sm:block'>Modificar evento</span>
-                                )
-                            }
-
-
-                        </button>
-                        <button onClick={() => setShowModal(true)} className="mb-3 ml-3 relative bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-full  rounded inline-flex items-center">
+                        <button className="mb-3 ml-3 relative bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-full  rounded inline-flex items-center"
+                          onClick={() => {
+                            handleEliminarEvento(idParticipante)
+                        }}
+                        >
 
                             <svg class="w-[15px] h-[15px] fill-[#dbdbdb] mr-1" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
 
                                 <path d="M367.2 412.5L99.5 144.8C77.1 176.1 64 214.5 64 256c0 106 86 192 192 192c41.5 0 79.9-13.1 111.2-35.5zm45.3-45.3C434.9 335.9 448 297.5 448 256c0-106-86-192-192-192c-41.5 0-79.9 13.1-111.2 35.5L412.5 367.2zM0 256a256 256 0 1 1 512 0A256 256 0 1 1 0 256z"></path>
 
                             </svg>
-                            <span className='hidden sm:block'>Cancelar evento</span>
+                            <span className='hidden sm:block'>Eliminar evento</span>
                         </button>
-
-                        {cantJugadoresAnotados < cantJugadores && (
-
-                            <button onClick={() => { setShowModalInvitar(true), setBtnCrear(false) }}
-                                className="mb-3 ml-3 ml-auto mr-2 relative bg-orange-300 hover:bg-orange-500 text-white font-bold py-1 px-2 rounded-full  rounded inline-flex items-center">
-
-                                <svg class="w-[20px] h-[20px] fill-[#e9e7e7]" viewBox="0 0 640 512" xmlns="http://www.w3.org/2000/svg">
-
-                                    <path d="M96 128a128 128 0 1 1 256 0A128 128 0 1 1 96 128zM0 482.3C0 383.8 79.8 304 178.3 304h91.4C368.2 304 448 383.8 448 482.3c0 16.4-13.3 29.7-29.7 29.7H29.7C13.3 512 0 498.7 0 482.3zM504 312V248H440c-13.3 0-24-10.7-24-24s10.7-24 24-24h64V136c0-13.3 10.7-24 24-24s24 10.7 24 24v64h64c13.3 0 24 10.7 24 24s-10.7 24-24 24H552v64c0 13.3-10.7 24-24 24s-24-10.7-24-24z"></path>
-
-                                </svg>
-
-
-                            </button>
-                        )}
-
                     </div>
                     {error && (
                         <div className="absolute mb-5 text-red" >
                             <label htmlFor="" className="text-red-500">{error}</label>
                         </div>
                     )}
-                    {cantJugadoresAnotados >= cantJugadores && (
-                        <div class="absolute top-5 -right-5 ">
-                            <div class="w-56 h-8 absolute top-4 -right-8">
+                        {cantJugadoresAnotados >= cantJugadores && (
+                        <div className="absolute top-5 -right-5 ">
+                            <div className="w-56 h-8 absolute top-4 -right-8">
                                 <div
-                                    class="h-full w-full bg-red-500 text-white text-center leading-8 font-semibold transform rotate-45">
+                                    className="h-full w-full bg-red-500 text-white text-center leading-8 font-semibold transform rotate-45">
                                     LLENO</div>
                             </div>
                         </div>
-                    )}     
+                    )}   
                 </div>
                 <div className="flex-1">
-                    {
-                        open ? (
-                            <FormularioModificar evento={evento} />
-                        ):( <Participantes duenio={nombreDuenio} evento={evento.dtoUsuarios} actualizar={actualizar} />)
-                    }
+                <Participantes  evento={evento.dtoUsuarios} />
                 </div>
-                
+            
             </div>
-            {showModal ? (
-                <ModalConfirmar
-                    setShowModal={setShowModal}
-                    toggleCancelarEvento={toggleCancelarEvento}
-                />
-            ) : null}
-            {showModalInvitar ? (
-                <ModalInvitar
-                    setShowModalInvitar={setShowModalInvitar}
-                    toggleCancelarEvento={toggleCancelarEvento}
-                    evento={evento}
-                />
-            ) : null}
+
 
 
 
@@ -228,4 +187,4 @@ const MisEventosCard = ({ evento, onDelete, actualice, actualizar }) => {
     );
 }
 
-export default MisEventosCard;
+export default MisEventosFinalizadosCard;

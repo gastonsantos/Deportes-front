@@ -52,8 +52,35 @@ async function obtenerEventoQueParticipo(){
       throw error; 
     }
   }
+  async function obtenerEventosQueParticipoFinalizados(){
+    const id = localStorage.getItem("id");
+    const data ={
+      id: id
+    }
+     console.log("obtener Eventos", data)
+      try {
+        const response = await axiosInstance.post('/evento/ObtenerEventosQueParticipoFinalizado',data);
+        console.log('ObtenerEventosPorIdUsuario', response.data);
+        return response.data;
+      } catch (error) {
+        throw error; 
+      }
+    }
 
-
+    async function obtenerEventosPorUsuarioFinalizados(){
+      const id = localStorage.getItem("id");
+      const data ={
+        id: id
+      }
+       console.log("obtener Eventos", data)
+        try {
+          const response = await axiosInstance.post('/evento/ObtenerEventosPorUsuarioFinalizado',data);
+          console.log('ObtenerEventosPorIdUsuario', response.data);
+          return response.data;
+        } catch (error) {
+          throw error; 
+        }
+      }
 async function obtenerEventoDetalle(id) {
   try {
     const response = await axiosInstance.get(`/evento/EventoDetalle/${id}`);
@@ -87,4 +114,4 @@ async function cancelarEvento(data){
 }
 
 
-export { agregarEvento,obtenerEventos,obtenerEventoDetalle, obtenerEventoPorIdUsuario, modificarEvento, cancelarEvento, obtenerEventoQueParticipo};
+export { agregarEvento,obtenerEventos,obtenerEventoDetalle, obtenerEventosPorUsuarioFinalizados,obtenerEventosQueParticipoFinalizados,obtenerEventoPorIdUsuario, modificarEvento, cancelarEvento, obtenerEventoQueParticipo};

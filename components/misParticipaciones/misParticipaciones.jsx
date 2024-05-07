@@ -4,46 +4,53 @@ import Image from "next/image";
 import React, { useEffect, useState } from 'react';
 import { cancelarEvento } from '@/services/evento/api';
 import Swal from 'sweetalert2';
-import Participantes from "@/components/misEventos/participantes";
+import Participantes from "@/components/misParticipaciones/participantes";
+import { rechazarNotificacion } from "@/services/notificaciones/api";
+import ModalCancelarParticipacion from "@/components/misParticipaciones/modelCancelarPart";
 
-const MisParticipacionesCard = ({ evento, onDelete, actualice }) => {
+const MisParticipacionesCard = ({ evento, onDelete, actualizar }) => {
     const router = useRouter();
-    const [showModal, setShowModal] = useState(false);
-    const [showModalInvitar, setShowModalInvitar] = useState(false);
-    const { idEvento, nombre, imagen, nombreDep, nombreDuenio,idDeporte, cantJugadores,cantJugadoresAnotados, provincia, localidad, direccion, numero, fecha, hora } = evento;
+    const [showModalCancelarParticipacion, setShowModalCancelarParticipacion] = useState(false);
+    const { idEvento, nombre, imagen, nombreDep, nombreDuenio,idDeporte,idParticipante, cantJugadores,cantJugadoresAnotados, provincia, localidad, direccion, numero, fecha, hora } = evento;
     const [fechaFormateada, setFechaFormateada] = useState("");
     const [open, setOpen] = useState(false);
     const [btnCrear, setBtnCrear] = useState(true);
     const [error, setError] = useState('');
     const toggleOpen = () => setOpen((cur) => !cur);
+   
     const [formData, setFormData] = useState({
         id: evento.idEvento
 
     });
 
-    const toggleCancelarEvento = async () => {
-
-
+    const handleRechazar = async (idParticipantes) => {
+        const data = {
+            idUsuario: idParticipantes
+        }
         try {
-            const response = await cancelarEvento(formData);
+            const response = await rechazarNotificacion(data)
             if (response) {
-                onDelete(evento.idEvento);
+                Swal.fire({
+                    title: '¡Se cancelo la participación en el evento',
+                    text: 'Has cancelado la participación al evento',
+                    icon: 'warning',
+                    confirmButtonText: 'Continuar',
+                    confirmButtonColor: '#007bff', // Adjust color as needed
+                }).then(() => {
+                   actualizar();
+                   onDelete();
+
+                });
             }
         } catch (error) {
-            if (error.response) {
-                switch (error.response.status) {
-                    case 404:
-                        setError('No se pudo cancelar el evento');
-                        break;
-                    default:
-                        setError('Error en la petición al servidor');
-                }
-            } else {
-
-                setError('Error en la petición al servidor');
-            }
+            Swal.fire({
+                title: 'No se pudo cancelar la paarticipación ',
+                text: 'Puedes intentarlo más tarde',
+                icon: 'error',
+                confirmButtonText: 'OK',
+                confirmButtonColor: '#007bff'
+            });
         }
-
     }
 
     useEffect(() => {
@@ -131,7 +138,9 @@ const MisParticipacionesCard = ({ evento, onDelete, actualice }) => {
                     </div >
                     <div className="pt-10 flex item-center mb-2">
 
-                        <button className="mb-3 ml-3 relative bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-full  rounded inline-flex items-center">
+                        <button className="mb-3 ml-3 relative bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-full  rounded inline-flex items-center"
+                       onClick={() => setShowModalCancelarParticipacion(true)} 
+                        >
 
                             <svg class="w-[15px] h-[15px] fill-[#dbdbdb] mr-1" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
 
@@ -159,7 +168,14 @@ const MisParticipacionesCard = ({ evento, onDelete, actualice }) => {
                 <div className="flex-1">
                 <Participantes  evento={evento.dtoUsuarios} />
                 </div>
-            
+                {showModalCancelarParticipacion ? (
+                <ModalCancelarParticipacion
+                setShowModalCancelarParticipacion={setShowModalCancelarParticipacion}
+                handleRechazar={handleRechazar}
+                idParticipante = {idParticipante}
+                
+                />
+            ) : null}
             </div>
 
 

@@ -50,7 +50,7 @@ const rechazarNotificacion = async (data) => {
 try {
 
     const response = await axiosInstance.post(API + "/participantes/RechazarInvitacion", data);
-    console.log("Recibo respuesta de agregarParticipante", response.status)
+    console.log("Recibo respuesta de RechazarParticipantes", response.status)
     return response.status
 
 
