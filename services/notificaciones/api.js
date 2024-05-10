@@ -41,7 +41,9 @@ try {
     console.log("Recibo respuesta de agregarParticipante", response.status)
     return response.status
 } catch (error) {
-    throw error;
+    console.log("Que hay en el data d NotificacionesError", error);
+   
+  throw error;
 }
 
 }

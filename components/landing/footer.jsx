@@ -83,10 +83,10 @@ const Footer = () => {
                       d="M12.378 1.602a.75.75 0 00-.756 0L3 6.632l9 5.25 9-5.25-8.622-5.03zM21.75 7.93l-9 5.25v9l8.628-5.032a.75.75 0 00.372-.648V7.93zM11.25 22.18v-9l-9-5.25v8.57a.75.75 0 00.372.648l8.628 5.033z" />
                   </svg>
                 </span>
-                DeportesAPP
+                SportSquad
               </h6>
               <p>
-              Somos la plataforma perfecta para organizar y disfrutar de eventos deportivos emocionantes. Con DeportesAPP, puedes crear fácilmente tus propios partidos de baloncesto, fútbol, pádel, tenis y más en segundos.
+              Somos la plataforma perfecta para organizar y disfrutar de eventos deportivos emocionantes. Con SportSquad, puedes crear fácilmente tus propios partidos de baloncesto, fútbol, pádel, tenis y más en segundos.
               </p>
             </div>
             <div>
@@ -193,7 +193,7 @@ const Footer = () => {
         <div className="bg-black/5 p-6 text-center">
           <span>© 2023 Copyright:</span>
           <a className="font-semibold" href="https://tw-elements.com/"
-          >TW Elements</a
+          > SportSquad</a
           >
         </div>
       </footer>

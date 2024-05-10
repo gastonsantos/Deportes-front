@@ -13,5 +13,6 @@ export type Evento = {
   cantJugadoresAnotados: number,
   imagen: string,
   idUsusarioDuenio: number
+  nombreDuenio:string
   };
   

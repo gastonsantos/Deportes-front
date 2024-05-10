@@ -4,6 +4,7 @@ import { obtenerCoordenadas } from "@/services/mapa/api";
 import { enviarNotificacion } from "@/services/notificaciones/api";
 import { APIMAP } from "@/config/constants";
 import Swal from 'sweetalert2';
+import Image from "next/image";
 const SingleEvento = ({ evento }) => {
   const [coordenadas, setCoordenadas] = useState(null);
   const [latitud, setLatitud] = useState();
@@ -208,13 +209,13 @@ const SingleEvento = ({ evento }) => {
 
 
             </div>
-            <div class="flex items-center">
+            <div className="flex items-center">
 
-              <div class="text-sm">
+              <div className="text-sm">
                 <p className="text-gray-900 font-bold mb-2">Dueño</p>
-                <p class="text-gray-900 leading-none">{nombreDuenio}</p>
+                <p className="text-gray-900 leading-none">{nombreDuenio}</p>
 
-                <p class="text-gray-600">{latitud},{longitud}</p>
+                <p className="text-gray-600">{latitud},{longitud}</p>
               </div>
             </div>
 
@@ -236,11 +237,27 @@ const SingleEvento = ({ evento }) => {
         </div>
       </div>
 
-      {latitud && longitud &&
-        <div className='flex-auto w-96 h-96 m-12 bg-white rounded-b lg:rounded-b-none lg:rounded-r ' id="map"
-        />
+      
 
-      }
+      {latitud && longitud ? (
+        <div className='flex-auto md:w-96 sm:w-80 w-96 h-auto m-12 bg-white rounded-b lg:rounded-b-none lg:rounded-r ' id="map" />
+      ) : (
+        <div className='flex-auto w-96 h-auto m-12 bg-white rounded-b lg:rounded-b-none lg:rounded-r'>
+
+          <Image
+            src="/images/evento-no-encontrado1.jpg"
+            alt="Image Description"
+            width={600}
+            height={600}
+            className="shadow-sm rounded-xl object-cover grayscale"
+          />
+        </div>
+      )}
+
+
+
+
+
 
     </div>
   );

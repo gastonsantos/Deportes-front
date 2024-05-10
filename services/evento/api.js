@@ -15,7 +15,7 @@ const agregarEvento = async (data) =>  {
 }
 async function obtenerEventos() {
   try {
-    const response = await axiosInstance.get('/evento/ObtenerEventos');
+    const response = await axiosInstance.get(`/evento/ObtenerEventos?Limit=${50}&Offset=${0}`);
     console.log('ObtenerEventos', response.data);
     return response.data;
   } catch (error) {
@@ -113,5 +113,18 @@ async function cancelarEvento(data){
   }
 }
 
+async function buscarEventoPorDeporteCiudad(data){
+  const datos={
+    buscador : data
+  }
+  try{
+    const response = await axiosInstance.post("evento/buscarEventoPorDeporteCiudad", datos);
+    return response;
+}
+catch(error){
+  throw error;
+}
+}
 
-export { agregarEvento,obtenerEventos,obtenerEventoDetalle, obtenerEventosPorUsuarioFinalizados,obtenerEventosQueParticipoFinalizados,obtenerEventoPorIdUsuario, modificarEvento, cancelarEvento, obtenerEventoQueParticipo};
+
+export { agregarEvento,obtenerEventos,obtenerEventoDetalle, buscarEventoPorDeporteCiudad,obtenerEventosPorUsuarioFinalizados,obtenerEventosQueParticipoFinalizados,obtenerEventoPorIdUsuario, modificarEvento, cancelarEvento, obtenerEventoQueParticipo};

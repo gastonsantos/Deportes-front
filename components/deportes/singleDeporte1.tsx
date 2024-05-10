@@ -3,7 +3,7 @@ import Link from 'next/link'; // Importar Link de next/link
 import Image from "next/image";
 import React, { useEffect, useState } from 'react';
 const SingleDeporte = ({ evento }: { evento: Evento }) => {
-    const { idEvento, nombre, imagen, nombreDep, cantJugadores, cantJugadoresAnotados, provincia, localidad, direccion, numero, fecha, hora, idUsusarioDuenio } = evento;
+    const { idEvento, nombre, imagen, nombreDep, cantJugadores, cantJugadoresAnotados, provincia, localidad, direccion, numero, fecha, hora, idUsusarioDuenio, nombreDuenio } = evento;
     const [fechaFormateada, setFechaFormateada] = useState("");
     useEffect(() => {
         if (evento && evento.fecha) { 
@@ -103,6 +103,10 @@ const SingleDeporte = ({ evento }: { evento: Evento }) => {
 
                                 </svg>
                                 <span> {cantJugadoresAnotados} / {cantJugadores}</span>
+                            </div>
+                            <div className="mt-1 mb-1 flex item-center text-gray-800">
+                                <span className="font-bold mr-1">Dueño:  </span>
+                                <span className=""> {nombreDuenio}</span>
                             </div>
                             <Link href={`/pages/deportes/${idEvento}`} className="flex justify-center">
                                 <button type="button" className="text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-full text-sm px-5 py-2.5 me-2 mb-2 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700">Ver más</button>

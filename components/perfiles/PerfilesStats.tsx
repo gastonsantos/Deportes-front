@@ -47,7 +47,7 @@ const options = {
 
       },
       suggestedMin: 0,
-      suggestedMax: 10,
+      suggestedMax: 100,
       ticks: {
         display: false
       }
@@ -67,7 +67,7 @@ const PerfilesStats = () => {
   const [data, setData] = useState(defaultData);
   const [formDataStats, setFormDataStats] = useState({
     idUsuario: typeof window !== 'undefined' ? localStorage.getItem("id") : '',
-   
+
     media: 0,
     velocidad: 0,
     resistencia: 0,
@@ -158,38 +158,38 @@ const PerfilesStats = () => {
     <>
 
       {/*stats card*/}
-      <div className="w-1/2 bg-gray-300 p-8 rounded shadow-md mt-10 md:mt-0">
+      <div className="w-1/2 bg-black p-8 rounded shadow-md mt-10 md:mt-0">
         <form >
+          <div className="flex flex-col items-center justify-center text-center">
+            <label htmlFor="velocidad" className="block text-white text-sm font-bold mb-2 md:text-center disable">Media</label>
+            <div className="w-12 h-12 px-3 py-2 border rounded-full bg-transparent text-center text-white border-blue-500 font-bold text-lg mb-2">{formDataStats.media}</div>
+          </div>
+
           <div className="flex flex-col justify-center  md:grid md:grid-cols-2 gap-4">
-           
-            <div>
-              <label htmlFor="velocidad" className="block text-gray-700 text-sm font-bold mb-2 text-center md:text-left disable">Media</label>
-              <input type="number" name="velocidad" id="velocidad" value={formDataStats.media} onChange={(e) => handleChange(e)} className="w-full px-4 py-2 border rounded focus:outline-none focus:border-green-500 text-gray-700 border-blue-500" />
-            </div>
 
             <div>
-              <label htmlFor="velocidad" className="block text-gray-700 text-sm font-bold mb-2 text-center md:text-left">Velocidad</label>
-              <input type="number" name="velocidad" id="velocidad" value={formDataStats.velocidad} onChange={(e) => handleChange(e)} className="w-full px-4 py-2 border rounded focus:outline-none focus:border-green-500 text-gray-700 border-blue-500" />
+              <label htmlFor="velocidad" className="block text-white text-sm font-bold mb-2 text-center md:text-left">Velocidad</label>
+              <input type="number" name="velocidad" id="velocidad" value={formDataStats.velocidad} onChange={(e) => handleChange(e)} className="md:w-full sm:w-full px-4 py-2 border rounded focus:outline-none focus:border-green-500 text-gray-700 border-blue-500" />
             </div>
             <div>
-              <label htmlFor="resistencia" className="block text-gray-700 text-sm font-bold mb-2 text-center md:text-left">Resistencia</label>
-              <input type="number" name="resistencia" id="resistencia" value={formDataStats.resistencia} onChange={(e) => handleChange(e)} className="w-full px-4 py-2 border rounded focus:outline-none focus:border-green-500 text-gray-700 border-blue-500" />
+              <label htmlFor="resistencia" className="block text-white text-sm font-bold mb-2 text-center md:text-left">Resistencia</label>
+              <input type="number" name="resistencia" id="resistencia" value={formDataStats.resistencia} onChange={(e) => handleChange(e)} className="md:w-full sm:w-full px-4 py-2 border rounded focus:outline-none focus:border-green-500 text-gray-700 border-blue-500" />
             </div>
             <div>
-              <label htmlFor="precision" className="block text-gray-700 text-sm font-bold mb-2 text-center md:text-left">Precision</label>
-              <input type="number" name="precision" id="precision" value={formDataStats.precision} onChange={(e) => handleChange(e)} className="w-full px-4 py-2 border rounded focus:outline-none focus:border-green-500 text-gray-700 border-blue-500" />
+              <label htmlFor="precision" className="block text-white text-sm font-bold mb-2 text-center md:text-left">Precision</label>
+              <input type="number" name="precision" id="precision" value={formDataStats.precision} onChange={(e) => handleChange(e)} className="md:w-full sm:w-full px-4 py-2 border rounded focus:outline-none focus:border-green-500 text-gray-700 border-blue-500" />
             </div>
             <div>
-              <label htmlFor="fuerza" className="block text-gray-700 text-sm font-bold mb-2 text-center md:text-left">Fuerza</label>
-              <input type="number" name="fuerza" id="fuerza" value={formDataStats.fuerza} onChange={(e) => handleChange(e)} className="w-full px-4 py-2 border rounded focus:outline-none focus:border-green-500 text-gray-700 border-blue-500" />
+              <label htmlFor="fuerza" className="block text-white text-sm font-bold mb-2 text-center md:text-left">Fuerza</label>
+              <input type="number" name="fuerza" id="fuerza" value={formDataStats.fuerza} onChange={(e) => handleChange(e)} className="md:w-full sm:w-full px-4 py-2 border rounded focus:outline-none focus:border-green-500 text-gray-700 border-blue-500" />
             </div>
             <div>
-              <label htmlFor="tecnica" className="block text-gray-700 text-sm font-bold mb-2 text-center md:text-left">Tecnica</label>
-              <input type="number" name="tecnica" id="tecnica" value={formDataStats.tecnica} onChange={(e) => handleChange(e)} className="w-full px-4 py-2 border rounded focus:outline-none focus:border-green-500 text-gray-700 border-blue-500" />
+              <label htmlFor="tecnica" className="block text-white text-sm font-bold mb-2 text-center md:text-left">Tecnica</label>
+              <input type="number" name="tecnica" id="tecnica" value={formDataStats.tecnica} onChange={(e) => handleChange(e)} className="md:w-full sm:w-full px-4 py-2 border rounded focus:outline-none focus:border-green-500 text-gray-700 border-blue-500" />
             </div>
             <div>
-              <label htmlFor="agilidad" className="block text-gray-700 text-sm font-bold mb-2 text-center md:text-left">Agilidad</label>
-              <input type="number" name="agilidad" id="agilidad" value={formDataStats.agilidad} onChange={(e) => handleChange(e)} className="w-full px-4 py-2 border rounded focus:outline-none focus:border-green-500 text-gray-700 border-blue-500" />
+              <label htmlFor="agilidad" className="block text-white text-sm font-bold mb-2 text-center md:text-left">Agilidad</label>
+              <input type="number" name="agilidad" id="agilidad" value={formDataStats.agilidad} onChange={(e) => handleChange(e)} className="md:w-full sm:w-full px-4 py-2 border rounded focus:outline-none focus:border-green-500 text-gray-700 border-blue-500" />
             </div>
           </div>
 
@@ -197,11 +197,17 @@ const PerfilesStats = () => {
 
 
         </form>
-        <Radar
-          data={data}
-          options={options}
-        />
-        <div className="flex justify-center md:justify-end mt-1">
+        <div className="hidden sm:block min-w-96 max-w-96">   
+          <Radar
+         
+         data={data}
+         options={options}
+       />
+       </div>
+        
+       
+
+        <div className="flex justify-center md:justify-end mt-3 ">
           <button
             className="bg-gray-500 text-white px-4 py-2 rounded hover:bg-gray-600 focus:outline-none focus:shadow-outline-gray"
             type="button"
