@@ -11,9 +11,9 @@ import { traerTodasLasNotificaciones } from "@/services/notificaciones/api";
 import Link from 'next/link';
 const navigation = [
   { name: 'SportSquad', href: '/', current: true },
-  { name: 'Eventos', href: '/pages/deportes', current: false },
-  { name: 'Crear evento', href: '/pages/crearEvento', current: false },
-  { name: 'Perfiles', href: '/pages/perfil', current: false },
+  { name: 'Explorá', href: '/pages/deportes', current: false },
+  { name: 'Crea', href: '/pages/crearEvento', current: false },
+  { name: 'Mis Perfíles', href: '/pages/perfil', current: false },
   { name: '¿Que es SportSquad?', href: '/pages/queEsSportSquad', current: false },
 ]
 
@@ -166,37 +166,7 @@ const NavBar = () => {
                       
                     </div>
                     </Link>
-                    {/*
-                    <Transition
-                      as={Fragment}
-                      enter="transition ease-out duration-100"
-                      enterFrom="transform opacity-0 scale-95"
-                      enterTo="transform opacity-100 scale-100"
-                      leave="transition ease-in duration-75"
-                      leaveFrom="transform opacity-100 scale-100"
-                      leaveTo="transform opacity-0 scale-95"
-                    > 
-                      <Menu.Items className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
-                        {mensajeNotificacion.map((notification) => (
-                          <Menu.Item>
-                            {({ active }) => (
-
-                              <a
-                                href="#"
-                                className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700')}
-                              >
-                                {notification}
-                              </a>
-                            )}
-                          </Menu.Item>
-
-                        ))}
-
-
-
-                      </Menu.Items>
-                    </Transition>
-                    */}
+                  
                   </Menu>
 
                   <Menu as="div" className="relative ml-3">
@@ -247,7 +217,7 @@ const NavBar = () => {
                               href="/pages/misEventos"
                               className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700')}
                             >
-                              Mis eventos
+                              Mís eventos
                             </a>
                           )}
                         </Menu.Item>
@@ -257,7 +227,7 @@ const NavBar = () => {
                               href="/pages/misParticipaciones"
                               className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700')}
                             >
-                              Mis participaciones
+                              Mís participaciones
                             </a>
                           )}
                         </Menu.Item>
