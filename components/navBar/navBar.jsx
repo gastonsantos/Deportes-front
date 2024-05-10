@@ -14,7 +14,7 @@ const navigation = [
   { name: 'Eventos', href: '/pages/deportes', current: false },
   { name: 'Crear evento', href: '/pages/crearEvento', current: false },
   { name: 'Perfiles', href: '/pages/perfil', current: false },
-  { name: '¿Que es SportSquad?', href: '#', current: false },
+  { name: '¿Que es SportSquad?', href: '/pages/queEsSportSquad', current: false },
 ]
 
 function classNames(...classes) {
