@@ -207,7 +207,7 @@ const NavBar = () => {
                               href="/pages/perfil"
                               className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700')}
                             >
-                              Perfil
+                              Perfiles
                             </a>
                           )}
                         </Menu.Item>
@@ -217,7 +217,7 @@ const NavBar = () => {
                               href="/pages/misEventos"
                               className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700')}
                             >
-                              Mís eventos
+                             Eventos
                             </a>
                           )}
                         </Menu.Item>
@@ -227,7 +227,17 @@ const NavBar = () => {
                               href="/pages/misParticipaciones"
                               className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700')}
                             >
-                              Mís participaciones
+                              Participaciones
+                            </a>
+                          )}
+                        </Menu.Item>
+                        <Menu.Item>
+                          {({ active }) => (
+                            <a
+                              href="/pages/misEventosFinalizados"
+                              className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700')}
+                            >
+                             Finalizados
                             </a>
                           )}
                         </Menu.Item>

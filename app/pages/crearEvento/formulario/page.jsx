@@ -6,6 +6,7 @@ import { agregarEvento } from '@/services/evento/api';
 import Swal from 'sweetalert2';
 import Image from "next/image";
 import Informacion from "@/components/infoAd/informacionEvento";
+import { ConsoleLogger } from '@microsoft/signalr/dist/esm/Utils';
 export default function Formulario() {
   const [deporteCreado, setDeporteCreado] = useState();
   const router = useRouter();
@@ -38,43 +39,89 @@ export default function Formulario() {
   const isFechaValida = (fecha) => {
     const fechaSeleccionada = new Date(fecha);
     const fechaActual = new Date();
-    return fechaSeleccionada >= fechaActual;
+    if (fechaSeleccionada > fechaActual) {
+      return true;
+    } else {
+      return false;
+    }
   };
 
+  const isFechaActual = (fecha) => {
+    // Obteniendo la fecha actual
+    const fechaActual = new Date();
+    const añoActual = fechaActual.getFullYear();
+    const mesActual = fechaActual.getMonth() + 1; // El mes está indexado desde 0, por lo que sumamos 1
+    const diaActual = fechaActual.getDate();
 
+    // Creando un objeto Date para la fecha ingresada
+    const fechaSeleccionada = new Date(fecha);
+    const añoSeleccionado = fechaSeleccionada.getFullYear();
+    const mesSeleccionado = fechaSeleccionada.getMonth() + 1; // El mes está indexado desde 0, por lo que sumamos 1
+    const diaSeleccionado = fechaSeleccionada.getDate()+ 1 ;
+
+    console.log("fechaActual", `${añoActual}-${mesActual}-${diaActual}`);
+    console.log("fechaSeleccionada", `${añoSeleccionado}-${mesSeleccionado}-${diaSeleccionado}`);
+
+    // Comparando fechas
+    if (añoSeleccionado === añoActual && mesSeleccionado === mesActual && diaSeleccionado === diaActual) {
+      return true; // La fecha seleccionada es la fecha actual
+    } else {
+      return false; // La fecha seleccionada no es la fecha actual
+    }
+  }
+
+
+
+  const irHoraValida = (horaIngresada) => {
+    // Obteniendo la hora actual
+    const horaActual = new Date();
+
+    // Creando un objeto Date para la hora ingresada
+    const horaIngresadaObj = new Date();
+    horaIngresadaObj.setHours(parseInt(horaIngresada.split(':')[0]), parseInt(horaIngresada.split(':')[1]), 0); // Estableciendo horas y minutos, segundos a 0
+
+    // Comparando las horas
+    if (horaIngresadaObj <= horaActual) {
+      return false; // La hora ingresada ya pasó
+    } else {
+      return true; // La hora ingresada es válida
+    }
+  }
+
+
+
+  const esFechaValidaParaEvento = (fecha, hora) => {
+    console.log("Que devuelve irHoraValida", irHoraValida(hora))
+    console.log("Que devuelve isFechaActual", isFechaActual(fecha))
+    if (isFechaValida(fecha)) {
+      return true
+    } else if (!isFechaValida(fecha)) {
+      if (isFechaActual(fecha) && irHoraValida(hora)) {
+        return true
+      } else {
+        return false
+      }
+
+    }
+
+  }
 
   const handleSubmit = async () => {
+
     try {
-      const horaInicio = new Date();
-      horaInicio.setHours(7, 0, 0); // Establece la hora de inicio permitida a las 07:00
 
-      const horaFin = new Date();
-      horaFin.setHours(0, 0, 0); // Establece la hora de fin permitida a las 00:00 del día siguiente
 
-      const horaSeleccionada = new Date(`2000-01-01T${formData.hora}`);
-      /*
-      if (horaSeleccionada < horaInicio || horaSeleccionada >= horaFin) {
+      if (!esFechaValidaParaEvento(formData.fecha, formData.hora)) {
         Swal.fire({
-          title: 'Hora Inválida',
-          text: 'La hora seleccionada debe estar entre las 07:00 y las 00:00',
+          title: 'Hora o fecha invalida',
+          text: 'Revise la fecha y hora del evento.',
           icon: 'error',
           confirmButtonText: 'OK',
           confirmButtonColor: '#007bff'
         });
         return; // Evita enviar el formulario si la hora no es válida
       }
-  */
-      if (!isFechaValida(formData.fecha)) {
-        Swal.fire({
-          title: 'Fecha Inválida',
-          text: 'La fecha seleccionada no puede ser anterior a la fecha actual',
-          icon: 'error',
-          confirmButtonText: 'OK',
-          confirmButtonColor: '#007bff'
-        });
-        return; // Evita enviar el formulario si la fecha no es válida
-      }
-      const response = await agregarEvento(formData);
+    const response = await agregarEvento(formData);
 
       if (response) {
         Swal.fire({
@@ -123,7 +170,8 @@ export default function Formulario() {
               <div className="flex flex-col justify-center md:grid md:grid-cols-2 gap-4 mb-2">
                 <div>
                   <label htmlFor="nombre" className="block text-gray-500 text-sm font-bold mb-2 text-center md:text-left pb-2">Nombre</label>
-                  <input type="text" name="nombre" id="nombre" value={formData.nombre} onChange={handleChange} className="w-full px-4 py-2 pb-2 border rounded focus:outline-none focus:border-green-500 text-gray-700 border-blue-500 pb-2" />
+                  <input type="text" name="nombre" id="nombre" required value={formData.nombre} onChange={handleChange} className="w-full px-4 py-2 pb-2 border rounded focus:outline-none focus:border-green-500 text-gray-700 border-blue-500 pb-2" />
+                  {formData.nombre === '' && <p className="text-red-500 text-xs italic">Este campo es obligatorio</p>}
                 </div>
               </div>
               <div className="flex flex-col justify-center md:grid md:grid-cols-2 gap-4 mb-2">
@@ -138,7 +186,9 @@ export default function Formulario() {
                     onChange={handleChange}
                     required
                   />
+                  {formData.fecha === '' && <p className="text-red-500 text-xs italic">Este campo es obligatorio</p>}
                 </div>
+                
                 <div>
                   <label htmlFor="hora" className="block text-gray-500 text-sm font-bold mb-2 text-center md:text-left pb-2">Hora</label>
                   <input type="time"
@@ -151,31 +201,34 @@ export default function Formulario() {
                     onChange={handleChange}
                     required
                   />
+                  {formData.hora === '' && <p className="text-red-500 text-xs italic">Este campo es obligatorio</p>}
                 </div>
+                
               </div>
               <div className="flex flex-col justify-center md:grid md:grid-cols-2 gap-4 mb-2">
                 <div>
                   <label htmlFor="provincia" className="block text-gray-500 text-sm font-bold mb-2 text-center md:text-left pb-2">Provincia</label>
-                  <input type="text" name="provincia" id="provincia" value={formData.provincia} onChange={handleChange} className="w-full px-4 py-2 border rounded focus:outline-none focus:border-green-500 text-gray-700 border-blue-500 pb-2" />
+                  <input type="text" name="provincia" id="provincia" required value={formData.provincia} onChange={handleChange} className="w-full px-4 py-2 border rounded focus:outline-none focus:border-green-500 text-gray-700 border-blue-500 pb-2" />
+                  {formData.provincia === '' && <p className="text-red-500 text-xs italic">Este campo es obligatorio</p>}
                 </div>
                 <div>
                   <label htmlFor="localidad" className="block text-gray-500 text-sm font-bold mb-2 text-center md:text-left pb-2">Localidad</label>
-                  <input type="text" name="localidad" id="localidad" value={formData.localidad} onChange={handleChange} className="w-full px-4 py-2 border rounded focus:outline-none focus:border-green-500 text-gray-700 border-blue-500 pb-2" />
+                  <input type="text" name="localidad" id="localidad" required value={formData.localidad} onChange={handleChange} className="w-full px-4 py-2 border rounded focus:outline-none focus:border-green-500 text-gray-700 border-blue-500 pb-2" />
+                  {formData.localidad === '' && <p className="text-red-500 text-xs italic">Este campo es obligatorio</p>}
                 </div>
               </div>
               <div className="flex flex-col justify-center md:grid md:grid-cols-2 gap-4">
                 <div>
                   <label htmlFor="direccion" className="block text-gray-500 text-sm font-bold mb-2 text-center md:text-left pb-2">Direccion</label>
-                  <input type="text" name="direccion" id="direccion" value={formData.direccion} onChange={handleChange} className="w-full px-4 py-2 border rounded focus:outline-none focus:border-green-500 text-gray-700 border-blue-500 pb-2" />
+                  <input type="text" name="direccion" id="direccion" required value={formData.direccion} onChange={handleChange} className="w-full px-4 py-2 border rounded focus:outline-none focus:border-green-500 text-gray-700 border-blue-500 pb-2" />
+                  {formData.direccion === '' && <p className="text-red-500 text-xs italic">Este campo es obligatorio</p>}
+
                 </div>
                 <div>
                   <label htmlFor="numero" className="block text-gray-500 text-sm font-bold mb-2 text-center md:text-left pb-2">Numero</label>
-                  <input type="text" name="numero" id="numero" value={formData.numero} onChange={handleChange} className="w-full px-4 py-2 border rounded focus:outline-none focus:border-green-500 text-gray-700 border-blue-500 pb-2" />
+                  <input type="text" name="numero" id="numero" required  value={formData.numero} onChange={handleChange} className="w-full px-4 py-2 border rounded focus:outline-none focus:border-green-500 text-gray-700 border-blue-500 pb-2" />
+                  {formData.numero === '' && <p className="text-red-500 text-xs italic">Este campo es obligatorio</p>}
                 </div>
-
-
-
-
               </div>
               {/* Buttons */}
               <div className="flex justify-center md:justify-end mt-4">

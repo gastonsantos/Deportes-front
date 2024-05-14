@@ -8,7 +8,7 @@ import Participantes from "@/components/misEventos/participantes";
 import ModalInvitar from "@/components/misEventos/modalInvitar";
 import { cancelarEvento } from '@/services/evento/api';
 
-const MisEventosCard = ({ evento, onDelete, actualice, actualizar }) => {
+const MisEventosCard = ({ evento, onDelete, actualizar }) => {
     const router = useRouter();
     const [showModal, setShowModal] = useState(false);
     const [showModalInvitar, setShowModalInvitar] = useState(false);

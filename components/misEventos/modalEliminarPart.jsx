@@ -1,7 +1,9 @@
 import React from "react";
 import { useRouter } from 'next/navigation';
-export default function ModalEliminarParticipante({ setShowModalEliminar, handleRechazar, idParticipante, actualizar }) {
+export default function ModalEliminarParticipante({ setShowModalEliminar, handleRechazar, idParticipante, actualizar, nombre , apellido }) {
     const router = useRouter();
+
+  
     return (
         <>
 
@@ -29,7 +31,7 @@ export default function ModalEliminarParticipante({ setShowModalEliminar, handle
                         {/*body*/}
                         <div className="relative p-6 flex-auto">
                             <p className="my-4  text-lg leading-relaxed">
-                                ¿Estás seguro que deseas eliminarlo del evento?
+                                ¿Estás seguro que deseas eliminar a {nombre} {apellido} del evento?
                             </p>
                         </div>
                         {/*footer*/}

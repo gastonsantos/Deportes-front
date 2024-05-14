@@ -43,13 +43,13 @@ const Participantes = ({ duenio, evento,actualizar }) => {
                     confirmButtonText: 'Continuar',
                     confirmButtonColor: '#007bff', // Adjust color as needed
                 }).then(() => {
-
+                    actualizar();
 
                 });
             }
         } catch (error) {
             Swal.fire({
-                title: 'No se pudo rechazar el usuario',
+                title: 'No se pudo eliminar el usuario',
                 text: 'Puedes intentarlo mas tarde',
                 icon: 'error',
                 confirmButtonText: 'OK',
@@ -93,6 +93,8 @@ const Participantes = ({ duenio, evento,actualizar }) => {
                                         handleRechazar={handleRechazar}
                                         idParticipante={evento.idParticipante}
                                         actualizar={actualizar}
+                                        nombre= {evento.nombre}
+                                        apellido = {evento.apellido}
                                     />
                                 ) : null}
                             </div>

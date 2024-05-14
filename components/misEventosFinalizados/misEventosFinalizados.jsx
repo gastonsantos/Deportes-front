@@ -2,57 +2,20 @@
 import { useRouter } from 'next/navigation';
 import Image from "next/image";
 import React, { useEffect, useState } from 'react';
-import { cancelarEvento } from '@/services/evento/api';
-import Swal from 'sweetalert2';
 import Participantes from "@/components/misEventosFinalizados/participantes";
-import { rechazarNotificacion } from "@/services/notificaciones/api";
+import ModalResultado from "@/components/misEventosFinalizados/modalAgregarResultado";
 
-const MisEventosFinalizadosCard = ({ evento, onDelete, actualice }) => {
+const MisEventosFinalizadosCard = ({ evento, actualizar }) => {
     const router = useRouter();
-    const [showModal, setShowModal] = useState(false);
-    const [showModalInvitar, setShowModalInvitar] = useState(false);
-    const { idEvento, nombre, imagen, nombreDep, nombreDuenio,idDeporte,idParticipante, cantJugadores,cantJugadoresAnotados, provincia, localidad, direccion, numero, fecha, hora } = evento;
+    const [showModalResultado, setShowModalResultado] = useState(false);
+    const { idEvento, nombre, imagen, nombreDep, nombreDuenio, idDeporte, idParticipante, cantJugadores, cantJugadoresAnotados, provincia, localidad, direccion, numero, fecha, hora, resultadoLocal, resultadoVisitante } = evento;
     const [fechaFormateada, setFechaFormateada] = useState("");
-    const [open, setOpen] = useState(false);
-    const [btnCrear, setBtnCrear] = useState(true);
     const [error, setError] = useState('');
-    const toggleOpen = () => setOpen((cur) => !cur);
-   
-    const [formData, setFormData] = useState({
-        id: evento.idEvento
-
-    });
-
-    const handleEliminarEvento = async (idParticipantes) => {
-        const data = {
-            idUsuario: idParticipantes
-        }
+    const [resultadoLocal1, setResultadoLocal] = useState(0);
+    const [resultadoVisitante1, setResultadoVisitante] = useState(0);
 
 
-        try {
-            const response = await eliminarEvento(data)
-            if (response) {
-                Swal.fire({
-                    title: '¡Se evento se elimino de forma permanente',
-                    text: 'Has evento se elimino.',
-                    icon: 'warning',
-                    confirmButtonText: 'Continuar',
-                    confirmButtonColor: '#007bff', // Adjust color as needed
-                }).then(() => {
-                    router.push('/pages/misEventos')
 
-                });
-            }
-        } catch (error) {
-            Swal.fire({
-                title: 'No se pudo celiminar el evento',
-                text: 'Puedes intentarlo más tarde',
-                icon: 'error',
-                confirmButtonText: 'OK',
-                confirmButtonColor: '#007bff'
-            });
-        }
-    }
 
     useEffect(() => {
         if (evento && evento.fecha) { // Verifica si evento y evento.fecha están definidos
@@ -61,8 +24,12 @@ const MisEventosFinalizadosCard = ({ evento, onDelete, actualice }) => {
             const fechaFormateada = fecha.toLocaleDateString('es-ES', opcionesFecha);
             console.log("evento.Lenght", evento.length);
             setFechaFormateada(fechaFormateada);
-
         }
+        if (evento.dtoResultado) {
+            setResultadoLocal(evento.dtoResultado.resultadoLocal)
+            setResultadoVisitante(evento.dtoResultado.resultadoVisitante)
+        }
+
     }, [evento]);
 
     return (
@@ -74,7 +41,7 @@ const MisEventosFinalizadosCard = ({ evento, onDelete, actualice }) => {
                             src={imagen}
                             alt="Image Description"
                             layout="fill" // Use "fill" for responsive image scaling
-                            className="border shadow-sm rounded-xl object-cover" // Maintain aspect ratio
+                            className="border shadow-sm rounded-xl object-cover grayscale" // Maintain aspect ratio
                         />
                     </div>
                     <div className="absolute top-0 start-0 end-0 bg-neutral-700 shadow-sm rounded-xl rounded-b-none opacity-75">
@@ -136,21 +103,35 @@ const MisEventosFinalizadosCard = ({ evento, onDelete, actualice }) => {
 
                         </div>
                         
-                    </div >
+                        <div className="flex-1 flex flex-col justify-center items-center">
+                            <div className="absolute border w-48 mb-60 ml-20  hidden sm:block">
+                                <p className="border item-center text-center bg-black">Resultado</p>
+                                <div className="mt-1 p-2 flex justify-center">
+                                    <div className="text-center">
+                                        <p className="p-2 border-b-2 border-white">Local</p>
+                                        <p className="p-2">{resultadoLocal1}</p>
+                                    </div>
+                                    <div className="text-center">
+                                        <p className="p-2 border-b-2 border-white">Visitante</p>
+                                        <p className="p-2">{resultadoVisitante1}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        </div>
                     <div className="pt-10 flex item-center mb-2">
 
-                        <button className="mb-3 ml-3 relative bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-full  rounded inline-flex items-center"
-                          onClick={() => {
-                            handleEliminarEvento(idParticipante)
-                        }}
+                        <button className="mb-3 ml-3 relative bg-purple-500 hover:bg-purple-700 text-white font-bold py-2 px-4 rounded-full  rounded inline-flex items-center"
+                            onClick={() => setShowModalResultado(true)}
                         >
 
-                            <svg class="w-[15px] h-[15px] fill-[#dbdbdb] mr-1" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
+                            <svg className="w-[15px] h-[15px] fill-[#ededed]" viewBox="0 0 448 512" xmlns="http://www.w3.org/2000/svg">
 
-                                <path d="M367.2 412.5L99.5 144.8C77.1 176.1 64 214.5 64 256c0 106 86 192 192 192c41.5 0 79.9-13.1 111.2-35.5zm45.3-45.3C434.9 335.9 448 297.5 448 256c0-106-86-192-192-192c-41.5 0-79.9 13.1-111.2 35.5L412.5 367.2zM0 256a256 256 0 1 1 512 0A256 256 0 1 1 0 256z"></path>
+                                <path d="M342.6 86.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L160 178.7l-57.4-57.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l80 80c12.5 12.5 32.8 12.5 45.3 0l160-160zm96 128c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L160 402.7 54.6 297.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l128 128c12.5 12.5 32.8 12.5 45.3 0l256-256z"></path>
 
                             </svg>
-                            <span className='hidden sm:block'>Eliminar evento</span>
+                            <span className='hidden sm:block'>Resultado</span>
                         </button>
                     </div>
                     {error && (
@@ -158,20 +139,28 @@ const MisEventosFinalizadosCard = ({ evento, onDelete, actualice }) => {
                             <label htmlFor="" className="text-red-500">{error}</label>
                         </div>
                     )}
-                        {cantJugadoresAnotados >= cantJugadores && (
-                        <div className="absolute top-5 -right-5 ">
-                            <div className="w-56 h-8 absolute top-4 -right-8">
-                                <div
-                                    className="h-full w-full bg-red-500 text-white text-center leading-8 font-semibold transform rotate-45">
-                                    LLENO</div>
-                            </div>
+
+                    <div className="absolute top-5 -right-5 ">
+                        <div className="w-56 h-8 absolute top-4 -right-8">
+                            <div
+                                className="h-full w-full bg-red-500 text-white text-center leading-8 font-semibold transform rotate-45">
+                                FINALIZADO</div>
                         </div>
-                    )}   
+                    </div>
+
                 </div>
                 <div className="flex-1">
-                <Participantes  evento={evento.dtoUsuarios} />
+                    <Participantes evento={evento.dtoUsuarios} />
                 </div>
-            
+                {showModalResultado ? (
+                    <ModalResultado
+                        setShowModalResultado={setShowModalResultado}
+                        idEvento={evento.idEvento}
+                        nombreEvento={nombre}
+                        actualizar={actualizar}
+                    />
+                ) : null}
+
             </div>
 
 

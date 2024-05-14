@@ -2,21 +2,19 @@
 import { obtenerEventosPorUsuarioFinalizados,obtenerEventosQueParticipoFinalizados } from "@/services/evento/api";
 import { NavBar } from "@/components/navBar/navBar";
 import MisEventosFinalizadosCard from "@/components/misEventosFinalizados/misEventosFinalizados";
-import Participantes from "@/components/misEventos/participantes";
 import Image from "next/image";
 import React, { useState, useEffect } from 'react';
 import Footer from "@/components/landing/footer";
-import Link from 'next/link';
+
 const MisEventosFinalizados = () => {
 
     const [evento, setEvento] = useState([]);
 
-
+/*
     const handleDelete = (eventId) => {
         setEvento(evento.filter(evento => evento.idEvento !== eventId));
     };
-    useEffect(() => {
-
+   */
         const fetchData = async () => {
             try {
                 const response = await obtenerEventosPorUsuarioFinalizados();
@@ -26,8 +24,7 @@ const MisEventosFinalizados = () => {
                     if(data){
                         setEvento(data);
                     }
-                    console.log("EVENTOS FINALIZADOS", data.dtoUsuarios
-                )
+                 
                     
                 }
             } catch (error) {
@@ -35,20 +32,23 @@ const MisEventosFinalizados = () => {
             }
         };
 
+
+    useEffect(() => {
         fetchData();
     }, []);
+ 
 
     return (
         <div className=" items-center justify-center">
             <NavBar />
-            <h2>Mis Participaciones</h2>
+            <h2 className="m-4">Últimos 5 Eventos</h2>
 
             {
                 evento.length != 0 ? (
 
                     <div className="grid grid-cols-1 gap-x-10 gap-y-14">
                         {evento.map((evento) => (
-                            <MisEventosFinalizadosCard key={evento.idEvento} evento={evento} onDelete={handleDelete} />
+                            <MisEventosFinalizadosCard key={evento.idEvento} evento={evento} actualizar={fetchData}/>
                         ))}
                         <div className="flex-1">
 

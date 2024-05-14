@@ -14,8 +14,6 @@ const Misventos = () => {
         setEvento(evento.filter(evento => evento.idEvento !== eventId)); // Elimina el evento de la lista
     };
 
-    
-
         const fetchData = async () => {
             try {
                 const response = await obtenerEventoPorIdUsuario();

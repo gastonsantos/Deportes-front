@@ -126,5 +126,26 @@ catch(error){
 }
 }
 
+async function agregarResultadoDelEvento(data){
+  const idEvento = parseInt(data.idEvento);
+  const resultadoLocal = parseInt(data.resultadoLocal);
+  const resultadoVisitante = parseInt(data.resultadoVisitante);
 
-export { agregarEvento,obtenerEventos,obtenerEventoDetalle, buscarEventoPorDeporteCiudad,obtenerEventosPorUsuarioFinalizados,obtenerEventosQueParticipoFinalizados,obtenerEventoPorIdUsuario, modificarEvento, cancelarEvento, obtenerEventoQueParticipo};
+  // Crear el objeto con los datos convertidos
+  const datos ={
+    idEvento: idEvento,
+    resultadoLocal: resultadoLocal,
+    resultadoVisitante: resultadoVisitante
+  };
+ console.log("AgregarResultado", data);
+  try{
+    const response = await axiosInstance.post("evento/agregarResultadoDelEvento", datos);
+    return response;
+}
+catch(error){
+  throw error;
+}
+}
+
+
+export { agregarEvento,obtenerEventos,obtenerEventoDetalle, buscarEventoPorDeporteCiudad,obtenerEventosPorUsuarioFinalizados,obtenerEventosQueParticipoFinalizados,obtenerEventoPorIdUsuario, modificarEvento, cancelarEvento, obtenerEventoQueParticipo, agregarResultadoDelEvento};
