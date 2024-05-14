@@ -18,6 +18,9 @@ const NotifiacionCard = ({ notificaciones , aceptar, rechazar}) => {
         localStorage.setItem("idQueMandaSol", idQueMandaSolicitud)
         router.push("/pages/notificaciones/invitacionPerfil");
     }
+    if (!notificaciones || notificaciones.length === 0) {
+        return <p>No hay notificaciones</p>;
+    }
     return (
 
         <section className="" key={notificaciones.id}>

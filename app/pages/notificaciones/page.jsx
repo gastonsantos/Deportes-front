@@ -104,14 +104,12 @@ const Notificaciones = () => {
                             <p className="hover:text-[#0a317b] cursor-pointer text-[#5e6778]"></p>
                         </div>
                     </section>
-                    {notificaciones.length > 0 ? (
-                        notificaciones.map((notificacion) => (
-                            <NotificacionesCard key={notificacion.id} notificacion={notificacion} aceptar={handleAceptar} rechazar={handleRechazar} />
-                        ))
-                    ) : (
-                        <p className="ml-8"> No hay invitaciones</p>
-                    )}
+                    {notificaciones.map((notificaciones) => (
 
+                        <NotificacionesCard key={notificaciones.id} notificaciones={notificaciones} aceptar={handleAceptar} rechazar={handleRechazar} />
+
+
+                    ))}
 
                 </div>
 
