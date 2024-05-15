@@ -15,22 +15,14 @@ export default function InvitacionPerfilCard() {
     const [fichaFutbol, setFichaFutbol] = useState();
     const [isAuthorized, setIsAuthorized] = useState(false);
     const [checkedAuth, setCheckedAuth] = useState(false);
+ 
+ 
     useEffect(() => {
         const id = Cookies.get('id');
         if (id) {
             setIsAuthorized(true);
         }
         setCheckedAuth(true);
-    }, []);
-
-    if (!checkedAuth) {
-        return null;
-    }
-
-    if (!isAuthorized) {
-        return <NoAutorizado />;
-    }
-    useEffect(() => {
         const fetchData = async () => {
             try {
 
@@ -112,7 +104,13 @@ export default function InvitacionPerfilCard() {
 
 
 
+    if (!checkedAuth) {
+        return null;
+    }
 
+    if (!isAuthorized) {
+        return <NoAutorizado />;
+    }
 
 
     return (
