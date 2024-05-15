@@ -2,16 +2,19 @@
 import Footer from "@/components/landing/footer";
 import { NavBar } from "@/components/navBar/navBar";
 import { aceptarNotificacion, rechazarNotificacion, traerTodasLasNotificaciones } from "@/services/notificaciones/api";
-import Link from 'next/link';
+import Cookies from 'js-cookie';
 import { useRouter } from 'next/navigation';
 import React, { useEffect, useState } from 'react';
 import Swal from 'sweetalert2';
 import NotificacionesCard from "@/components/notificaciones/notificacionCard"
+import NoAutorizado from "@/components/NoAutorizado/noAutorizado";
 
 const Notificaciones = () => {
     const router = useRouter();
     const [notificaciones, setNotificaciones] = useState([]);
     const [cantidad, setCantidad] = useState();
+    const [isAuthorized, setIsAuthorized] = useState(false);
+    const [checkedAuth, setCheckedAuth] = useState(false);
 
 
 
@@ -33,6 +36,21 @@ const Notificaciones = () => {
         fetchData();
     }, []);
 
+    useEffect(() => {
+        const id = Cookies.get('id');
+        if (id) {
+            setIsAuthorized(true);
+        }
+        setCheckedAuth(true);
+    }, []);
+
+    if (!checkedAuth) {
+        return null;
+    }
+
+    if (!isAuthorized) {
+        return <NoAutorizado />;
+    }
     const handleAceptar = async (idParticipantes) => {
         const data = {
             idUsuario: idParticipantes

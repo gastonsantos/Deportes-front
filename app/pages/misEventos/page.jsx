@@ -6,32 +6,52 @@ import Image from "next/image";
 import React, { useState, useEffect } from 'react';
 import Footer from "@/components/landing/footer";
 import Link from 'next/link';
+import Cookies from 'js-cookie';
+import NoAutorizado from "@/components/NoAutorizado/noAutorizado";
+
 const Misventos = () => {
+    const [isAuthorized, setIsAuthorized] = useState(false);
+    const [checkedAuth, setCheckedAuth] = useState(false);
 
     const [evento, setEvento] = useState([]);
-    
+
     const handleDelete = (eventId) => {
         setEvento(evento.filter(evento => evento.idEvento !== eventId)); // Elimina el evento de la lista
     };
 
-        const fetchData = async () => {
-            try {
-                const response = await obtenerEventoPorIdUsuario();
-                if (response) {
-                    console.log("obtengoEventos", response);
-                    const data = response
-                    setEvento(data);
-                }
-            } catch (error) {
-                console.error("Error al obtener deportes:", error);
+    const fetchData = async () => {
+        try {
+            const response = await obtenerEventoPorIdUsuario();
+            if (response) {
+                console.log("obtengoEventos", response);
+                const data = response
+                setEvento(data);
             }
-        };
+        } catch (error) {
+            console.error("Error al obtener deportes:", error);
+        }
+    };
 
-        useEffect(() => {
-            fetchData();
-        }, []);
-     
+    useEffect(() => {
+        fetchData();
+    }, []);
 
+    useEffect(() => {
+        const id = Cookies.get('id');
+        if (id) {
+          setIsAuthorized(true);
+        }
+        setCheckedAuth(true); 
+      }, []);
+    
+      if (!checkedAuth) {
+        return null; 
+      }
+    
+      if (!isAuthorized) {
+        return <NoAutorizado />;
+      }
+    
     return (
         <div className=" items-center justify-center">
             <NavBar />
@@ -42,7 +62,7 @@ const Misventos = () => {
 
                     <div className="grid grid-cols-1 gap-x-10 gap-y-14">
                         {evento.map((evento) => (
-                            <MisEventosCard key={evento.idEvento} evento={evento} onDelete={handleDelete} actualizar={fetchData}/>
+                            <MisEventosCard key={evento.idEvento} evento={evento} onDelete={handleDelete} actualizar={fetchData} />
                         ))}
                     </div>
                 ) : (
@@ -52,7 +72,7 @@ const Misventos = () => {
                         <div className="flex flex-col items-center justify-center h-screen -mt-10">
 
                             <div className="relative">
-                                    <h2>No tienes Eventos</h2>
+                                <h2>No tienes Eventos</h2>
                                 <Image
                                     src="/images/no-eventos.jpg"
                                     alt="Image Description"

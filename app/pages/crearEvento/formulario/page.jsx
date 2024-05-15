@@ -6,8 +6,12 @@ import { agregarEvento } from '@/services/evento/api';
 import Swal from 'sweetalert2';
 import Image from "next/image";
 import Informacion from "@/components/infoAd/informacionEvento";
-import { ConsoleLogger } from '@microsoft/signalr/dist/esm/Utils';
+import Cookies from 'js-cookie';
+import NoAutorizado from "@/components/NoAutorizado/noAutorizado";
+
 export default function Formulario() {
+  const [isAuthorized, setIsAuthorized] = useState(false);
+  const [checkedAuth, setCheckedAuth] = useState(false);
   const [deporteCreado, setDeporteCreado] = useState();
   const router = useRouter();
   const [formData, setFormData] = useState({
@@ -16,11 +20,12 @@ export default function Formulario() {
     localidad: '',
     direccion: '',
     numero: 0,
-    idUsuarioCreador: typeof window !== 'undefined' ? localStorage.getItem("id") : '',
+    idUsuarioCreador: typeof window !== 'undefined' ? Cookies.get('id') : '',
     idDeporte: typeof window !== 'undefined' ? localStorage.getItem("selectedDeporteId") : '',
     fecha: '',
     hora: ''
   });
+
 
   const handleChange = (e) => {
     console.log(e.target, "que tiene e")
@@ -34,7 +39,24 @@ export default function Formulario() {
 
   useEffect(() => {
     setDeporteCreado(localStorage.getItem("selectedDeporteNombre"));
-  })
+    const id = Cookies.get('id');
+    if (id) {
+      setIsAuthorized(true);
+    }
+    setCheckedAuth(true); 
+  }, []);
+
+  if (!checkedAuth) {
+    return null; 
+  }
+
+  if (!isAuthorized) {
+    return <NoAutorizado />;
+  }
+/*
+  useEffect(() => {
+    setDeporteCreado(localStorage.getItem("selectedDeporteNombre"));
+  })*/
 
   const isFechaValida = (fecha) => {
     const fechaSeleccionada = new Date(fecha);

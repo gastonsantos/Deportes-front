@@ -1,15 +1,35 @@
 "use client"
 import { NavBar } from "@/components/navBar/navBar";
 import Image from "next/image";
+import Cookies from 'js-cookie';
 import React, { useEffect, useState } from 'react';
 import Swal from 'sweetalert2';
 import Footer from "@/components/landing/footer";
 import PerfilesStats from "@/components/invitacionesPerfil/PerfilesStats";
 import { obtenerFichaDeportistaPorId, obtengoPerfilFutbolPorId, ObtenerUsuarioParaPerfilInvitacion } from "@/services/login/perfiles/api";
+import NoAutorizado from "@/components/NoAutorizado/noAutorizado";
+
 export default function InvitacionPerfilCard() {
     const [usuario, setUsuario] = useState();
     const [fichaDeportista, setFichaDeportista] = useState();
     const [fichaFutbol, setFichaFutbol] = useState();
+    const [isAuthorized, setIsAuthorized] = useState(false);
+    const [checkedAuth, setCheckedAuth] = useState(false);
+    useEffect(() => {
+        const id = Cookies.get('id');
+        if (id) {
+            setIsAuthorized(true);
+        }
+        setCheckedAuth(true);
+    }, []);
+
+    if (!checkedAuth) {
+        return null;
+    }
+
+    if (!isAuthorized) {
+        return <NoAutorizado />;
+    }
     useEffect(() => {
         const fetchData = async () => {
             try {
@@ -70,7 +90,7 @@ export default function InvitacionPerfilCard() {
 
     const player = {
         image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
-        id: usuario ? usuario.id: "",
+        id: usuario ? usuario.id : "",
         name: usuario ? usuario.nombre + " " + usuario.apellido : " ",
         edad: fichaDeportista ? fichaDeportista.edad : " ",
         altura: fichaDeportista ? fichaDeportista.altura : "",
@@ -84,14 +104,14 @@ export default function InvitacionPerfilCard() {
         fuerza: fichaFutbol ? fichaFutbol.fuerza : "",
         tecnica: fichaFutbol ? fichaFutbol.tecnica : "",
         agilidad: fichaFutbol ? fichaFutbol.agilidad : "",
-       
+
         deporte: "Fútbol"
 
     };
 
-   
-    
-    
+
+
+
 
 
 
@@ -110,7 +130,7 @@ export default function InvitacionPerfilCard() {
                                 <img src={player.image} alt={player.name} className="w-10 h-10 rounded-full" />
                                 <div className="ml-4 ">
                                     <h3 className="text-sm font-medium bg-amber-700 rounded-e-full pl-6 pr-4 pt-1 pb-1">{player.name}</h3>
-                                    
+
                                 </div>
                             </div>
                             <div className="flex items-center justify-center font-bold text-lg text-white-500 mr-1 bg-amber-700 w-12 h-12 rounded-full -mt-14">{player.media}</div>
@@ -217,7 +237,7 @@ export default function InvitacionPerfilCard() {
                             </div>
                         </div>
                     </div>
-                 
+
                 </div>
 
 

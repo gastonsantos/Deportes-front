@@ -1,43 +1,61 @@
 "use client"
-import { obtenerEventosPorUsuarioFinalizados,obtenerEventosQueParticipoFinalizados } from "@/services/evento/api";
+import { obtenerEventosPorUsuarioFinalizados, obtenerEventosQueParticipoFinalizados } from "@/services/evento/api";
 import { NavBar } from "@/components/navBar/navBar";
 import MisEventosFinalizadosCard from "@/components/misEventosFinalizados/misEventosFinalizados";
 import Image from "next/image";
 import React, { useState, useEffect } from 'react';
 import Footer from "@/components/landing/footer";
+import Cookies from 'js-cookie';
+import NoAutorizado from "@/components/NoAutorizado/noAutorizado";
 
 const MisEventosFinalizados = () => {
+    const [isAuthorized, setIsAuthorized] = useState(false);
+    const [checkedAuth, setCheckedAuth] = useState(false);
 
     const [evento, setEvento] = useState([]);
 
-/*
-    const handleDelete = (eventId) => {
-        setEvento(evento.filter(evento => evento.idEvento !== eventId));
-    };
-   */
-        const fetchData = async () => {
-            try {
-                const response = await obtenerEventosPorUsuarioFinalizados();
-                if (response) {
-                    
-                    const data = response
-                    if(data){
-                        setEvento(data);
-                    }
-                 
-                    
-                }
-            } catch (error) {
-                console.error("Error al obtener deportes:", error);
-            }
+    /*
+        const handleDelete = (eventId) => {
+            setEvento(evento.filter(evento => evento.idEvento !== eventId));
         };
+       */
+    const fetchData = async () => {
+        try {
+            const response = await obtenerEventosPorUsuarioFinalizados();
+            if (response) {
+
+                const data = response
+                if (data) {
+                    setEvento(data);
+                }
+
+
+            }
+        } catch (error) {
+            console.error("Error al obtener deportes:", error);
+        }
+    };
 
 
     useEffect(() => {
         fetchData();
     }, []);
- 
 
+    useEffect(() => {
+        const id = Cookies.get('id');
+        if (id) {
+            setIsAuthorized(true);
+        }
+        setCheckedAuth(true);
+    }, []);
+
+    if (!checkedAuth) {
+        return null;
+    }
+
+    if (!isAuthorized) {
+        return <NoAutorizado />;
+    }
     return (
         <div className=" items-center justify-center">
             <NavBar />
@@ -48,12 +66,12 @@ const MisEventosFinalizados = () => {
 
                     <div className="grid grid-cols-1 gap-x-10 gap-y-14">
                         {evento.map((evento) => (
-                            <MisEventosFinalizadosCard key={evento.idEvento} evento={evento} actualizar={fetchData}/>
+                            <MisEventosFinalizadosCard key={evento.idEvento} evento={evento} actualizar={fetchData} />
                         ))}
                         <div className="flex-1">
 
 
-                            
+
 
                         </div>
                     </div>

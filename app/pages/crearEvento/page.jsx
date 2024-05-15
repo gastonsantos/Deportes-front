@@ -3,7 +3,29 @@ import { NavBar } from "@/components/navBar/navBar";
 import Carousel from "@/components/carousel/carousel";
 import Informacion from "@/components/infoAd/informacion";
 import Image from "next/image";
+import Cookies from 'js-cookie';
+import NoAutorizado from "@/components/NoAutorizado/noAutorizado";
+import { useEffect, useState } from 'react';
 export default function Crear() {
+  const [isAuthorized, setIsAuthorized] = useState(false);
+  const [checkedAuth, setCheckedAuth] = useState(false);
+
+  useEffect(() => {
+    const id = Cookies.get('id');
+    if (id) {
+      setIsAuthorized(true);
+    }
+    setCheckedAuth(true); 
+  }, []);
+
+  if (!checkedAuth) {
+    return null; 
+  }
+
+  if (!isAuthorized) {
+    return <NoAutorizado />;
+  }
+
   return (
     <div>
       <NavBar />

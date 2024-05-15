@@ -1,6 +1,6 @@
 
 import axiosInstance from '@/services/interceptor/api'
-
+import Cookies from 'js-cookie';
 
 
 const agregarEvento = async (data) =>  {
@@ -24,7 +24,7 @@ async function obtenerEventos() {
 }
 
 async function obtenerEventoPorIdUsuario(){
-const id = localStorage.getItem("id");
+const id = Cookies.get('id');
 const data ={
   id: id
 }
@@ -39,7 +39,7 @@ const data ={
 }
 
 async function obtenerEventoQueParticipo(){
-  const id = localStorage.getItem("id");
+  const id = Cookies.get('id');
   const data ={
     id: id
   }
@@ -53,7 +53,7 @@ async function obtenerEventoQueParticipo(){
     }
   }
   async function obtenerEventosQueParticipoFinalizados(){
-    const id = localStorage.getItem("id");
+    const id = Cookies.get('id');
     const data ={
       id: id
     }
@@ -68,7 +68,7 @@ async function obtenerEventoQueParticipo(){
     }
 
     async function obtenerEventosPorUsuarioFinalizados(){
-      const id = localStorage.getItem("id");
+      const id = Cookies.get('id');
       const data ={
         id: id
       }
@@ -82,6 +82,7 @@ async function obtenerEventoQueParticipo(){
         }
       }
 async function obtenerEventoDetalle(id) {
+  console.log("Param", id)
   try {
     const response = await axiosInstance.get(`/evento/EventoDetalle/${id}`);
     console.log('ObtenerEvento', response.data);

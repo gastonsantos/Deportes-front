@@ -4,17 +4,18 @@ import Cookies from 'js-cookie';
 import { jwtDecode } from "jwt-decode";
 import axiosInstance from '@/services/interceptor/api'
 
+
 async function obtenerUsuarioPorId(id){
     try{
       let parseId;
       parseId = parseInt(id);
       const data ={
-        id : parseId,
+        id : Cookies.get('id'),
         //id : 1002,
       }
-      console.log("Que hay en data", data);
+      
       const response = await axiosInstance.post('usuarios/UsuarioPerfil', data)
-      console.log('Que trae usuarios Perfil', response.data);
+     
       return response.data;
     }catch(error){
       throw error;
