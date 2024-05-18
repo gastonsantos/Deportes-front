@@ -118,7 +118,7 @@ const PerfilesInfo = () => {
               name="manoHabil"
               value={formData.manoHabil}
               onChange={handleChange}
-              className="md:w-full sm:w-full px-4 py-2 border rounded focus:outline-none focus:border-green-500 text- border-blue-500"
+              className="md:w-full sm:w-full px-4 py-2 border rounded focus:outline-none focus:border-green-500 text-black border-blue-500"
             >
               <option value="Derecho">Derecho</option>
               <option value="Izquierdo">Izquierdo</option>
