@@ -8,10 +8,11 @@ import Footer from "@/components/landing/footer";
 import Link from 'next/link';
 import Cookies from 'js-cookie';
 import NoAutorizado from "@/components/NoAutorizado/noAutorizado";
+import useAuth from '@/services/customHooks/api'
 
 const Misventos = () => {
-    const [isAuthorized, setIsAuthorized] = useState(false);
-    const [checkedAuth, setCheckedAuth] = useState(false);
+    //const [isAuthorized, setIsAuthorized] = useState(false);
+    //const [checkedAuth, setCheckedAuth] = useState(false);
 
     const [evento, setEvento] = useState([]);
 
@@ -36,21 +37,15 @@ const Misventos = () => {
         fetchData();
     }, []);
 
-    useEffect(() => {
-        const id = Cookies.get('id');
-        if (id) {
-          setIsAuthorized(true);
-        }
-        setCheckedAuth(true); 
-      }, []);
+    const { isAuthorized, checkedAuth } = useAuth();
+
+    if (!checkedAuth) {
+      return null; 
+    }
     
-      if (!checkedAuth) {
-        return null; 
-      }
-    
-      if (!isAuthorized) {
-        return <NoAutorizado />;
-      }
+    if (!isAuthorized) {
+      return <NoAutorizado />;
+    }
     
     return (
         <div className=" items-center justify-center">

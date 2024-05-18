@@ -5,10 +5,11 @@ import AsideComponent from '@/components/navegation/AsideComponent';
 import { NavBar } from "@/components/navBar/navBar";
 import NoAutorizado from "@/components/NoAutorizado/noAutorizado";
 import Cookies from 'js-cookie';
+import useAuth from '@/services/customHooks/api';
 
 const SettingsComponent = () => {
-  const [isAuthorized, setIsAuthorized] = useState(false);
-  const [checkedAuth, setCheckedAuth] = useState(false);
+  //const [isAuthorized, setIsAuthorized] = useState(false);
+  //const [checkedAuth, setCheckedAuth] = useState(false);
   const [formData, setFormData] = useState({
     nombre: '',
     apellido: '',
@@ -42,11 +43,7 @@ const SettingsComponent = () => {
   */
 
   useEffect(() => {
-    const id = Cookies.get('id');
-    if (id) {
-      setIsAuthorized(true);
-    }
-    setCheckedAuth(true);
+   
     const fetchData = async () => {
       try {
 
@@ -68,14 +65,17 @@ const SettingsComponent = () => {
 
   }, []);
 
+  const { isAuthorized, checkedAuth } = useAuth();
 
-  if (!checkedAuth) {
-    return null;
-  }
+    if (!checkedAuth) {
+      return null; 
+    }
+    
+    if (!isAuthorized) {
+      return <NoAutorizado />;
+    }
 
-  if (!isAuthorized) {
-    return <NoAutorizado />;
-  }
+
   return (
     <>
       <NavBar />

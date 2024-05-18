@@ -7,21 +7,17 @@ import React, { useState, useEffect } from 'react';
 import Footer from "@/components/landing/footer";
 import NoAutorizado from "@/components/NoAutorizado/noAutorizado";
 import Cookies from 'js-cookie';
-
+import useAuth from '@/services/customHooks/api'
 const Misventos = () => {
     const [evento, setEvento] = useState([]);
-    const [isAuthorized, setIsAuthorized] = useState(false);
-    const [checkedAuth, setCheckedAuth] = useState(false);
+    // const [isAuthorized, setIsAuthorized] = useState(false);
+    //const [checkedAuth, setCheckedAuth] = useState(false);
+    const { isAuthorized, checkedAuth } = useAuth();
+
 
     useEffect(() => {
-        const id = Cookies.get('id');
-        if (id) {
-            setIsAuthorized(true);
-        }
-        setCheckedAuth(true);
-    }, []);
+      
 
-    useEffect(() => {
         if (isAuthorized) {
             const fetchData = async () => {
                 try {
@@ -45,6 +41,7 @@ const Misventos = () => {
         setEvento(evento.filter(evento => evento.idEvento !== eventId));
     };
 
+
     if (!checkedAuth) {
         return null;
     }
@@ -52,6 +49,7 @@ const Misventos = () => {
     if (!isAuthorized) {
         return <NoAutorizado />;
     }
+
 
     return (
         <div className="items-center justify-center">

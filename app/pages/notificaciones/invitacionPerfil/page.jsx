@@ -8,21 +8,18 @@ import Footer from "@/components/landing/footer";
 import PerfilesStats from "@/components/invitacionesPerfil/PerfilesStats";
 import { obtenerFichaDeportistaPorId, obtengoPerfilFutbolPorId, ObtenerUsuarioParaPerfilInvitacion } from "@/services/login/perfiles/api";
 import NoAutorizado from "@/components/NoAutorizado/noAutorizado";
+import useAuth from '@/services/customHooks/api';
 
 export default function InvitacionPerfilCard() {
     const [usuario, setUsuario] = useState();
     const [fichaDeportista, setFichaDeportista] = useState();
     const [fichaFutbol, setFichaFutbol] = useState();
-    const [isAuthorized, setIsAuthorized] = useState(false);
-    const [checkedAuth, setCheckedAuth] = useState(false);
+    //const [isAuthorized, setIsAuthorized] = useState(false);
+    //const [checkedAuth, setCheckedAuth] = useState(false);
  
  
     useEffect(() => {
-        const id = Cookies.get('id');
-        if (id) {
-            setIsAuthorized(true);
-        }
-        setCheckedAuth(true);
+     
         const fetchData = async () => {
             try {
 
@@ -103,15 +100,15 @@ export default function InvitacionPerfilCard() {
 
 
 
+    const { isAuthorized, checkedAuth } = useAuth();
 
     if (!checkedAuth) {
-        return null;
+      return null; 
     }
-
+    
     if (!isAuthorized) {
-        return <NoAutorizado />;
+      return <NoAutorizado />;
     }
-
 
     return (
         <div>

@@ -4,9 +4,11 @@ import Cookies from 'js-cookie';
 import { Dep } from '@/components/deportes/dep';
 import { NavBar } from "@/components/navBar/navBar";
 import NoAutorizado from "@/components/NoAutorizado/noAutorizado";
+import useAuth from '@/services/customHooks/api'
+
 
 export default function Deportes() {
-  const [isAuthorized, setIsAuthorized] = useState(false);
+ /* const [isAuthorized, setIsAuthorized] = useState(false);
   const [checkedAuth, setCheckedAuth] = useState(false);
 
   useEffect(() => {
@@ -24,6 +26,16 @@ export default function Deportes() {
   if (!isAuthorized) {
     return <NoAutorizado />;
   }
+*/  
+const { isAuthorized, checkedAuth } = useAuth();
+
+if (!checkedAuth) {
+  return null; 
+}
+
+if (!isAuthorized) {
+  return <NoAutorizado />;
+}
 
   return (
     <div>

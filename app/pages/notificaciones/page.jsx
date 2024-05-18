@@ -8,13 +8,14 @@ import React, { useEffect, useState } from 'react';
 import Swal from 'sweetalert2';
 import NotificacionesCard from "@/components/notificaciones/notificacionCard"
 import NoAutorizado from "@/components/NoAutorizado/noAutorizado";
+import useAuth from '@/services/customHooks/api';
 
 const Notificaciones = () => {
     const router = useRouter();
     const [notificaciones, setNotificaciones] = useState([]);
     const [cantidad, setCantidad] = useState();
-    const [isAuthorized, setIsAuthorized] = useState(false);
-    const [checkedAuth, setCheckedAuth] = useState(false);
+    //const [isAuthorized, setIsAuthorized] = useState(false);
+    //const [checkedAuth, setCheckedAuth] = useState(false);
 
 
 
@@ -36,21 +37,16 @@ const Notificaciones = () => {
         fetchData();
     }, []);
 
-    useEffect(() => {
-        const id = Cookies.get('id');
-        if (id) {
-            setIsAuthorized(true);
-        }
-        setCheckedAuth(true);
-    }, []);
+    const { isAuthorized, checkedAuth } = useAuth();
 
     if (!checkedAuth) {
-        return null;
+      return null; 
     }
-
+    
     if (!isAuthorized) {
-        return <NoAutorizado />;
+      return <NoAutorizado />;
     }
+    
     const handleAceptar = async (idParticipantes) => {
         const data = {
             idUsuario: idParticipantes

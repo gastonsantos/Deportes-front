@@ -6,20 +6,13 @@ import Image from "next/image";
 import Cookies from 'js-cookie';
 import NoAutorizado from "@/components/NoAutorizado/noAutorizado";
 import { useEffect, useState } from 'react';
+import useAuth from '@/services/customHooks/api'
 export default function Crear() {
-  const [isAuthorized, setIsAuthorized] = useState(false);
-  const [checkedAuth, setCheckedAuth] = useState(false);
-
-  useEffect(() => {
-    const id = Cookies.get('id');
-    if (id) {
-      setIsAuthorized(true);
-    }
-    setCheckedAuth(true); 
-  }, []);
-
+  //const [isAuthorized, setIsAuthorized] = useState(false);
+  //const [checkedAuth, setCheckedAuth] = useState(false);
+  const { isAuthorized, checkedAuth } = useAuth();
   if (!checkedAuth) {
-    return null; 
+    return null;
   }
 
   if (!isAuthorized) {
@@ -30,7 +23,7 @@ export default function Crear() {
     <div>
       <NavBar />
       <div className="absolute w-screen h-screen">
-      <Image
+        <Image
           src="/images/imagen-login.jpg"
           alt="Background Image"
           layout="fill"
@@ -40,21 +33,21 @@ export default function Crear() {
         />
       </div>
       <div className="relative hidden sm:block">
-        <Informacion/>
-        </div>
-        <div className="container fluid items-center justify-center flex flex-wrap">
-        
-          <div className="relative w-1/2 text-center font-medium text-3xl leading-tight text-white dark:text-white">
+        <Informacion />
+      </div>
+      <div className="container fluid items-center justify-center flex flex-wrap">
 
-            <h2>¿Qué vas a jugar?</h2>
-            <Carousel />
-            {/*agregar un aviso de que aun no se puede crear un deporte en caso de que no exista 
+        <div className="relative w-1/2 text-center font-medium text-3xl leading-tight text-white dark:text-white">
+
+          <h2>¿Qué vas a jugar?</h2>
+          <Carousel />
+          {/*agregar un aviso de que aun no se puede crear un deporte en caso de que no exista 
         En segundo lugar agregar la opcion de crear evento con el forumario ya que al estar vacio, deberira decir algo como 
         "Aun no hay eventos, porque no creas uno? o alguna frase con un boton al form */}
-          </div>
         </div>
       </div>
-  
+    </div>
+
 
 
   );

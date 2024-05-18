@@ -8,10 +8,11 @@ import Image from "next/image";
 import Informacion from "@/components/infoAd/informacionEvento";
 import Cookies from 'js-cookie';
 import NoAutorizado from "@/components/NoAutorizado/noAutorizado";
+import useAuth from '@/services/customHooks/api'
 
 export default function Formulario() {
-  const [isAuthorized, setIsAuthorized] = useState(false);
-  const [checkedAuth, setCheckedAuth] = useState(false);
+  //const [isAuthorized, setIsAuthorized] = useState(false);
+  //const [checkedAuth, setCheckedAuth] = useState(false);
   const [deporteCreado, setDeporteCreado] = useState();
   const router = useRouter();
   const [formData, setFormData] = useState({
@@ -36,23 +37,15 @@ export default function Formulario() {
     }));
     console.log("AVERR", formData);
   };
-
-  useEffect(() => {
-    setDeporteCreado(localStorage.getItem("selectedDeporteNombre"));
-    const id = Cookies.get('id');
-    if (id) {
-      setIsAuthorized(true);
-    }
-    setCheckedAuth(true); 
-  }, []);
-
+  const { isAuthorized, checkedAuth } = useAuth();
   if (!checkedAuth) {
-    return null; 
+    return null;
   }
 
   if (!isAuthorized) {
     return <NoAutorizado />;
   }
+ 
 /*
   useEffect(() => {
     setDeporteCreado(localStorage.getItem("selectedDeporteNombre"));

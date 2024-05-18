@@ -15,7 +15,7 @@ const NoEstaAutorizado = () => {
         <p className="py-6">
           Usted no tiene permisos para ver esta página o vista. Por favor, inicie sesión o regístrese.
         </p>
-        <button onClick={redirect} className="">Comenzar</button>
+        <button onClick={redirect} className="bg-purple-700 rounded-full p-2 hover:bg-purple-500">Comenzar</button>
       </div>
     </div>
   );

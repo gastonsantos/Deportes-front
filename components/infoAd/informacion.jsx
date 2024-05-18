@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { motion } from "framer-motion";
 
-const Informacion = ({reglas}) => {
+const Informacion = () => {
   const [visible, setVisible] = useState(false);
   
   const mostrarInfo = () => {
