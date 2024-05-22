@@ -99,7 +99,7 @@ const SettingsComponent = () => {
             </div>
             {/* Form Section */}
             <form>
-              <div className="flex flex-col justify-center md:grid md:grid-cols-2 gap-4">
+              <div className="flex flex-col justify-center md:grid md:grid-cols-2 gap-4 mb-2">
                 <div>
                   <label htmlFor="nombre" className="block text-white text-sm font-bold mb-2 text-center md:text-left">Nombre</label>
                   <input type="text" id="nombre" value={formData.nombre} onChange={handleChange} className="w-full px-4 py-2 border rounded focus:outline-none focus:border-green-500 text-gray-700 border-blue-500" />
@@ -113,7 +113,7 @@ const SettingsComponent = () => {
                 <label htmlFor="apodo" className="block text-white text-sm font-bold mb-2 text-center md:text-left">Apodo</label>
                 <input type="text" id="apodo" value={formData.apodo} onChange={handleChange} className="w-full px-4 py-2 border rounded focus:outline-none focus:border-green-500 text-gray-700 border-blue-500" />
               </div>
-              <div className="flex flex-col justify-center  md:grid md:grid-cols-2 gap-4">
+              <div className="flex flex-col justify-center md:grid md:grid-cols-2 gap-4 mb-2">
                 <div>
                   <label htmlFor="provincia" className="block text-white text-sm font-bold mb-2 text-center md:text-left">Provincia</label>
                   <input type="text" id="provincia" value={formData.provincia} onChange={handleChange} className="w-full px-4 py-2 border rounded focus:outline-none focus:border-green-500 text-gray-700 border-blue-500" />
@@ -144,7 +144,7 @@ const SettingsComponent = () => {
               {/* Buttons */}
               <div className="flex justify-center md:justify-end">
                 <button
-                  className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 focus:outline-none focus:shadow-outline-blue"
+                  className="bg-purple-700 rounded-full p-2 hover:bg-purple-500 text-white px-4 py-2 rounded  focus:outline-none focus:shadow-outline-gray"
                   type="button"
                   onClick={() => alert('Changes saved!')}
                 >

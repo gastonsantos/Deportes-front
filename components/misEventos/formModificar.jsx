@@ -118,9 +118,9 @@ const FormularioModificar = ({ evento }) => {
                     initial={{ opacity: 0, x: "-50%" }}
                     animate={{ opacity: 0.8, x: 0 }}
                     transition={{ duration: 0.5, staggerChildren: 0.1 }}
-                    className={"md:absolute lg:absolute relative md:w-1/2 text-center z-40 p-4 bg-black rounded-lg overflow-hidden text-justify"}
+                    className={"md:absolute lg:absolute sm:absolute relative sm:w-1/2 md:w-1/2 text-center z-40 p-4  rounded-lg overflow-hidden text-justify"}
                 >
-                    <div className="w-1/2 min-w-96 bg-white rounded-xl cursor-pointer ">
+                    <div className="md:w-1/2 md:min-w-96 bg-white rounded-xl cursor-pointer ">
                         <Card className="">
                             <CardBody>
                                 <Typography>

@@ -248,7 +248,7 @@ export default function Formulario() {
               {/* Buttons */}
               <div className="flex justify-center md:justify-end mt-4">
                 <button
-                  className="bg-gray-500 text-white px-4 py-2 rounded hover:bg-gray-600 focus:outline-none focus:shadow-outline-gray"
+                  className="bg-purple-600 text-white px-4 py-2 rounded hover:bg-purple-800 focus:outline-none focus:shadow-outline-gray"
                   type="button"
                   onClick={handleSubmit}
                 >

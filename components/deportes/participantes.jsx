@@ -30,7 +30,7 @@ const Participantes = ({ evento }) => {
     
     
     return (
-        <div className="w-1/2 min-w-96 bg-white rounded-xl mt-4 ml-4 text-justify ml-2">
+        <div className="w-1/2 min-w-96 bg-white rounded-xl mt-4 md:ml-4 sm:ml-2  text-justify">
             <Card className="">
                 <CardBody>
                     <Typography>

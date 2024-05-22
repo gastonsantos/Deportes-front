@@ -7,13 +7,13 @@ export default function ModalConfirmar({ setShowModal, toggleCancelarEvento }) {
 
 
             <div
-                className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none"
+                className="justify-center items-center flex fixed inset-0 z-50"
             >
-                <div className="absolute w-auto my-6 mx-auto max-w-3xl ">
+                <div className="text-white bg-gray-500 relative flex flex-col w-96 h-64 ">
                     {/*content*/}
                     <div className="border-0 rounded-lg shadow-lg relative flex flex-col w-full text-white bg-gray-900 outline-none focus:outline-none">
                         {/*header*/}
-                        <div className="flex items-start justify-between p-5 border-b border-solid border-blueGray-200 rounded-t">
+                        <div className="flex items-start justify-center bg-neutral-800 p-5 border-b border-solid border-blueGray-200 rounded-t flex justify-center text-center">
                             <h3 className="text-3xl font-semibold ">
                                 Cancelar evento
                             </h3>

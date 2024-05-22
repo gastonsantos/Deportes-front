@@ -59,28 +59,28 @@ export default function ModalAgregarResultado({ setShowModalResultado, idEvento 
     }
     return (
         <>
-            <div className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none">
-                <div className="absolute w-auto my-6 mx-auto max-w-3xl">
+            <div className="justify-center items-center flex fixed inset-0 z-50 ">
+                <div className="text-white bg-gray-500 relative flex flex-col w-96 h-64">
                     {/*content*/}
                     <div className="border-0 rounded-lg shadow-lg relative flex flex-col w-full text-white bg-gray-900 outline-none focus:outline-none">
                         {/*header*/}
-                        <div className="flex items-start justify-center bg-neutral-800 p-5 border-b border-solid border-blueGray-200 rounded-t ">
-                            <div className="text-3xl font-semibold">
+                        <div className="flex items-start justify-center bg-neutral-800 p-5 border-b border-solid border-blueGray-200 rounded-t flex justify-center text-center">
+                            <div className="text-2xl font-semibold">
                                 <p>Resultado</p><p>{nombreEvento}</p>
                             </div>
                         </div>
                         {/*body*/}
-                        <div className=''>
+                        <div className='overflow-hidden'>
                             <form action="">
-                                <div className="mt-1 p-2 flex justify-center text-2xl font-semibold">
-                                    <div className='text-center p-1'>
+                                <div className="mt-1 p-2 flex justify-center md:text-2xl sm:text-1x1 font-semibold ">
+                                    <div className='text-center text-sm p-1'>
                                         <p className='p-2 '>Local</p>
                                         <input className="bg-transparent border text-center" type="number" name="resultadoLocal" id="resultadoLocal"
                                         value={formData.resultadoLocal}
                                         onChange={handleChange}
                                         />
                                     </div>
-                                    <div className='text-center p-1'>
+                                    <div className='text-center text-sm p-1'>
                                         <p className='p-2 border-white'>Visitante</p>
                                         <input className="bg-transparent border text-center" type="number" name="resultadoVisitante" id="resultadoVisitante" 
                                         value={formData.resultadoVisitante}

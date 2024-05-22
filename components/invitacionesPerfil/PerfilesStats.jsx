@@ -153,7 +153,7 @@ const PerfilesStats = ({statsFutbol}) => {
 
   return (
     <>
-      <div className="flex-1 min-w-96 max-w-96 shadow-md hidden sm:block mt-2" >
+      <div className="flex-1 min-w-96 max-w-96 shadow-md hidden sm:block md:mt-9" >
         <div className="bg-gray-900 rounded-lg shadow-md p-4 text-white" style={{ backgroundImage: `url('/images/Fondo1.jpg')`, backgroundSize: 'cover', backgroundPosition: 'center', backgroundRepeat: 'no-repeat' }} >
           <div className="flex flex-col justify-center md:grid md:grid-cols-2 gap-2 m-10 items-center">
             <div>

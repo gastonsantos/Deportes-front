@@ -18,7 +18,7 @@ const Participantes = ({ duenio, evento }) => {
     }, [evento]);
 
     return (
-        <div className="w-1/2 min-w-96 bg-white rounded-xl mt-4 text-justify ml-2">
+        <div className="md:w-1/2 md:min-w-96 w-72 bg-white rounded-xl mt-4 ml-4 text-justify ml-2">
             <Card className="">
                 <CardBody>
                     <Typography>

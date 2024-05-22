@@ -1,6 +1,4 @@
 "use client";
-import { useState, useEffect } from 'react';
-import Cookies from 'js-cookie';
 import { Dep } from '@/components/deportes/dep';
 import { NavBar } from "@/components/navBar/navBar";
 import NoAutorizado from "@/components/NoAutorizado/noAutorizado";

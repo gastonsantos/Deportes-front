@@ -114,7 +114,7 @@ const Notificaciones = () => {
                 <div className="sm:mx-auto sm:w-[45rem]  sm:mt-6 sm:p-10 text-sm bg-black">
                     <section className="header m-5">
                         <div className="container flex justify-between">
-                            <p className="text-xl sm:text-2xl text-gray-200 font-bold sm:font-extrabold">Invitaciones <span className="px-4 ml-2 rounded-lg text-white bg-blue-900 sm:text-xl">{notificaciones.length}</span></p>
+                            <p className="text-xl sm:text-2xl text-gray-200 font-bold sm:font-extrabold">Invitaciones <span className="px-4 ml-2 rounded-lg text-white bg-purple-600 sm:text-xl">{notificaciones.length}</span></p>
                             <p className="hover:text-[#0a317b] cursor-pointer text-[#5e6778]"></p>
                         </div>
                     </section>

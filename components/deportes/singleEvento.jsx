@@ -154,7 +154,7 @@ const SingleEvento = ({ evento }) => {
   return (
     <div className='flex flex-wrap'>
 
-      <div className="flex-auto w-96 m-10 bg-transparent p-2">
+      <div className="flex-auto w-96 md:m-10  sm:m-2 bg-transparent p-2">
         <div class="w-full lg:max-w-full lg:flex">
           <div class="h-48 w lg:h-auto lg:w-48 flex-none bg-cover rounded-t lg:rounded-t-none lg:rounded-l text-center overflow-hidden" style={{ backgroundImage: `url(${imagen})` }} title={nombre}>
           </div>
@@ -230,7 +230,7 @@ const SingleEvento = ({ evento }) => {
               <button
                 type="button"
                 onClick={handleEnviarNotificacion}
-                className="py-2.5 px-5 me-2 mb-2 mt-4 text-sm font-medium text-gray-900 focus:outline-none bg-gray-400 rounded-lg border border-gray-200 hover:bg-gray-600 hover:text-gray-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700"
+                className="py-2.5 px-5 me-2 mb-2 mt-4 text-sm font-medium text-white focus:outline-none bg-purple-600 rounded-lg border border-gray-200 hover:bg-purple-800 hover:text-white focus:ring-4 focus:ring-gray-100 "
               >
                 Unirse
               </button>

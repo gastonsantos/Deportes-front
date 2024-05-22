@@ -65,11 +65,11 @@ const LoginForm = () => {
           Login
     </h2> 
     <div className="mb-5">
-      <label htmlFor="email" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Tú email</label>
+      <label htmlFor="email" className="block mb-2 text-sm font-medium text-gray-900 text-white">Tú email</label>
       <input onChange={(e) => { setEmail(e.target.value) }} type="email" id="email" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="name@flowbite.com" required />
     </div>
     <div className="mb-5">
-      <label htmlFor="password" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Tú password</label>
+      <label htmlFor="password" className="block mb-2 text-sm font-medium text-gray-900 text-white">Tú password</label>
       <input onChange={(e) => { setPassword(e.target.value) }} type="password" id="password" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required />
     </div>
     <div className="mb-5">
@@ -81,10 +81,10 @@ const LoginForm = () => {
               <label htmlFor="" className="text-red-500">{error}</label>
             </div>
     )}
-    <div className="mb-5">
+    <div className="mb-5 text-white">
     <a href="/pages/cambioContraseniaForm" >¿Olvidaste tu contraseña?</a>
     </div>
-    <div className="mb-5">
+    <div className="mb-5 text-white">
     <a href="/pages/registro" >Crear cuenta</a>
     </div>
     </div>

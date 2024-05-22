@@ -93,7 +93,7 @@ const Stepper = () => {
       </div>
       <div className="flex justify-between mt-28">
         <button
-          className="disabled:bg-gray-300 disabled:text-gray-700 disabled:cursor-not-allowed bg-gray-500 hover:bg-gray-600 text-white px-8 py-1.5 rounded-md font-medium text-base h-10"
+          className="disabled:bg-gray-300 disabled:text-gray-700 disabled:cursor-not-allowed bg-purple-600 hover:bg-purple-800 text-white px-8 py-1.5 rounded-md font-medium text-base h-10"
           onClick={prevStep}
           disabled={activeStep === 1}
         >
@@ -111,7 +111,7 @@ const Stepper = () => {
              ))}       
         </div>
         <button
-          className="disabled:bg-gray-300 disabled:text-gray-700 disabled:cursor-not-allowed h-10 bg-gray-500 hover:bg-gray-600 text-white px-8 py-1.5 rounded-md font-medium text-base"
+          className="disabled:bg-gray-300 disabled:text-gray-700 disabled:cursor-not-allowed h-10 bg-purple-600 hover:bg-purple-800 text-white px-8 py-1.5 rounded-md font-medium text-base"
           onClick={nextStep}
           disabled={activeStep === totalSteps}
         >

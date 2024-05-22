@@ -14,7 +14,7 @@ const AsideComponent: React.FC<AsideProps> = () => {
           <ul className="mt-4 space-y-2">
             <li><a href="/pages/perfil" className="block px-4 py-2 text-sm hover:opacity-100  hover:text-white">Personal</a></li>
             <li><a href="/pages/perfil/futbol" className="block px-4 py-2 text-sm hover:opacity-100  hover:text-white">Deportista</a></li>
-            
+            <li><a href="/pages/perfil/media" className="block px-4 py-2 text-sm hover:opacity-100  hover:text-white">Estadísticas</a></li>
           </ul>
         </div>
       </aside>

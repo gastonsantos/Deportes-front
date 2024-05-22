@@ -113,8 +113,8 @@ export default function InvitacionPerfilCard() {
     return (
         <div>
             <NavBar />
-            <div className="container fluid flex lg:flex items-center justify-center ">
-                <div className="flex-1  min-w-96 max-w-96 shadow-md -mt-9">
+            <div className="container fluid flex lg:flex items-center justify-center mt-1">
+                <div className="flex-1 min-w-96 max-w-96 shadow-md md:mt-9">
                     <div className="bg-gray-900 rounded-lg shadow-md p-9 text-white" style={{ backgroundImage: `url('/images/Fondo1.jpg')`, backgroundSize: 'cover', backgroundPosition: 'center', backgroundRepeat: 'no-repeat' }}>
 
                         <p className="text-white-500 ml-10 pt-1">Ficha<span> </span> </p>

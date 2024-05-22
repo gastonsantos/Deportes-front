@@ -26,9 +26,9 @@ export default function Imagenes() {
               <a className="underline decoration-indigo-500/30">fútbol</a>, <a className="underline decoration-violet-500">pádel</a>, <a className="underline decoration-amber-600">tenis</a> y más en segundos.
             </p>
             <div className="flex justify-center mt-6 flex item-center"> 
-            <Link href="/pages/login" class="w-32 animate-bounce focus:animate-none hover:animate-none inline-flex text-md font-medium bg-gray-500 mt-3 px-4 py-2 rounded-lg tracking-wide text-white">
+            <Link href="/pages/login" class="w-32 animate-bounce focus:animate-none hover:animate-none inline-flex text-md font-medium bg-purple-600 mt-3 px-4 py-2 rounded-lg tracking-wide text-white">
               
-                <span class="ml-2">Empezar </span>
+                <span class="ml-2 ">Empezar </span>
                 
                 <span>⚽</span>
                 
