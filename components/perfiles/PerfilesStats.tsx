@@ -168,33 +168,33 @@ const PerfilesStats = () => {
 
             <div className="flex flex-col justify-center md:grid md:grid-cols-2 gap-4 mb-2">
               <div>
-                <label htmlFor="edad" className="block text-white text-sm font-bold mb-2 text-center md:text-left">Velocidad</label>
-                <input type="number" name="edad" id="edad" value={formDataStats.velocidad} onChange={(e) => handleChange(e)}  className="w-full px-4 py-2 border rounded focus:outline-none focus:border-green-500 text-gray-700 border-blue-500" />
+                <label htmlFor="velocidad" className="block text-white text-sm font-bold mb-2 text-center md:text-left">Velocidad</label>
+                <input type="number" name="velocidad" id="velocidad" value={formDataStats.velocidad} onChange={(e) => handleChange(e)}  className="w-full px-4 py-2 border rounded focus:outline-none focus:border-green-500 text-gray-700 border-blue-500" />
               </div>
               <div>
-                <label htmlFor="altura" className="block text-white text-sm font-bold mb-2 text-center md:text-left">Resistencia</label>
-                <input type="number" name="altura" id="altura" value={formDataStats.velocidad} onChange={(e) => handleChange(e)} className="w-full px-4 py-2 border rounded focus:outline-none focus:border-green-500 text-gray-700 border-blue-500" />
+                <label htmlFor="resistencia" className="block text-white text-sm font-bold mb-2 text-center md:text-left">Resistencia</label>
+                <input type="number" name="resistencia" id="resistencia" value={formDataStats.resistencia} onChange={(e) => handleChange(e)} className="w-full px-4 py-2 border rounded focus:outline-none focus:border-green-500 text-gray-700 border-blue-500" />
               </div>
             </div>
 
             <div className="flex flex-col justify-center md:grid md:grid-cols-2 gap-4 mb-2">
               <div>
-                <label htmlFor="edad" className="block text-white text-sm font-bold mb-2 text-center md:text-left">Precision</label>
-                <input type="number" name="edad" id="edad" value={formDataStats.precision} onChange={(e) => handleChange(e)}  className="w-full px-4 py-2 border rounded focus:outline-none focus:border-green-500 text-gray-700 border-blue-500" />
+                <label htmlFor="precision" className="block text-white text-sm font-bold mb-2 text-center md:text-left">Precision</label>
+                <input type="number" name="precision" id="precision" value={formDataStats.precision} onChange={(e) => handleChange(e)}  className="w-full px-4 py-2 border rounded focus:outline-none focus:border-green-500 text-gray-700 border-blue-500" />
               </div>
               <div>
-                <label htmlFor="altura" className="block text-white text-sm font-bold mb-2 text-center md:text-left">Fuerza</label>
-                <input type="number" name="altura" id="altura" value={formDataStats.fuerza} onChange={(e) => handleChange(e)}className="w-full px-4 py-2 border rounded focus:outline-none focus:border-green-500 text-gray-700 border-blue-500" />
+                <label htmlFor="fuerza" className="block text-white text-sm font-bold mb-2 text-center md:text-left">Fuerza</label>
+                <input type="number" name="fuerza" id="fuerza" value={formDataStats.fuerza} onChange={(e) => handleChange(e)}className="w-full px-4 py-2 border rounded focus:outline-none focus:border-green-500 text-gray-700 border-blue-500" />
               </div>
             </div>
             <div className="flex flex-col justify-center md:grid md:grid-cols-2 gap-4 mb-2">
               <div>
-                <label htmlFor="edad" className="block text-white text-sm font-bold mb-2 text-center md:text-left">Tecnica</label>
-                <input type="number" name="edad" id="edad" value={formDataStats.tecnica} onChange={(e) => handleChange(e)}  className="w-full px-4 py-2 border rounded focus:outline-none focus:border-green-500 text-gray-700 border-blue-500" />
+                <label htmlFor="tecnica" className="block text-white text-sm font-bold mb-2 text-center md:text-left">Tecnica</label>
+                <input type="number" name="tecnica" id="tecnica" value={formDataStats.tecnica} onChange={(e) => handleChange(e)}  className="w-full px-4 py-2 border rounded focus:outline-none focus:border-green-500 text-gray-700 border-blue-500" />
               </div>
               <div>
-                <label htmlFor="altura" className="block text-white text-sm font-bold mb-2 text-center md:text-left">Agilidad</label>
-                <input type="number" name="altura" id="altura" value={formDataStats.agilidad} onChange={(e) => handleChange(e)}className="w-full px-4 py-2 border rounded focus:outline-none focus:border-green-500 text-gray-700 border-blue-500" />
+                <label htmlFor="agilidad" className="block text-white text-sm font-bold mb-2 text-center md:text-left">Agilidad</label>
+                <input type="number" name="agilidad" id="agilidad" value={formDataStats.agilidad} onChange={(e) => handleChange(e)}className="w-full px-4 py-2 border rounded focus:outline-none focus:border-green-500 text-gray-700 border-blue-500" />
               </div>
             </div>
           
