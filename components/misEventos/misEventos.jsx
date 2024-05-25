@@ -7,13 +7,13 @@ import ModalConfirmar from "@/components/misEventos/modalConfirmar";
 import Participantes from "@/components/misEventos/participantes";
 import ModalInvitar from "@/components/misEventos/modalInvitar";
 import { cancelarEvento } from '@/services/evento/api';
-
+import formatFecha from '@/services/customHooks/formatFecha';
 const MisEventosCard = ({ evento, onDelete, actualizar }) => {
     const router = useRouter();
     const [showModal, setShowModal] = useState(false);
     const [showModalInvitar, setShowModalInvitar] = useState(false);
     const { idEvento, nombre, imagen, nombreDep,nombreDuenio, idDeporte, cantJugadores, cantJugadoresAnotados, provincia, localidad, direccion, numero, fecha, hora } = evento;
-    const [fechaFormateada, setFechaFormateada] = useState("");
+    //const [fechaFormateada, setFechaFormateada] = useState("");
     const [open, setOpen] = useState(false);
     const [btnCrear, setBtnCrear] = useState(true);
     const [error, setError] = useState('');
@@ -47,18 +47,8 @@ const MisEventosCard = ({ evento, onDelete, actualizar }) => {
         }
 
     }
-
-    useEffect(() => {
-        if (evento && evento.fecha) { // Verifica si evento y evento.fecha están definidos
-            const fecha = new Date(evento.fecha);
-            const opcionesFecha = { year: 'numeric', month: 'long', day: 'numeric' };
-            const fechaFormateada = fecha.toLocaleDateString('es-ES', opcionesFecha);
-            console.log("evento.Lenght", evento.length);
-            setFechaFormateada(fechaFormateada);
-
-        }
-    }, [evento]);
-
+    const fechaFormateada  = formatFecha(evento);
+ 
     return (
         <>
 
@@ -82,15 +72,30 @@ const MisEventosCard = ({ evento, onDelete, actualizar }) => {
                             <h3 className="text-lg text-white">
                                 {nombre}
                             </h3>
-                            <div className="mt-2 flex items-center text-white">
-                                <span className="m-1">jugadores {cantJugadores} &bull;
-
-                                    <span>🏀</span>
-                                    <span>🥎</span>
-                                    <span>🎾</span>
-                                    <span>⚽</span></span>
-
-                            </div>
+                            <div className="mt-2 flex items-center">
+                                        <span className="m-1">jugadores {cantJugadores} &bull;</span>
+                                        {(nombreDep =="Basquet" || nombreDep =="Basquet 2v2") &&
+                                            (
+                                                <span>🏀</span>
+                                            )
+                                        }
+                                          {(nombreDep =="Paddle single" || nombreDep =="Paddle Dobles") &&
+                                            (
+                                                <span>🥎</span>
+                                            )
+                                        }
+                                         {(nombreDep =="Futbol 5" || nombreDep =="Futbol 11") &&
+                                            (
+                                                <span>⚽</span>
+                                            )
+                                        }
+                                         {(nombreDep =="Tenis Single" || nombreDep =="Tenis Dobles") &&
+                                        (
+                                            <span>🎾</span>
+                                        )
+                                    }
+                                    
+                                    </div>
                             <div className="mt-1 flex item-center">
                                 <svg className="w-[20px] h-[20px] fill-[#bebbbb] mr-2" viewBox="0 0 576 512" xmlns="http://www.w3.org/2000/svg">
                                     <path d="M384 476.1L192 421.2V35.9L384 90.8V476.1zm32-1.2V88.4L543.1 37.5c15.8-6.3 32.9 5.3 32.9 22.3V394.6c0 9.8-6 18.6-15.1 22.3L416 474.8zM15.1 95.1L160 37.2V423.6L32.9 474.5C17.1 480.8 0 469.2 0 452.2V117.4c0-9.8 6-18.6 15.1-22.3z" clipRule="evenodd"></path>

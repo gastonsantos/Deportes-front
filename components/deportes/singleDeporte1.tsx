@@ -1,18 +1,11 @@
 import { Evento } from "@/model/Evento";
 import Link from 'next/link'; // Importar Link de next/link
-import Image from "next/image";
 import React, { useEffect, useState } from 'react';
+import formatFecha from '@/services/customHooks/formatFecha';
 const SingleDeporte = ({ evento }: { evento: Evento }) => {
     const { idEvento, nombre, imagen, nombreDep, cantJugadores, cantJugadoresAnotados, provincia, localidad, direccion, numero, fecha, hora, idUsusarioDuenio, nombreDuenio } = evento;
-    const [fechaFormateada, setFechaFormateada] = useState("");
-    useEffect(() => {
-        if (evento && evento.fecha) {
-            const fecha = new Date(evento.fecha);
-            const opcionesFecha = { year: 'numeric', month: 'long', day: 'numeric' } as const; // Asegurarse de que las opciones sean del tipo correcto
-            const fechaFormateada = fecha.toLocaleDateString('es-ES', opcionesFecha);
-            setFechaFormateada(fechaFormateada);
-        }
-    }, [evento]);
+    const fechaFormateada  = formatFecha(evento);
+  
 
 
     return (
@@ -43,11 +36,27 @@ const SingleDeporte = ({ evento }: { evento: Evento }) => {
 
                                     <div className="mt-2 flex items-center">
                                         <span className="m-1">jugadores {cantJugadores} &bull;</span>
-                                        <span>🏀</span>
-                                        <span>🥎</span>
-                                        <span>🎾</span>
-                                        <span>⚽</span>
-
+                                        {(nombreDep =="Basquet" || nombreDep =="Basquet 2v2") &&
+                                            (
+                                                <span>🏀</span>
+                                            )
+                                        }
+                                          {(nombreDep =="Paddle single" || nombreDep =="Paddle Dobles") &&
+                                            (
+                                                <span>🥎</span>
+                                            )
+                                        }
+                                         {(nombreDep =="Futbol 5" || nombreDep =="Futbol 11") &&
+                                            (
+                                                <span>⚽</span>
+                                            )
+                                        }
+                                         {(nombreDep =="Tenis Single" || nombreDep =="Tenis Dobles") &&
+                                        (
+                                            <span>🎾</span>
+                                        )
+                                    }
+                                    
                                     </div>
 
                                 </div>

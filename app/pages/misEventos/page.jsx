@@ -6,13 +6,11 @@ import Image from "next/image";
 import React, { useState, useEffect } from 'react';
 import Footer from "@/components/landing/footer";
 import Link from 'next/link';
-import Cookies from 'js-cookie';
 import NoAutorizado from "@/components/NoAutorizado/noAutorizado";
 import useAuth from '@/services/customHooks/api'
 
 const Misventos = () => {
-    //const [isAuthorized, setIsAuthorized] = useState(false);
-    //const [checkedAuth, setCheckedAuth] = useState(false);
+ 
 
     const [evento, setEvento] = useState([]);
 
