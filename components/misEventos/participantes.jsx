@@ -4,7 +4,7 @@ import { useRouter } from 'next/navigation';
 import Swal from 'sweetalert2';
 import { rechazarNotificacion } from "@/services/notificaciones/api";
 import ModalEliminarParticipante from "@/components/misEventos/modalEliminarPart";
-const Participantes = ({ duenio, evento,actualizar }) => {
+const Participantes = ({ duenio, evento, actualizar }) => {
     const router = useRouter();
     const [showModalEliminar, setShowModalEliminar] = useState(false);
     const { id, apellido, nombre, apodo, email, idParticipante } = evento;
