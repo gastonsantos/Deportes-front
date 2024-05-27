@@ -7,7 +7,7 @@ const InfoLanding =()=>{
           <div class="flex flex-col flex-wrap lg:py-6 -mb-10 lg:w-1/2 lg:pl-12 lg:text-left text-center">
             <div class="flex flex-col mb-10 lg:items-start items-center">
               <div class="flex-grow">
-                <h2 class="text-white text-2xl title-font font-medium mb-3">
+                <h2 class=" text-gray-700  dark:text-white text-2xl title-font font-medium mb-3">
                 Interfaz intuitiva
                 </h2>
                 <p class="leading-relaxed text-lg">
@@ -17,7 +17,7 @@ const InfoLanding =()=>{
             </div>
             <div class="flex flex-col mb-10 lg:items-start items-center">
               <div class="flex-grow">
-                <h2 class="text-white text-2xl title-font font-medium mb-3">
+                <h2 class="text-gray-700  dark:text-white  text-2xl title-font font-medium mb-3">
                 Geolocalización
                 </h2>
                 <p class="leading-relaxed text-lg">
@@ -27,7 +27,7 @@ const InfoLanding =()=>{
             </div>
             <div class="flex flex-col mb-10 lg:items-start items-center">
               <div class="flex-grow">
-                <h2 class="text-white text-2xl title-font font-medium mb-3">
+                <h2 class="text-gray-700  dark:text-white  text-2xl title-font font-medium mb-3">
                   Perfiles
                 </h2>
                 <p class="leading-relaxed text-lg">
@@ -37,7 +37,7 @@ const InfoLanding =()=>{
             </div>
             <div class="flex flex-col mb-10 lg:items-start items-center">
               <div class="flex-grow">
-                <h2 class="text-white text-2xl title-font font-medium mb-3">
+                <h2 class="text-gray-700  dark:text-white  text-2xl title-font font-medium mb-3">
                 Notificaciones en tiempo real.
                 </h2>
                 <p class="leading-relaxed text-lg">
@@ -47,7 +47,7 @@ const InfoLanding =()=>{
             </div>
             <div class="flex flex-col mb-10 lg:items-start items-center">
               <div class="flex-grow">
-                <h2 class="text-white text-2xl title-font font-medium mb-3">
+                <h2 class="text-gray-700  dark:text-white  text-2xl title-font font-medium mb-3">
                 Integración con redes sociales
                 </h2>
                 <p class="leading-relaxed text-lg">

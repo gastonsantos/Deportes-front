@@ -114,7 +114,7 @@ export default function InvitacionPerfilCard() {
         <div>
             <NavBar />
             <div className="container fluid flex lg:flex items-center justify-center mt-1">
-                <div className="flex-1 min-w-96 max-w-96 shadow-md md:mt-9">
+                <div className="flex-1 min-w-96 max-w-96 shadow-md md:mt-9 p-2">
                     <div className="bg-gray-900 rounded-lg shadow-md p-9 text-white" style={{ backgroundImage: `url('/images/Fondo1.jpg')`, backgroundSize: 'cover', backgroundPosition: 'center', backgroundRepeat: 'no-repeat' }}>
 
                         <p className="text-white-500 ml-10 pt-1">Ficha<span> </span> </p>
@@ -178,7 +178,7 @@ export default function InvitacionPerfilCard() {
                             </svg>
                         </div>
 
-                        <div className="grid grid-cols-2 gap-4 p-2 ">
+                        <div className="grid grid-cols-2 gap-4 p-2">
                             <div className="relative w-32 h-4">
                                 <p className="text-white-600">Velocidad</p>
                                 <span className="inline-block w-full bg-white rounded-md relative p-3">

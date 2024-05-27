@@ -20,7 +20,7 @@ export default function Imagenes() {
               Bienvenido a SportSquad
             </h1>
             <br />
-            <p className="mx-auto text-xl font-normal leading-relaxed text-gray-600 dark:text-gray-300 lg:w-2/3 md:text-3xl sm:text-2xl hidden sm:block">
+            <p className="mx-auto text-xl font-normal leading-relaxed text-gray-300 dark:text-gray-300 lg:w-2/3 md:text-3xl sm:text-2xl hidden sm:block">
 
               Somos la plataforma perfecta para organizar y disfrutar de eventos deportivos emocionantes. Con SportSquad, puedes crear fácilmente tus propios partidos de  <a className="underline decoration-pink-500"> baloncesto</a> ,
               <a className="underline decoration-indigo-500/30">fútbol</a>, <a className="underline decoration-violet-500">pádel</a>, <a className="underline decoration-amber-600">tenis</a> y más en segundos.
