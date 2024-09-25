@@ -66,7 +66,7 @@ const LoginForm = () => {
           onClick={() => setShowCredentials(!showCredentials)}  // Al hacer clic, se alterna el estado
           className="bg-gray-500 hover:bg-gray-600 text-white font-semibold rounded-md py-2 px-4"
         >
-          Información
+          Demo
         </button>
 
         {/* Mostrar las credenciales si showCredentials es true */}
