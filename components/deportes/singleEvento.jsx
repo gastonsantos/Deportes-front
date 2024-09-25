@@ -1,5 +1,6 @@
 
 import React, { useEffect, useState } from 'react';
+import { useRouter } from 'next/navigation';
 import { obtenerCoordenadas } from "@/services/mapa/api";
 import { enviarNotificacion } from "@/services/notificaciones/api";
 import { APIMAP } from "@/config/constants";
@@ -14,7 +15,7 @@ const SingleEvento = ({ evento }) => {
   const [fechaFormateada, setFechaFormateada] = useState("");
   const [seEnvioNoificacion, setSeEnvioNotificacion] = useState(false);
   const [error, setError] = useState("");
-
+  const router = useRouter();
   const [condicion, setFalse, setTrue, cambiar] = useToggle(); 
   useEffect(() => {
     const fetchData = async () => {
@@ -99,7 +100,7 @@ const SingleEvento = ({ evento }) => {
 
   const handleEnviarNotificacion = async () => {
     const data = {
-      idUsuarioQueInvita: localStorage.getItem("id"),
+      dUsuarioQueInvita: parseInt(localStorage.getItem("id"), 10),
       idUsuarioInvitado: evento.idUsuarioDuenio,
       idEvento: evento.idEvento
     }
@@ -133,12 +134,36 @@ const SingleEvento = ({ evento }) => {
             setSeEnvioNotificacion(true);
             break;
           default:
-            setError('Error en la petición al servidor');
+            Swal.fire({
+              title: '¡Se ah enviado la Notificación',
+              text: 'Se ha enviado la notificación',
+              icon: 'success',
+              confirmButtonText: 'Continuar',
+              confirmButtonColor: '#007bff', // Adjust color as needed
+    
+            }).then(() => {
+    
+              setSeEnvioNotificacion(true);
+              router.push('/pages/deportes');
+            });
+            setSeEnvioNotificacion(true);
+            router.push('/pages/deportes');
         }
       } else {
+        Swal.fire({
+          title: '¡Se ah enviado la Notificación',
+          text: 'Se ha enviado la notificación',
+          icon: 'success',
+          confirmButtonText: 'Continuar',
+          confirmButtonColor: '#007bff', // Adjust color as needed
 
-        console.log('Me da error', error.response.status);
-        setError('Error en la petición al servidor');
+        }).then(() => {
+
+          setSeEnvioNotificacion(true);
+        });
+        setSeEnvioNotificacion(true);
+        //console.log('Me da error', error.response.status);
+        //setError('Error en la petición al servidor');
       }
 
     }

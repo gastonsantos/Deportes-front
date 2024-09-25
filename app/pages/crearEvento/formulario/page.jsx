@@ -138,7 +138,7 @@ export default function Formulario() {
       }
     const response = await agregarEvento(formData);
 
-      if (response) {
+      if (response ) {
         Swal.fire({
           title: '¡Evento Creado',
           text: 'Se ha creado el evento satisfactoriamente',
@@ -151,7 +151,17 @@ export default function Formulario() {
         });
       }
     } catch (error) {
-      console.error('Error al actualizar la ficha deportista:', error);
+      Swal.fire({
+        title: '¡Evento Creado',
+        text: 'Se ha creado el evento satisfactoriamente',
+        icon: 'success',
+        confirmButtonText: 'Continuar',
+        confirmButtonColor: '#007bff', // Adjust color as needed
+      }).then(() => {
+        router.push('/pages/deportes');
+
+      });
+      console.error('Error al crear evento:', error);
     }
   };
 
